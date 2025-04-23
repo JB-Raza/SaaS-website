@@ -1,0 +1,24 @@
+/* custom classes */
+.text-gradient-teal {
+    background: linear-gradient(270deg, #06766E 0%, #20BA8B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.heading-1{
+    font-size: var(--heading-one);
+}
+.heading-2{
+    font-size: var(--heading-two);
+}
+.heading-3{
+    font-size: var(--heading-three);
+}
+.heading-4{
+    font-size: var(--heading-four);
+}
+.heading-5{
+    font-size: var(--heading-five);
+}
+.heading-6{
+    font-size: var(--heading-six);
+}

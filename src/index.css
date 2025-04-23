@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+
+  --heading-one: clamp(2.125rem, -0.0733rem + 5.5vw, 4.4375rem);
+  --heading-two: clamp(2rem, 0.3353rem + 2.1661vw, 3.5rem);
+  --heading-three: clamp(1.875rem, 0.7133rem + 2.8846vw, 3.125rem);
+  --heading-four: clamp(1.5rem, 0.5569rem + 1.444vw, 1.875rem);
+  --heading-five: clamp(1.125rem, 1.2rem + 0.722vw, 1.5rem);
+  --heading-six: clamp(1rem, 0.769rem + 0.6813vw, 1.25rem);
+  --icon-bubble-animation : icon-bubble-animation 0.7s ease 
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* body {
+  background-color: rgb(44, 44, 44);
+} */
+
+.hero-section {
+  background: linear-gradient(69.92deg, #003D3D 28.63%, #00664E 87.07%, #008C63 112.98%);
+  position: relative;
+  z-index: 10;
+}
+
+
+.hero-heading {
+  font-size: var(--heading-one);
+  line-height: clamp(3.125rem, -0.0733rem + 5.5vw, 6.4375rem);
+}
+
+.hero-img {
+  aspect-ratio: 103/77;
+}
+
+.clients-section .container .swiper::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0) 80%,
+      rgba(255, 255, 255, 0.7) 100%);
+  z-index: 99;
+}
+
+
+/* animation */
+@keyframes icon-bubble-animation {
+  0%{
+    scale: 1.4;
+  }
+  15%{
+    scale: 1.1;
+  }
+  35%{
+    scale: 1.0;
+  }
+  45%{
+    scale: 1.2;
+  }
+  70%{
+    scale: 1.4;
+  }
+  85%{
+    scale: 1.2;
+  }
+  100%{
+    scale: 1;
+  }
+}
