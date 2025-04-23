@@ -48,26 +48,41 @@
   z-index: 99;
 }
 
+/* departments section */
+.department-container{
+  background-image: url('./bg-screen-img.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* animation */
 @keyframes icon-bubble-animation {
   0%{
+    scale: 1;
+  }
+  25%{
     scale: 1.4;
   }
-  15%{
-    scale: 1.1;
+  50%{
+    scale: 1;
   }
-  35%{
-    scale: 1.0;
-  }
-  45%{
-    scale: 1.2;
-  }
-  70%{
+  75%{
     scale: 1.4;
-  }
-  85%{
-    scale: 1.2;
   }
   100%{
     scale: 1;
