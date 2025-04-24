@@ -27,13 +27,13 @@ function App() {
 
   return (
     <>
-      {/* <div className="hero-section relative">
+      <div className="hero-section relative">
         <Navbar />
         <Hero />
-      </div> */}
+      </div>
 
       {/* our clients saas companies */}
-      {/* <div className="clients-section flex gap-10 justify-center py-10 my-15">
+      <div className="clients-section flex gap-10 justify-center py-10 my-15">
         <div className="container relative">
           <h5 className="text-center mb-16 font-semibold line-clamp-1 heading-4">Loved by next-gen B2B <span className='text-gradient-teal'>SaaS</span> companies.....</h5>
 
@@ -84,26 +84,26 @@ function App() {
             </SwiperSlide>
           </Swiper>
         </div>
-      </div> */}
+      </div>
 
       {/* task management features */}
-      {/* <TaskManagement /> */}
+      <TaskManagement />
 
       {/* workspace departments */}
-      {/* <Workspace /> */}
+      <Workspace />
 
       {/* built-in automation */}
-      {/* <AutomateTasks /> */}
+      <AutomateTasks />
 
       {/* track projects */}
-      {/* <TrackProjects /> */}
+      <TrackProjects />
 
       {/* testimonial section */}
-      {/* <Testimonial /> */}
+      <Testimonial />
 
       {/* app integration section */}
 
-      {/* <div className="app-integration relative justify-between h-[500px] max-h-[700px]">
+      <div className="app-integration relative justify-between h-[500px] max-h-[700px]">
         <img src="./app-integration/app-integration-center.png" alt="error"
           className="absolute top-1/2 left-1/2 w-15 h-15 md:w-20 md:h-20 -translate-x-1/2 -translate-y-1/2"
         />
@@ -118,7 +118,7 @@ function App() {
           <img src="./app-integration/6.png" alt="" className="absolute translate-y-60 md:translate-y-70 right-1 md:right-1/9 w-15 h-15 "/>
         </div>
         <Button content={"start free trial"} className={"absolute bottom-0 left-1/2 -translate-x-1/2 text-white px-12 !py-5"} icon={"fa-solid fa-cloud-arrow-down"} />
-      </div> */}
+      </div>
 
       {/* pricing section */}
       <Pricing />
