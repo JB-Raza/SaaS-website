@@ -103,7 +103,7 @@ function App() {
 
       {/* app integration section */}
 
-      <div className="app-integration relative justify-between h-[500px] max-h-[700px]">
+      <div className="app-integration my-20 relative justify-between h-[500px] max-h-[700px]">
         <img src="./app-integration/app-integration-center.png" alt="error"
           className="absolute top-1/2 left-1/2 w-15 h-15 md:w-20 md:h-20 -translate-x-1/2 -translate-y-1/2"
         />

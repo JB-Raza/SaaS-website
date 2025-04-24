@@ -3,7 +3,7 @@ import Button from "../universalComponents/Button.jsx";
 
 export default function Pricing() {
   return (
-    <div className="py-28 w-full px-2 sm:px-4">
+    <div className="py-10 w-full px-2 sm:px-4">
     
             <p className="font-medium text-wrap text-center capitalize !bg-white mx-auto w-fit px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
               <span className="text-gradient-teal">Up to </span>
