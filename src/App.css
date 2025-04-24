@@ -26,3 +26,15 @@
 .bg-linear-gradient-primary{
     background: linear-gradient(69.92deg, #003D3D 28.63%,#00664E 87.07%, #008C63 112.98%);
 }
+
+
+
+
+@media screen and (max-width: 1200px) {
+    .app-integration {
+        background-image: url("./app-integration/net-shape.png");
+        background-repeat: no-repeat;
+        background-position: center -70px;
+        background-size: cover;
+      }
+}
