@@ -6,7 +6,7 @@ export default function AutomateTasks() {
     return (
         <div>
             {/* task section 1/2 */}
-            <div className="py-15 w-full px-3">
+            <div className="py-30 md:py-15 w-full px-3">
                 <p className="font-medium text-wrap text-center capitalize !bg-white w-fit px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
                     <span className="text-gradient-teal">Up to </span>
                     <span className="text-yellow-500">70%</span>
@@ -34,7 +34,7 @@ export default function AutomateTasks() {
                             </p>
                         </div>
                         <Button content={"Start Free Trial"} icon={"fa-solid fa-cloud-arrow-down"}
-                            className={"!rounded-0 px-13 !py-5"} />
+                            className={"!rounded-0 px-13 !py-5 text-white"} />
 
                     </div>
                     <div className="col-span-12 mt-10 lg:mt-0 lg:col-span-6">
@@ -44,7 +44,7 @@ export default function AutomateTasks() {
             </div>
 
             {/* task section 2/2 */}
-            <div className="py-15 w-full px-3">
+            <div className="py-30 md:py-15 w-full px-3">
                 <div className="grid grid-cols-12">
                     {/* col 1 */}
                     <div className="col-span-12 mt-10 lg:mt-0 md:col-span-6 pe-7">

@@ -1,14 +1,16 @@
 // css
 import "./App.css"
 import React, { useState } from 'react'
-import { Autoplay, FreeMode } from 'swiper/modules'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, FreeMode, Pagination } from 'swiper/modules'
 
 
 // swiper css
 import 'swiper/css';
 import "swiper/css/autoplay";
 import "swiper/css/free-mode";
+import 'swiper/css/pagination';
 
 // components
 import Navbar from './components/navbar/Navbar.jsx'
@@ -16,7 +18,7 @@ import Hero from './components/sections/Hero.jsx'
 import TaskManagement from './components/sections/TaskManagement.jsx'
 import Workspace from './components/sections/Workspace.jsx'
 import AutomateTasks from './components/sections/AutomateTasks.jsx'
-
+import TrackProjects from "./components/sections/TrackProjects.jsx";
 
 function App() {
 
@@ -89,6 +91,10 @@ function App() {
 
       {/* built-in automation */}
       <AutomateTasks />
+
+      {/* track projects */}
+        <TrackProjects />
+
     </>
   )
 }

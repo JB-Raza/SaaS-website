@@ -4,7 +4,7 @@ export default function Workspace() {
       let [activeDepart, setActiveDepart] = useState("all teams")
     
     return (
-        <div className="workplaces-section bg-[linear-gradient(69.92deg,_#003D3D_28.63%,_#00664E_87.07%,_#008C63_112.98%)] py-28 w-full">
+        <div className="workplaces-section bg-linear-gradient-primary py-28 w-full px-2">
 
             <p className="font-medium text-wrap text-center capitalize !bg-white mx-auto w-fit px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
                 <span className="text-gradient-teal">Up to </span>
@@ -19,8 +19,8 @@ export default function Workspace() {
             <div className="mx-auto p-3 sm:p-7 mt-10 border-[1px] border-white/20 rounded-xl max-w-[1300px]">
                 <div className="department-container rounded-2xl grid grid-cols-12">
 
-                    <div className="col-span-12 lg:col-span-3 flex justify-center items-stretch  px-2 sm:px-7 lg:px-0 ms-0 sm:ms-3 mb-7">
-                        <div className="left-section bg-neutral-100 w-full rounded-2xl mt-24 lg:mt-15">
+                    <div className="col-span-12 lg:col-span-3 flex justify-center items-stretch px-2 sm:px-7 lg:px-0 ms-0 sm:ms-3 mb-7">
+                        <div className="left-section bg-neutral-100 w-full rounded-2xl mt-20 lg:mt-15">
                             <div className="logo mx-7 mt-4 mb-20">
                                 <img src="./logo-two.png" alt="" />
                             </div>

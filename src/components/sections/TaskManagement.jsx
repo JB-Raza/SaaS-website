@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function TaskManagement() {
   return (
-    <div className="task-management-section sm:px-5 my-10">
+    <div className="task-management-section px-2 sm:px-5 my-10">
         {/* header data */}
         <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-          <h2 className="capitalize font-semibold max-w-[550px]" style={{ fontSize: "var(--heading-two)" }}>Task management <span className="text-gradient-teal capitalize font-normal italic">Features</span> & capabilities</h2>
+          <h2 className="capitalize font-semibold max-w-[550px] heading-2">Task management <span className="text-gradient-teal capitalize font-normal italic">Features</span> & capabilities</h2>
           <p className="text-gray-600 max-w-[550px]">Sassly-CRM in the past allowing you to focus more on your businesssimply enjoy your newfound legal time to reflect leaving pen</p>
         </div>
 

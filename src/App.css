@@ -22,3 +22,7 @@
 .heading-6{
     font-size: var(--heading-six);
 }
+
+.bg-linear-gradient-primary{
+    background: linear-gradient(69.92deg, #003D3D 28.63%,#00664E 87.07%, #008C63 112.98%);
+}
