@@ -4,7 +4,7 @@ import Button from '../universalComponents/Button.jsx'
 
 export default function Hero() {
   return (
-    <div className="grid grid-cols-12 gap-y-10 sm:y-16 pt-56 pb-36 overflow-clip">
+    <div className="grid custom-container mx-auto grid-cols-12 gap-y-10 sm:y-16 pt-56 pb-36 overflow-clip">
               {/* content section */}
               <div className="col-span-12 sm:col-span-8 md:col-span-6 flex justify-center flex-col gap-7 !px-3">
     

@@ -6,13 +6,13 @@ export default function AutomateTasks() {
     return (
         <div>
             {/* task section 1/2 */}
-            <div className="py-30 md:py-15 w-full px-3">
-                <p className="font-medium text-wrap text-center capitalize !bg-white w-fit px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
-                    <span className="text-gradient-teal">Up to </span>
+            <div className="py-30 custom-container mx-auto md:py-15 w-full px-3">
+                <p className="font-medium text-wrap text-center capitalize !bg-white w-fit px-2 sm:px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
+                    <span className="text-gradient-teal">Up to</span>
                     <span className="text-yellow-500">70%</span>
                     <span className="text-gradient-teal"> off managed cloud hosting</span>
                 </p>
-                <h2 className="heading-2 font-semibold mt-4 leading-10 capitalize lg:w-[50%] xxl:w-auto">Supercharge  <span className="italic text-gradient-teal font-normal">daily work</span>. with built-in automation</h2>
+                <h2 className="heading-2 font-semibold mt-4 leading-10 md:leading-15 capitalize lg:w-[50%] xxl:w-auto">Supercharge  <span className="italic text-gradient-teal font-normal">daily work</span>. with built-in automation</h2>
 
                 <div className="grid grid-cols-12">
                     {/* col 1 */}
@@ -44,7 +44,7 @@ export default function AutomateTasks() {
             </div>
 
             {/* task section 2/2 */}
-            <div className="py-10 sm:py-20 md:py-15 mb-10 w-full px-3">
+            <div className="py-10 custom-container mx-auto sm:py-20 md:py-15 mb-10 w-full px-3">
                 <div className="grid grid-cols-12">
                     {/* col 1 */}
                     <div className="col-span-12 mt-10 lg:mt-0 md:col-span-6 pe-7">
@@ -52,12 +52,12 @@ export default function AutomateTasks() {
                     </div>
                     {/* col 2 */}
                     <div className="col-span-12 md:col-span-6">
-                        <p className="font-medium text-wrap text-center capitalize !bg-white w-fit px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
+                        <p className="font-medium text-wrap text-center capitalize !bg-white w-fit px-2 sm:px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
                             <span className="text-gradient-teal">Up to </span>
                             <span className="text-yellow-500">70%</span>
                             <span className="text-gradient-teal"> off managed cloud hosting</span>
                         </p>
-                        <h2 className="heading-2 font-semibold mt-4 leading-10 capitalize">Powerful & life-saving <span className="italic text-gradient-teal font-normal"> task manager</span></h2>
+                        <h2 className="heading-2 font-semibold mt-4 leading-10 md:leading-15 capitalize">Powerful & life-saving <span className="italic text-gradient-teal font-normal"> task manager</span></h2>
 
                         <p className="text-neutral-500 font-medium text-[18px] mt-8 leading-loose">Sassly-CRM in the past allowing you to focus more on your business <br /> simply enjoy your newfound legal time to reflect leaving</p>
 

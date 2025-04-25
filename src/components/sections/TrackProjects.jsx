@@ -12,15 +12,15 @@ import 'swiper/css/pagination';
 
 export default function TrackProjects() {
     return (
-        <div className="py-10 w-full px-2">
+        <div className="custom-container mx-auto pb-10 w-full px-2">
 
-            <p className="font-medium text-wrap text-center capitalize !bg-white mx-auto w-fit px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
+            <p className="font-medium text-wrap text-center capitalize !bg-white mx-auto w-fit px-2 sm:px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
                 <span className="text-gradient-teal">Up to </span>
                 <span className="text-yellow-500">70%</span>
                 <span className="text-gradient-teal"> off managed cloud hosting</span>
             </p>
 
-            <h2 className="heading-2 text-center font-semibold mt-4 leading-10  capitalize">Plan, execute and <span className="italic font-normal text-gradient-teal">track projects</span>. of <br /> any size</h2>
+            <h2 className="heading-2 text-center font-semibold mt-4 leading-10 md:leading-15 capitalize">Plan, execute and <span className="italic font-normal text-gradient-teal">track projects</span>. of <br /> any size</h2>
 
 
 

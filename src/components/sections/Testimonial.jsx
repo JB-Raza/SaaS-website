@@ -8,7 +8,7 @@ import 'swiper/css';
 
 export default function Testimonial() {
     return (
-        <div className="grid grid-cols-12 bg-[#06766E] py-15 px-3 sm:px-6 mx-auto w-[calc(100%-10px)] sm:w-[calc(100%-30px)] rounded-xl">
+        <div className="grid max-w-[1200px] bg-[#06766E] grid-cols-12 py-15 px-3 sm:px-6 mx-auto w-[calc(100%-10px)] sm:w-[calc(100%-30px)] rounded-xl">
             {/* col 1 */}
             <div className="col-span-12 md:col-span-5 lg:col-span-4">
                 <img

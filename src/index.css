@@ -19,7 +19,9 @@
   box-sizing: border-box;
 }
 
-
+.custom-container {
+  max-width: 1350px !important;
+}
 .hero-section {
   background: linear-gradient(69.92deg, #003D3D 28.63%, #00664E 87.07%, #008C63 112.98%);
   position: relative;
@@ -34,7 +36,7 @@
   background-image: url("./hero-sky-bg.png");
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center;
+  background-position: right;
   z-index: -1;
   animation: hero-bg-animation 15s ease-in-out infinite;
 }
@@ -49,7 +51,7 @@
   aspect-ratio: 103/77;
 }
 
-.clients-section .container .swiper::before {
+.clients-section .clients .swiper::before {
   content: "" !important;
   position: absolute !important;
   width: 100% !important;
@@ -86,7 +88,17 @@
   background-size: cover;
 }
 
-
+.workplaces-section::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url('./curve-way.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+}
 
 
 

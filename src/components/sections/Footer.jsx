@@ -3,10 +3,10 @@ import Button from "../universalComponents/Button.jsx";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#FBF6EE] px-3">
+        <footer className="bg-[#FBF6EE] px-3 overflow-hidden">
 
 
-            <div className="grid grid-cols-12 py-30 gap-7">
+            <div className="custom-container mx-auto grid grid-cols-12 py-30 gap-7">
 
                 {/* col 1 */}
                 <div className="col-span-12 xs:col-span-6 sm:col-span-4 lg:col-span-3">
@@ -32,14 +32,6 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* 
-                
-
-
-
-
-
-                */}
                 {/* col 3 */}
                 <div className="col-span-12 xs:col-span-6 sm:col-span-4 lg:col-span-2">
                     <h5 className="heading-5 font-medium">Service</h5>
@@ -50,12 +42,12 @@ export default function Footer() {
                         <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">AI Machine Learning</span>
                         <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Data Security</span>
                         <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Software Development</span>
-                        
+
                     </div>
                 </div>
 
                 {/* col 4 form */}
-                <div className="col-span-10 md:col-span-8 lg:col-span-5">
+                <div className="col-span-11 xs:col-span-12 sm:col-span-10 md:col-span-8 mt-8 lg:mt-0 lg:col-span-5">
                     <div className="logo">
                         <img src="./logo-three.png" alt="logo" />
                     </div>
@@ -72,7 +64,7 @@ export default function Footer() {
             </div>
 
             {/* last footer */}
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between border-t-[1px] border-neutral-200 py-9 px-4">
+            <div className="custom-container mx-auto flex flex-col md:flex-row gap-4 items-center justify-between border-t-[1px] border-neutral-200 py-9 px-4">
                 <p className="font-semibold text-center">© 2025 <span className="text-gradient-teal">WowTheme7</span> - IT Services. All rights reserved.</p>
                 <div className="links flex gap-5">
                     <span className="font-semibold text-[15px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">FAQs</span>

@@ -4,15 +4,15 @@ import Button from "../universalComponents/Button.jsx";
 export default function Pricing() {
 
   return (
-    <div className="py-10 w-full px-2 sm:px-4">
+    <div className="py-10 custom-container mx-auto w-full px-2 sm:px-4">
 
-      <p className="font-medium text-wrap text-center capitalize !bg-white mx-auto w-fit px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
+      <p className="font-medium text-wrap text-center capitalize !bg-white mx-auto w-fit px-2 sm:px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
         <span className="text-gradient-teal">Up to </span>
         <span className="text-yellow-500">70%</span>
         <span className="text-gradient-teal"> off managed cloud hosting</span>
       </p>
 
-      <h2 className="heading-2 text-center font-semibold mt-4 leading-10  capitalize">flexible pricing <span className="italic font-normal text-gradient-teal">plan</span>.  that include <br /> business</h2>
+      <h2 className="heading-2 text-center font-semibold mt-4 leading-10 md:leading-15 capitalize">flexible pricing <span className="italic font-normal text-gradient-teal">plan</span>.  that include <br /> business</h2>
 
       <div className="grid gap-5 grid-cols-12 mt-15">
         {/* basic plan */}

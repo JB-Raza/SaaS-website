@@ -4,19 +4,19 @@ export default function Workspace() {
       let [activeDepart, setActiveDepart] = useState("all teams")
     
     return (
-        <div className="workplaces-section bg-linear-gradient-primary py-28 w-full px-2">
+        <div className="workplaces-section relative overflow-clip bg-linear-gradient-primary py-28 w-full px-2 sm:px-0">
 
-            <p className="font-medium text-wrap text-center capitalize !bg-white mx-auto w-fit px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
+            <p className="relative z-2 font-medium text-wrap text-center capitalize !bg-white mx-auto w-fit px-2 sm:px-10 py-2 rounded-full border-1 border-[hsl(144,80%,55%)]">
                 <span className="text-gradient-teal">Up to </span>
                 <span className="text-yellow-500">70%</span>
                 <span className="text-gradient-teal"> off managed cloud hosting</span>
             </p>
 
-            <h2 className="heading-2 text-center text-white font-bold mt-4 leading-10">Essential for <span className="italic font-normal">workplaces</span>. Great for <br /> any team.</h2>
-            <p className="text-neutral-300 font-medium text-[18px] text-center mx-auto mt-10 px-3 leading-loose">Sassly-CRM in the past allowing you to focus more on your business <br /> simply enjoy your newfound legal time to reflect leaving</p>
+            <h2 className="relative z-2 heading-2 text-center text-white font-bold mt-4 leading-10 md:leading-15">Essential for <span className="italic font-normal">workplaces</span>. Great for <br /> any team.</h2>
+            <p className="relative z-2 text-neutral-300 font-medium text-[18px] text-center mx-auto mt-10 px-3 leading-loose">Sassly-CRM in the past allowing you to focus more on your business <br /> simply enjoy your newfound legal time to reflect leaving</p>
 
             {/* department container */}
-            <div className="mx-auto p-3 sm:p-7 mt-10 border-[1px] border-white/20 rounded-xl max-w-[1300px]">
+            <div className="relative z-2 mx-auto p-3 sm:p-7 mt-10 border-[1px] border-white/20 rounded-xl max-w-[1300px]">
                 <div className="department-container rounded-2xl grid grid-cols-12">
 
                     <div className="col-span-12 lg:col-span-3 flex justify-center items-stretch px-2 sm:px-7 lg:px-0 ms-0 sm:ms-3 mb-7">
