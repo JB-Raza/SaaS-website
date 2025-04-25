@@ -21,11 +21,11 @@ export default function Workspace() {
 
                     <div className="col-span-12 lg:col-span-3 flex justify-center items-stretch px-2 sm:px-7 lg:px-0 ms-0 sm:ms-3 mb-7">
                         <div className="left-section bg-neutral-100 w-full rounded-2xl mt-20 lg:mt-15">
-                            <div className="logo mx-7 mt-4 mb-20">
+                            <div className="logo mx-7 mt-4 mb-8 md:mb-20">
                                 <img src="./logo-two.png" alt="" />
                             </div>
                             {/* all department btns */}
-                            <div className="flex flex-col">
+                            <div className="flex flex-col pb-5">
                                 {/* teams btn */}
                                 <button
                                     onClick={() => setActiveDepart("all teams")}

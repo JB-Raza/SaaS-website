@@ -44,7 +44,7 @@ export default function AutomateTasks() {
             </div>
 
             {/* task section 2/2 */}
-            <div className="py-30 md:py-15 w-full px-3">
+            <div className="py-10 sm:py-20 md:py-15 mb-10 w-full px-3">
                 <div className="grid grid-cols-12">
                     {/* col 1 */}
                     <div className="col-span-12 mt-10 lg:mt-0 md:col-span-6 pe-7">

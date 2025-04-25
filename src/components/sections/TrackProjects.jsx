@@ -40,8 +40,8 @@ export default function TrackProjects() {
                     breakpoints={{
                         200: { slidesPerView: 1 },
                         500: { slidesPerView: 2 },
-                        700: { slidesPerView: 3 },
-                        900: { slidesPerView: 4 },
+                        800: { slidesPerView: 3 },
+                        1200: { slidesPerView: 4 },
                     }}
                     speed={1000}
                     loop={true}
