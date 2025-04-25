@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function TaskManagement() {
   return (
-    <div className="task-management-section px-2 sm:px-5 my-10">
+    <div className="task-management-section px-2 sm:px-5 my-20">
         {/* header data */}
         <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
           <h2 className="capitalize font-semibold max-w-[550px] heading-2">Task management <span className="text-gradient-teal capitalize font-normal italic">Features</span> & capabilities</h2>
@@ -76,47 +76,27 @@ export default function TaskManagement() {
           </div>
 
           {/* cards */}
-          {/* card 1 */}
-          <div className="mx-3 sm:mx-0 col-span-12 sm:col-span-6 lg:col-span-4 gap-5">
-            <div className="flex flex-col justify-between h-full card group bg-neutral-50 hover:bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)] border-[1px] border-slate-200 rounded-lg p-7 md:p-12">
-              <div className="flex justify-between mb-6">
-                <h4 className="font-semibold group-hover:text-white heading-5">Asynchronous <br /> Meetings</h4>
-                <img className="group-hover:animate-[var(--icon-bubble-animation)] duration-300" src="./icons/whatsapp-video.svg" alt="video" />
-              </div>
-              <p className="text-neutral-500 group-hover:text-white mt-8">We are committed to your success. Our platform is built to drive</p>
+          {(cards || []).map((card, i) => 
+          <div key={i} className="mx-3 sm:mx-0 col-span-12 sm:col-span-6 lg:col-span-4 gap-5">
+          <div className="flex flex-col justify-between h-full card group bg-neutral-50 hover:bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)] border-[1px] border-slate-200 rounded-lg p-7 md:p-12">
+            <div className="flex justify-between mb-6">
+              <h4 className="font-semibold group-hover:text-white heading-5">{card.title} <br /></h4>
+              <i className={`${card.icon} text-green-500 text-2xl group-hover:animate-[var(--icon-bubble-animation)] group-hover:text-white duration-300`}></i>
             </div>
+            <p className="text-neutral-500 group-hover:text-white mt-8">{card.description}</p>
           </div>
-          {/* card 2 */}
-          <div className="mx-3 sm:mx-0 col-span-12 sm:col-span-6 lg:col-span-4 gap-5">
-            <div className="flex flex-col justify-between h-full card group bg-neutral-50 hover:bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)] border-[1px] border-slate-200 rounded-lg p-7 md:p-12">
-              <div className="flex justify-between mb-6">
-                <h4 className="font-semibold group-hover:text-white heading-5">Asynchronous <br /> Meetings</h4>
-                <img className="group-hover:animate-[var(--icon-bubble-animation)] duration-300" src="./icons/whatsapp-video.svg" alt="video" />
-              </div>
-              <p className="text-neutral-500 group-hover:text-white mt-8">We are committed to your success. Our platform is built to drive</p>
-            </div>
-          </div>
-          {/* card 3 */}
-          <div className="mx-3 sm:mx-0 col-span-12 sm:col-span-6 lg:col-span-4 gap-5">
-            <div className="flex flex-col justify-between h-full card group bg-neutral-50 hover:bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)] border-[1px] border-slate-200 rounded-lg p-7 md:p-12">
-              <div className="flex justify-between mb-6">
-                <h4 className="font-semibold group-hover:text-white heading-5">Asynchronous <br /> Meetings</h4>
-                <img className="group-hover:animate-[var(--icon-bubble-animation)] duration-300" src="./icons/whatsapp-video.svg" alt="video" />
-              </div>
-              <p className="text-neutral-500 group-hover:text-white mt-8">We are committed to your success. Our platform is built to drive</p>
-            </div>
-          </div>
-          {/* card 4 */}
-          <div className="mx-3 sm:mx-0 col-span-12 sm:col-span-6 lg:col-span-4 gap-5">
-            <div className="flex flex-col justify-between h-full card group bg-neutral-50 hover:bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)] border-[1px] border-slate-200 rounded-lg p-7 md:p-12">
-              <div className="flex justify-between mb-6">
-                <h4 className="font-semibold group-hover:text-white heading-5">Asynchronous <br /> Meetings</h4>
-                <img className="group-hover:animate-[var(--icon-bubble-animation)] duration-300" src="./icons/whatsapp-video.svg" alt="video" />
-              </div>
-              <p className="text-neutral-500 group-hover:text-white mt-8">We are committed to your success. Our platform is built to drive</p>
-            </div>
-          </div>
+        </div>  
+          )}
         </div>
       </div>
   )
 }
+
+
+
+let cards = [
+  { title: "Asynchronous Meetings", description: "We are committed to your success. Our platform is built to drive", icon: "fa-solid fa-video" },
+  { title: "built-in Automation", description: "We are committed to your success. Our platform is built to drive", icon: "fa-brands fa-researchgate" },
+  { title: "Monitoring your Time", description: "We are committed to your success. Our platform is built to drive", icon: "fa-solid fa-gear" },
+  { title: "Remote-Friendly Collection", description: "We are committed to your success. Our platform is built to drive", icon: "fa-solid fa-users-rectangle" },
+]

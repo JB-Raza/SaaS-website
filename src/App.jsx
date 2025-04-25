@@ -22,6 +22,7 @@ import TrackProjects from "./components/sections/TrackProjects.jsx";
 import Testimonial from "./components/sections/Testimonial.jsx";
 import Button from "./components/universalComponents/Button.jsx";
 import Pricing from "./components/sections/Pricing.jsx";
+import Footer from './components/sections/Footer.jsx'
 
 function App() {
 
@@ -102,7 +103,6 @@ function App() {
       <Testimonial />
 
       {/* app integration section */}
-
       <div className="app-integration my-20 relative justify-between h-[500px] max-h-[700px]">
         <img src="./app-integration/app-integration-center.png" alt="error"
           className="absolute top-1/2 left-1/2 w-15 h-15 md:w-20 md:h-20 -translate-x-1/2 -translate-y-1/2"
@@ -123,6 +123,41 @@ function App() {
       {/* pricing section */}
       <Pricing />
 
+
+      {/* revolutionize our services */}
+      <div className="pt-20 mt-30 relative w-[calc(100%-10px)] md:w-[calc(100%-20px)] rounded-xl mx-auto px-2 bg-[url(./revolutionize/hill-shape.png)] bg-no-repeat bg-cover">
+
+        {/* imgs */}
+        <div className="absolute right-[20px] top-[20px]">
+          <img src="./revolutionize/person.png" alt="" className="absolute -top-[65%]" />
+          <img src="./revolutionize/card.png" alt="" className="opacity-0 lg:opacity-100" />
+        </div>
+
+        <p className="font-medium text-white text-wrap text-center capitalize !bg-white/15 mx-auto w-fit px-10 py-2 rounded-full">
+          Up to <span className="text-yellow-500">70%</span> off managed cloud hosting
+        </p>
+
+        <h2 className="heading-3 text-center font-semibold mt-4 text-white leading-10 md:leading-15">Ready to revolutionize <br /> our service?</h2>
+
+        <Button content={"Download for free"} className={"text-white mx-auto my-10"} />
+
+        {/* all floating buttons */}
+        <div className="flex items-center mt-20 flex-wrap gap-5 justify-center">
+          <span className="px-10 py-2 rounded-full bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] font-medium text-white">Project management</span>
+          <span className="px-10 py-2 rounded-full bg-green-400 font-medium">Technology</span>
+          <span className="px-10 py-2 rounded-full bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] font-medium">Technology</span>
+          <span className="px-10 py-2 rounded-full bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] font-medium">Project management</span>
+          <span className="px-10 py-2 rounded-full bg-yellow-500 font-medium">Technology</span>
+          <span className="px-10 py-2 rounded-full bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] font-medium">Project management</span>
+          <span className="px-10 py-2 rounded-full bg-orange-500 font-medium">Technology</span>
+          <span className="px-10 py-2 rounded-full  bg-green-400 font-medium">Project management</span>
+          <span className="px-10 py-2 rounded-full bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] font-medium">Project management</span>
+          <span className="px-10 py-2 rounded-full bg-pink-600 font-medium">Technology</span>
+        </div>
+      </div>
+
+      {/* footer */}
+      <Footer />
     </>
   )
 }

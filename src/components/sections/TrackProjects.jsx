@@ -51,41 +51,20 @@ export default function TrackProjects() {
                     }}
                     freeMode={true}
                 >
-                    <SwiperSlide >
-                        <div className="card col-span-3 flex flex-col">
-                            <img src="./plan-and-tracking/1.png" alt="project 1" className="w-full max-w-300px" />
-                            <h3 className="capitalize heading-6 font-bold text-center my-4">project management</h3>
-                            <p className="text-neutral-600 text-center leading-loose px-3 sm:px-5">Web hosting provides everything you idea online. From where you</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <div className="card col-span-3 flex flex-col">
-                            <img src="./plan-and-tracking/1.png" alt="project 1" className="w-full max-w-300px" />
-                            <h3 className="capitalize heading-6 font-bold text-center my-4">project management</h3>
-                            <p className="text-neutral-600 text-center leading-loose px-3 sm:px-5">Web hosting provides everything you idea online. From where you</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <div className="card col-span-3 flex flex-col">
-                            <img src="./plan-and-tracking/1.png" alt="project 1" className="w-full max-w-300px" />
-                            <h3 className="capitalize heading-6 font-bold text-center my-4">project management</h3>
-                            <p className="text-neutral-600 text-center leading-loose px-3 sm:px-5">Web hosting provides everything you idea online. From where you</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <div className="card col-span-3 flex flex-col">
-                            <img src="./plan-and-tracking/1.png" alt="project 1" className="w-full max-w-300px" />
-                            <h3 className="capitalize heading-6 font-bold text-center my-4">project management</h3>
-                            <p className="text-neutral-600 text-center leading-loose px-3 sm:px-5">Web hosting provides everything you idea online. From where you</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide >
-                        <div className="card col-span-3 flex flex-col">
-                            <img src="./plan-and-tracking/1.png" alt="project 1" className="w-full max-w-300px" />
-                            <h3 className="capitalize heading-6 font-bold text-center my-4">project management</h3>
-                            <p className="text-neutral-600 text-center leading-loose px-3 sm:px-5">Web hosting provides everything you idea online. From where you</p>
-                        </div>
-                    </SwiperSlide>
+                    {(projects || []).map((project, i) =>
+
+                        <SwiperSlide key={i} >
+                            <div className="card col-span-3 flex flex-col">
+                                <div className='flex items-stretch h-[350px]'>
+                                <img src={project.image} alt="project 1" className="w-full max-w-300px" />
+                                </div>
+                                <div>
+                                <h3 className="heading-6 font-bold text-center my-4">{project.title}</h3>
+                                <p className="text-neutral-600 text-center leading-loose px-3 sm:px-5">{project.description}</p>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    )}
                 </Swiper>
                 <div className="custom-swiper-pagination mt-20 flex justify-center gap-3"></div>
             </div>
@@ -93,3 +72,13 @@ export default function TrackProjects() {
         </div>
     )
 }
+
+
+const projects = [
+    { image: "./plan-and-tracking/1.png", title: "Project management", description: "Web hosting provides everything you idea online. From where you" },
+    { image: "./plan-and-tracking/2.png", title: "Collaboration tools", description: "Web hosting provides everything you idea online. From where you" },
+    { image: "./plan-and-tracking/3.png", title: "Operation teams", description: "Web hosting provides everything you idea online. From where you" },
+    { image: "./plan-and-tracking/4.png", title: "Custom templates", description: "Web hosting provides everything you idea online. From where you" },
+    { image: "./plan-and-tracking/1.png", title: "UI Design", description: "Web hosting provides everything you idea online. From where you" },
+    { image: "./plan-and-tracking/2.png", title: "optimization", description: "Web hosting provides everything you idea online. From where you" },
+]

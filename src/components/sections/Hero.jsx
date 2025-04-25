@@ -4,11 +4,13 @@ import Button from '../universalComponents/Button.jsx'
 
 export default function Hero() {
   return (
-    <div className="grid grid-cols-12 gap-16 pt-72 pb-36 overflow-clip">
+    <div className="grid grid-cols-12 gap-16 pt-56 pb-36 overflow-clip">
               {/* content section */}
               <div className="col-span-12 sm:col-span-8 md:col-span-6 flex justify-center flex-col gap-7 !px-3">
     
-                <h1 className="text-white capitalize hero-heading font-semibold">Simplify task <br /> <span className='italic font-normal text-gradient-teal'>management</span> and <br /> prioritize work</h1>
+                <h1 className="text-white capitalize hero-heading font-bold perspective-dramatic">
+                <span>Simplify task</span> <span className='italic !font-normal text-gradient-teal'>management</span> and <span>prioritize work</span>
+                </h1>
                 <p className="text-white text-[18px] font-normal px-3 leading-loose">Sassly-<span className='text-amber-400'>CRM</span> in the past allowing you to focus more on your business or simply enjoy your newfound legal time to reflect leaving</p>
     
                 <Button content={"Start Free Trial"} icon={"fa-solid fa-cloud-arrow-down"} className={" w-[240px] py-5 text-white bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)]"} />
