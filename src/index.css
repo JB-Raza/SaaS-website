@@ -6,6 +6,7 @@
 
 
 :root {
+  --satoshi-font: "Satoshi", sans-serif;
   --heading-one: clamp(2.125rem, -0.0733rem + 5.5vw, 4.4375rem);
   --heading-two: clamp(2rem, 0.3353rem + 2.1661vw, 3.5rem);
   --heading-three: clamp(1.875rem, 0.7133rem + 2.8846vw, 3.125rem);
@@ -17,6 +18,13 @@
 
 * {
   box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, span{
+  font-family: var(--satoshi-font) !important;
+}
+.satoshi-font{
+  font-family: var(--satoshi-font) !important;
 }
 
 .custom-container {

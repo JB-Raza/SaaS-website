@@ -28,7 +28,7 @@ export default function Navbar() {
 
 
   return (
-    <header className={`py-8 relative z-50 mx-auto ${isFixed ? "" : "px-3"}`}>
+    <header className={`py-5 relative z-50 mx-auto ${isFixed ? "" : "px-3"}`}>
       <nav className={`rounded-md px-6 ${isFixed ? "fixed top-0 left-0 z-50 bg-[#0f6555] right-0 rounded-none" : "absolute left-3 right-3 bg-white/5 max-w-[1350px] mx-auto"}`}>
         <div className="custom-container mx-auto flex justify-between items-center">
 

@@ -20,7 +20,7 @@ export default function NavItem({ navTitle, dropdownItems, className, isOpen, in
 
             {/* dropdown */}
             <ul
-                className={`h-[0px] overflow-clip transition-all duration-400 !py-0 px-2 ${isOpen ? "w-full !block h-full" : "w-full"}
+                className={`h-[0px] overflow-clip transition-all duration-400 p-2 ${isOpen ? "w-full !block h-full" : "w-full"}
             lg:block lg:absolute  min-w-[190px] top-[100%] left-0 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:h-auto lg:group-hover:visible bg-transparent lg:bg-white text-black lg:shadow-lg rounded-md p-2 z-50 transition duration-300 ease-out 
              lg:translate-y-5 lg:group-hover:-translate-y-1 ${dropdownItems && dropdownItems.length > 0 ? "" : "!hidden"}`}>
                 {(dropdownItems || []).map((item, index) => (

@@ -33,7 +33,7 @@ export default function TaskManagement() {
         {/* col 1 */}
         <div className="col-span-12 row-span-2 sm:col-span-6 lg:col-span-4 flex flex-col items-center py-20 rounded-lg bg-[#D19D3D17]">
           {/* badges */}
-          <div className=" w-[calc(100%-10px)] sm:w-[calc(100%-30px)] md:w-[calc(100%-50px)] flex flex-col mb-15">
+          <div className="w-[calc(100%-10px)] sm:w-[calc(100%-30px)] md:w-[calc(100%-50px)] flex flex-col mb-15">
             {/* badge 1 */}
             <span className="rounded-full px-10 py-3 text-white font-bold
               relative z-3 -rotate-[14deg] bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)] inline-block min-w-[250px]
@@ -44,7 +44,7 @@ export default function TaskManagement() {
             <span className="rounded-full px-10 py-3 font-bold
               relative bg-yellow-500 z-2 inline-block min-w-[250px]
               ">
-              UI Design
+              Performance Tracking
             </span>
             {/* badge 3 */}
             <span className="rounded-full px-10 py-3 text-white font-bold
