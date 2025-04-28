@@ -20,9 +20,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import Clients from "./components/sections/Clients.jsx";
 import { useTextAnimate } from "./components/hooks/textAnimation.js"
-// import {ScrollTrigger} from 'gsap/ScrollTrigger'
 
-// gsap.registerPlugin(ScrollTrigger)
 
 function App() {
 
@@ -45,6 +43,25 @@ function App() {
         ease: 'power1.out',
       })
     }
+
+    // floating icons animations in app integration section
+    gsap.from(".floating-icons-left", {
+      scale: 1.5,
+      duration: 3,
+      ease: "power2.out",
+      repeat: -1,
+      yoyo: true,
+      stagger: 0.1,
+    })
+    gsap.from(".floating-icons-right", {
+      top: 15,
+      duration: 2,
+      srub: 1,
+      ease: "power2.out",
+      repeat: -1,
+      yoyo: true,
+      stagger: 0.5,
+    })
 
     document.addEventListener("mousemove", trackCursor)
     return () => document.removeEventListener("mousemove", trackCursor)
@@ -103,12 +120,12 @@ function App() {
           />
 
           <div className="relative">
-            <img src="./app-integration/1.png" alt="" className="absolute left-3 md:left-1/9 w-10 md:w-15 " />
-            <img src="./app-integration/2.png" alt="" className="absolute translate-y-30 sm:translate-y-35 md:translate-y-40 left-1/8 md:left-1/5 w-10 md:w-15" />
-            <img src="./app-integration/3.png" alt="" className="absolute translate-y-60 md:translate-y-70 left-1 md:left-1/9 w-15 h-15 " />
-            <img src="./app-integration/4.png" alt="" className="absolute right-3 md:right-1/9 w-10 md:w-15 " />
-            <img src="./app-integration/5.png" alt="" className="absolute translate-y-30 sm:translate-y-35 md:translate-y-40 right-1/8 md:right-1/5 w-10 md:w-15" />
-            <img src="./app-integration/6.png" alt="" className="absolute translate-y-60 md:translate-y-70 right-1 md:right-1/9 w-15 h-15 " />
+            <img src="./app-integration/1.png" alt="" className="floating-icons-left absolute left-3 md:left-1/9 w-10 md:w-15 " />
+            <img src="./app-integration/2.png" alt="" className="floating-icons-left absolute translate-y-30 sm:translate-y-35 md:translate-y-40 left-1/8 md:left-1/5 w-10 md:w-15" />
+            <img src="./app-integration/3.png" alt="" className="floating-icons-left absolute translate-y-60 md:translate-y-70 left-1 md:left-1/9 w-15 h-15 " />
+            <img src="./app-integration/4.png" alt="" className="floating-icons-right absolute right-3 md:right-1/9 w-10 md:w-15 " />
+            <img src="./app-integration/5.png" alt="" className="floating-icons-right absolute translate-y-30 sm:translate-y-35 md:translate-y-40 right-1/8 md:right-1/5 w-10 md:w-15" />
+            <img src="./app-integration/6.png" alt="" className="floating-icons-right absolute translate-y-60 md:translate-y-70 right-1 md:right-1/9 w-15 h-15 " />
           </div>
           <Button content={"start free trial"} className={"text-nowrap absolute bottom-0 left-1/2 -translate-x-1/2 text-white px-12 !py-5"} icon={"fa-solid fa-cloud-arrow-down"} />
         </div>

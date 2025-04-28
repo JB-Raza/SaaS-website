@@ -38,33 +38,37 @@ export default function Navbar() {
   const sidebarTimeline = useRef();
 
   useGSAP(() => {
-    sidebarTimeline.current = gsap.timeline({ paused: true })
-      .from(".close-btn", {
-        opacity: 0,
-        duration: 0.5,
-        ease: "power3.out",
-      })
-      .from(".sidebar-logo", {
-        opacity: 0,
-        y: -30,
-        duration: 0.2,
-      })
-      .fromTo(".animate-navitem",
-        { y: -50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          ease: "power1.out",
-          stagger: { each: 0.1 },
-        }
-      );
+    if (window.innerWidth < 1024) {
 
-  }, []); // <-- empty array, run once
+      sidebarTimeline.current = gsap.timeline({ paused: true })
+        .from(".close-btn", {
+          opacity: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        })
+        .from(".sidebar-logo", {
+          opacity: 0,
+          y: -30,
+          duration: 0.2,
+        })
+        .fromTo(".animate-navitem",
+          { y: -50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            ease: "power1.out",
+            stagger: { each: 0.1 },
+          }
+        );
+    }
+
+  }, []);
 
   useEffect(() => {
     if (isSidebarOpen) {
       sidebarTimeline.current?.play();
-    } else {
+    }
+    else{
       sidebarTimeline.current?.reverse();
     }
   }, [isSidebarOpen]);
