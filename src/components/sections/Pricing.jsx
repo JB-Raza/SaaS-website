@@ -1,7 +1,10 @@
 import React from 'react'
 import Button from "../universalComponents/Button.jsx";
+import { useTextAnimate } from '../hooks/textAnimation.js';
 
 export default function Pricing() {
+
+  useTextAnimate(".pricing-elem-animate", { start: "top 100%" })
 
   return (
     <div className="py-10 custom-container mx-auto w-full px-2 sm:px-4">
@@ -12,14 +15,18 @@ export default function Pricing() {
         <span className="text-gradient-teal"> off managed cloud hosting</span>
       </p>
 
-      <h2 className="heading-2 text-center font-semibold mt-4 leading-10 md:leading-15 capitalize">flexible pricing <span className="italic font-normal text-gradient-teal">plan</span>.  that include <br /> business</h2>
+      <h2 className="heading-2 text-center flex flex-col font-semibold mt-4 leading-10 md:leading-15 capitalize">
+        <p className='pricing-elem-animate'>flexible pricing <span className="italic font-normal text-gradient-teal">plan</span>.  that include</p>
+        <p className='pricing-elem-animate'>business</p>
+      </h2>
 
       <div className="grid gap-5 grid-cols-12 mt-15">
-        {/* basic plan */}
+        {/* plans */}
+
         {(pricingData || []).map((data, i) => (
           <div key={i} className="col-span-12 md:col-span-6 lg:col-span-4">
             <div className="card max-w-[450px] mx-auto bg-neutral-100 px-8 py-10">
-              <h5 className="heading-5 font-semibold">{data.title}</h5>
+              <h5 className="pricing-elem-animate heading-5 font-semibold">{data.title}</h5>
               <p className="text-neutral-600 mt-2">Customize anything anytime</p>
               <hr className="border-[1px] my-7 border-gray-200" />
               <p className="heading-2 font-bold">${data.annualPrice}<span className="text-xl">/Yearly</span> </p>
@@ -28,7 +35,7 @@ export default function Pricing() {
               <p className="text-center font-medium my-3">Renews at $9.88/month</p>
               <div className="benefits flex flex-col gap-5 mt-10">
                 {(data.benefits || []).map((benefit, index) => (
-                  <p key={`${index}${i}`} className="font-semibold flex gap-3 items-center">
+                  <p key={`${index}${i}`} className="pricing-elem-animate font-semibold flex gap-3 items-center">
                     <span className=" w-7 h-7 flex items-center justify-center rounded-full bg-green-100">
                       <i className="fa-solid fa-check text-sm text-gradient-teal"></i>
                     </span>
@@ -42,7 +49,7 @@ export default function Pricing() {
             </div>
           </div>
         ))}
-        
+
 
 
       </div>

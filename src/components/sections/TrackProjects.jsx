@@ -1,4 +1,5 @@
 import React from 'react'
+import {useTextAnimate} from '../hooks/textAnimation.js'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, FreeMode, Pagination } from 'swiper/modules'
@@ -9,8 +10,10 @@ import "swiper/css/autoplay";
 import "swiper/css/free-mode";
 import 'swiper/css/pagination';
 
-
 export default function TrackProjects() {
+
+    useTextAnimate(".projects-elem-animate", {start: "top 100%"})
+
     return (
         <div className="custom-container mx-auto pb-10 w-full px-2">
 
@@ -20,7 +23,11 @@ export default function TrackProjects() {
                 <span className="text-gradient-teal"> off managed cloud hosting</span>
             </p>
 
-            <h2 className="heading-2 text-center font-semibold mt-4 leading-10 md:leading-15 capitalize">Plan, execute and <span className="italic font-normal text-gradient-teal">track projects</span>. of <br /> any size</h2>
+            <h2 className="projects-elem-animate heading-2 text-center font-semibold mt-4 leading-10 md:leading-15 capitalize">
+                <p className="projects-elem-animate"> Plan, execute and <span className="italic font-normal text-gradient-teal">track projects</span>.</p>
+                <p className="projects-elem-animate">of any size</p>
+
+                </h2>
 
 
 

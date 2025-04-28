@@ -1,8 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { useTextAnimate } from '../hooks/textAnimation'
 
 export default function Workspace() {
-      let [activeDepart, setActiveDepart] = useState("all teams")
-    
+    let [activeDepart, setActiveDepart] = useState("all teams")
+
+    useTextAnimate(".animated-data-workspace", { start: "top 80%", duration: 1, y: 100 })
+
     return (
         <div className="workplaces-section relative overflow-clip bg-linear-gradient-primary py-28 w-full px-2 sm:px-0">
 
@@ -12,8 +15,14 @@ export default function Workspace() {
                 <span className="text-gradient-teal"> off managed cloud hosting</span>
             </p>
 
-            <h2 className="relative z-2 heading-2 text-center text-white font-bold mt-4 leading-10 md:leading-15">Essential for <span className="italic font-normal">workplaces</span>. Great for <br /> any team.</h2>
-            <p className="relative z-2 text-neutral-300 font-medium text-[18px] text-center mx-auto mt-10 px-3 leading-loose">Sassly-CRM in the past allowing you to focus more on your business <br /> simply enjoy your newfound legal time to reflect leaving</p>
+            <h2 className="relative z-2 heading-2 flex flex-col text-center text-white font-bold mt-4 leading-10 md:leading-15">
+                <p className='animated-data-workspace'>Essential for <span className="italic font-normal">workplaces</span>. Great for </p>
+                <p className='animated-data-workspace'>any team.</p>
+            </h2>
+            <p className="relative z-2 text-neutral-300 flex flex-col font-medium text-[18px] text-center mx-auto mt-8 px-3 leading-loose">
+                <span className='animated-data-workspace'>Sassly-CRM in the past allowing you to focus more on your business</span>
+                <span className='animated-data-workspace'> simply enjoy your newfound legal time to reflect leaving</span>
+            </p>
 
             {/* department container */}
             <div className="relative z-2 mx-auto p-3 sm:p-7 mt-10 border-[1px] border-white/20 rounded-xl max-w-[1300px]">

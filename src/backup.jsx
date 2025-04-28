@@ -1,43 +1,55 @@
-
-
-
-// navbar and nav item
-
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import NavItem from './NavItem.jsx'
 
-
-// gsap animations
+// gsap
 import gsap from 'gsap'
 
-export function Navbar() {
+export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)
   const [isFixed, setIsFixed] = useState(false)
 
-  const navbarRef = useRef(null)
+  const navbarRef = useRef()
+  const sideBarRef = useRef()
+  const sideBarToggleBtn = useRef()
 
-  // trigger navbar animation
-    useEffect(() => {
-    if(isFixed){
-      gsap.from(navbarRef.current, {
-        y: -200,
-        duration: 0.35,
-        ease: "power3.out",
-      })
-    }
-  }, [isFixed])
 
   useEffect(() => {
+
     function handleScroll() {
       if (window.scrollY > 20) setIsFixed(true)
       else setIsFixed(false)
     }
-
+    function closeSideBar(e) {
+      if (sideBarRef.current && !sideBarRef.current.contains(e.target) && sideBarToggleBtn.current && !sideBarToggleBtn.current.contains(e.target)) {
+        setIsSidebarOpen(false)
+      }
+    }
+    window.addEventListener("click", closeSideBar)
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener('click', closeSideBar)
+    }
   }, [])
 
+  // navbar animation from top
+  useEffect(() => {
+    if (isFixed) {
+      gsap.from(navbarRef.current, {
+        y: -100,
+        duration: 0.4,
+        ease: "power1.out",
+      })
+    }
+    else{
+      gsap.from(navbarRef.current, {
+        y: 0,
+      })
+    }
+  }, [isFixed])
+
+  // disabling scroll on sidebar open
   useEffect(() => {
     if (isSidebarOpen) {
       document.body.style.overflow = "hidden"
@@ -49,7 +61,7 @@ export function Navbar() {
 
 
   return (
-    <header className={`py-7 relative z-50 mx-auto ${isFixed ? "" : "px-3"}`}>
+    <header className={`py-5 relative z-50 mx-auto ${isFixed ? "" : "px-3"}`}>
       <nav ref={navbarRef} className={`rounded-md px-6 ${isFixed ? "fixed top-0 left-0 z-50 bg-[#0f6555] right-0 rounded-none" : "absolute left-3 right-3 bg-white/5 max-w-[1350px] mx-auto"}`}>
         <div className="custom-container mx-auto flex justify-between items-center">
 
@@ -61,9 +73,9 @@ export function Navbar() {
           {/* nav links */}
 
           {/* nav items row */}
-          <ul className={`fixed z-50 top-0 left-0 h-screen w-[250px] sm:w-[300px] flex flex-col justify-start bg-white px-6
-         transform -translate-x-[100%] duration-300 ${isSidebarOpen ? "translate-x-[0%]" : ""} 
-         lg:static lg:flex-row lg:h-auto lg:w-auto lg:translate-x-0 lg:px-0 lg:bg-transparent lg:gap-[30px] lg:text-white
+          <ul ref={sideBarRef} className={`fixed z-50 top-0 left-0 h-screen sm:w-[300px] w-[250px] flex flex-col justify-start bg-white px-6
+         transform-[translateX(-100%)] duration-300 ${isSidebarOpen ? "transform-[translateX(0)]" : ""} 
+         lg:static lg:flex-row lg:h-auto lg:w-auto lg:transform-[translateX(0)] lg:px-0 lg:bg-transparent lg:gap-[30px] lg:text-white
         `}>
             {/* btn to close */}
             <button
@@ -94,7 +106,7 @@ export function Navbar() {
             </button>
           </div>
 
-          <button
+          <button ref={sideBarToggleBtn}
             onClick={() => setIsSidebarOpen(prev => !prev)}
             className='flex lg:hidden flex-col gap-[7px]'>
             <p className="w-8 rounded-2xl h-[3px] bg-white"></p>
@@ -117,39 +129,3 @@ const navbarData = [
   { navTitle: "Blog", dropdownItems: ["item 1", "item 2", "item 3"] },
   { navTitle: "Contact" },
 ]
-
-
-
-import React from 'react'
-
-export default function NavItem({ navTitle, dropdownItems, className, isOpen, index, setIsOpen }) {
-
-    const toggleDropdown = () => {
-        setIsOpen(prev => (prev === index ? null : index));
-    };
-
-
-    return (
-        <li
-            onClick={toggleDropdown}
-            className={`relative transition-all duration-300 h-[60px] ${isOpen ? "h-auto" : ""} lg:py-6 lg:h-[100%] flex flex-col lg:flex-row items-center font-semibold cursor-pointer group text-base ${className}`}>
-            <a className='group-hover:-translate-y-1 !py-3 w-full flex gap-2 items-center justify-between lg:justify-start duration-300 m-0 border-b-[1px] lg:border-0 border-slate-200' href="#">
-                <span>{navTitle}</span>
-                {dropdownItems?.length > 0 &&
-                    <i className={`fa fa-angle-down text-[10px] lg:group-hover:rotate-180 duration-200 lg:group-hover:text-blue-600 text-slate-300 ${isOpen ? "rotate-180 duration-300" : ""}`}></i>
-                }
-            </a>
-
-            {/* dropdown */}
-            <ul
-                className={`h-[0px] overflow-clip transition-all duration-400 p-2 ${isOpen ? "w-full !block h-full" : "w-full"}
-            lg:block lg:absolute  min-w-[190px] top-[100%] left-0 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:h-auto lg:group-hover:visible bg-transparent lg:bg-white text-black lg:shadow-lg rounded-md p-2 z-50 transition duration-300 ease-out 
-             lg:translate-y-5 lg:group-hover:-translate-y-1 ${dropdownItems && dropdownItems.length > 0 ? "" : "!hidden"}`}>
-                {(dropdownItems || []).map((item, index) => (
-                    <li key={index} className="px-4 py-2 rounded-sm border-b-[1px] border-slate-200 lg:border-0 hover:bg-gray-200">{item}</li>
-                ))}
-            </ul>
-        </li>
-    )
-}
-

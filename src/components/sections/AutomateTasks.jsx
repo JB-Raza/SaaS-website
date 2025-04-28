@@ -1,8 +1,12 @@
 import React from 'react'
 import Button from "../universalComponents/Button.jsx";
-
+import { useTextAnimate } from '../hooks/textAnimation.js'
 
 export default function AutomateTasks() {
+
+
+    useTextAnimate(".animate-automateTask-elem", { start: "top 90%", stagger: 0.3 })
+
     return (
         <div>
             {/* task section 1/2 */}
@@ -12,23 +16,30 @@ export default function AutomateTasks() {
                     <span className="text-yellow-500">70%</span>
                     <span className="text-gradient-teal"> off managed cloud hosting</span>
                 </p>
-                <h2 className="heading-2 font-semibold mt-4 leading-10 md:leading-15 capitalize lg:w-[50%] xxl:w-auto">Supercharge  <span className="italic text-gradient-teal font-normal">daily work</span>. with built-in automation</h2>
+                <h2 className="heading-2 font-semibold mt-4 leading-10 md:leading-15 capitalize lg:w-[50%] xxl:w-auto">
+                    <p className='animate-automateTask-elem'>Supercharge  <span className="italic text-gradient-teal font-normal">daily work</span>. with built-in </p>
+                    <p className='animate-automateTask-elem'>automation </p>
+                </h2>
 
                 <div className="grid grid-cols-12">
                     {/* col 1 */}
                     <div className="col-span-12 lg:col-span-6">
-                        <p className="text-neutral-500 font-medium text-[18px] mt-8 leading-loose">Sassly-CRM in the past allowing you to focus more on your business <br /> simply enjoy your newfound legal time to reflect leaving</p>
+                        <p className="text-neutral-500 flex flex-col font-medium text-[18px] mt-8 leading-loose">
+                            <span className='animate-automateTask-elem'>Sassly-CRM in the past allowing you to focus more on your business </span>
+                            <span className='animate-automateTask-elem'>simply enjoy your newfound legal time to reflect leaving</span>
+
+                        </p>
                         {/* features */}
                         <div className="features my-10 flex flex-col gap-4">
-                            <p className="bg-neutral-100 font-semibold flex gap-3 items-center text-[17px] rounded-full ps-6 pe-15 py-3 w-fit">
+                            <p className="animate-automateTask-elem bg-neutral-100 font-semibold flex gap-3 items-center text-[17px] rounded-full ps-6 pe-15 py-3 w-fit">
                                 <i className="fa-solid fa-square-check text-[20px] text-[#008C63]"></i>
                                 <span>Workflow streamlining</span>
                             </p>
-                            <p className="bg-neutral-100 font-semibold flex gap-3 items-center text-[17px] rounded-full ps-6 pe-15 py-3 w-fit">
+                            <p className="animate-automateTask-elem bg-neutral-100 font-semibold flex gap-3 items-center text-[17px] rounded-full ps-6 pe-15 py-3 w-fit">
                                 <i className="fa-solid fa-square-check text-[20px] text-[#008C63]"></i>
                                 <span>Expedite onboarding with clear prioritization</span>
                             </p>
-                            <p className="bg-neutral-100 font-semibold flex gap-3 items-center text-[17px] rounded-full ps-6 pe-15 py-3 w-fit">
+                            <p className="animate-automateTask-elem bg-neutral-100 font-semibold flex gap-3 items-center text-[17px] rounded-full ps-6 pe-15 py-3 w-fit">
                                 <i className="fa-solid fa-square-check text-[20px] text-[#008C63]"></i>
                                 <span>Collaborate on ideas 7x faster</span>
                             </p>
@@ -57,12 +68,12 @@ export default function AutomateTasks() {
                             <span className="text-yellow-500">70%</span>
                             <span className="text-gradient-teal"> off managed cloud hosting</span>
                         </p>
-                        <h2 className="heading-2 font-semibold mt-4 leading-10 md:leading-15 capitalize">Powerful & life-saving <span className="italic text-gradient-teal font-normal"> task manager</span></h2>
+                        <h2 className="animate-automateTask-elem heading-2 font-semibold mt-4 leading-10 md:leading-15 capitalize">Powerful & life-saving <span className="italic text-gradient-teal font-normal"> task manager</span></h2>
 
-                        <p className="text-neutral-500 font-medium text-[18px] mt-8 leading-loose">Sassly-CRM in the past allowing you to focus more on your business <br /> simply enjoy your newfound legal time to reflect leaving</p>
+                        <p className="animate-automateTask-elem text-neutral-500 font-medium text-[18px] mt-8 leading-loose">Sassly-CRM in the past allowing you to focus more on your business <br /> simply enjoy your newfound legal time to reflect leaving</p>
 
                         {/* card 1 */}
-                        <div className="card flex items-start gap-4 sm:gap-10 mt-13">
+                        <div className="animate-automateTask-elem card flex items-start gap-4 sm:gap-10 mt-13">
                             <i className="fa-solid fa-bars-progress text-green-500 text-3xl mt-2"></i>
                             <div>
                                 <h5 className="heading-5 font-semibold">Automate Task Creation</h5>
@@ -70,7 +81,7 @@ export default function AutomateTasks() {
                             </div>
                         </div>
                         {/* card 2 */}
-                        <div className="card flex items-start gap-4 sm:gap-10 mt-13">
+                        <div className="animate-automateTask-elem card flex items-start gap-4 sm:gap-10 mt-13">
                             <i className="fa-solid fa-bars-progress text-green-500 text-3xl mt-2"></i>
                             <div>
                                 <h5 className="heading-5 font-semibold">Automate Task Creation</h5>

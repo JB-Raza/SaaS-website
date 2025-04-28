@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 export default function NavItem({ navTitle, dropdownItems, className, isOpen, index, setIsOpen }) {
 
-    const toggleDropdown = () => {
+    const dropdownRef = useRef()
+
+    const toggleDropdown = (e) => {
+        e.preventDefault()
         setIsOpen(prev => (prev === index ? null : index));
     };
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        if (isOpen) {
+            dropdownRef.current.style.maxHeight = `${window.innerHeight}px`
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, [isOpen]);
+
 
 
     return (
@@ -20,13 +40,25 @@ export default function NavItem({ navTitle, dropdownItems, className, isOpen, in
 
             {/* dropdown */}
             <ul
-                className={`h-[0px] overflow-clip transition-all duration-400 p-2 ${isOpen ? "w-full !block h-full" : "w-full"}
-            lg:block lg:absolute  min-w-[190px] top-[100%] left-0 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:h-auto lg:group-hover:visible bg-transparent lg:bg-white text-black lg:shadow-lg rounded-md p-2 z-50 transition duration-300 ease-out 
-             lg:translate-y-5 lg:group-hover:-translate-y-1 ${dropdownItems && dropdownItems.length > 0 ? "" : "!hidden"}`}>
+                ref={dropdownRef}
+                className={`
+                    overflow-hidden lg:overflow-auto
+                    lg:block lg:absolute min-w-[190px] top-[100%] left-0
+                    bg-transparent lg:bg-white text-black lg:shadow-lg rounded-md p-2 z-50
+                    transition-all duration-300 ease
+                    lg:translate-y-5 lg:group-hover:-translate-y-0
+                    ${dropdownItems && dropdownItems.length > 0 ? "" : "!hidden"}
+                    ${windowWidth < 1024
+                        ? (isOpen ? 'opacity-100 visible' : 'max-h-0 opacity-0 invisible')
+                        : 'lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible'
+                    }
+                `}
+            >
                 {(dropdownItems || []).map((item, index) => (
                     <li key={index} className="px-4 py-2 rounded-sm border-b-[1px] border-slate-200 lg:border-0 hover:bg-gray-200">{item}</li>
                 ))}
             </ul>
+
         </li>
     )
 }

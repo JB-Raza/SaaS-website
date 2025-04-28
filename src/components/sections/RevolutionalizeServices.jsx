@@ -1,7 +1,10 @@
 import React from 'react'
 import Button from "../universalComponents/Button.jsx";
+import { useTextAnimate } from '../hooks/textAnimation.js';
 
 export default function RevolutionalizeServices() {
+
+    useTextAnimate(".animate-elem-revolution", { start: "top 90%", y: 50 })
     return (
         <div className="custom-container bg-[url(./revolutionize/hill-shape.png)] bg-no-repeat bg-cover mx-auto pt-20 mt-30 relative w-[calc(100%-10px)] md:w-[calc(100%-20px)] rounded-xl px-2 ">
 
@@ -15,7 +18,10 @@ export default function RevolutionalizeServices() {
                 Up to <span className="text-yellow-500">70%</span> off managed cloud hosting
             </p>
 
-            <h2 className="heading-3 text-center font-semibold mt-4 text-white leading-10 md:leading-10 md:leading-15">Ready to revolutionize <br /> our service?</h2>
+            <h2 className="heading-3 text-center font-semibold mt-4 text-white leading-10 md:leading-15">
+                <p className='animate-elem-revolution'>Ready to revolutionize</p>
+                <p className='animate-elem-revolution'>our service?</p>
+            </h2>
 
             <Button content={"Download for free"} className={"text-white mx-auto my-10"} />
 

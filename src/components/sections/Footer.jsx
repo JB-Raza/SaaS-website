@@ -1,7 +1,11 @@
 import React from 'react'
 import Button from "../universalComponents/Button.jsx";
+import { useTextAnimate } from '../hooks/textAnimation.js';
 
 export default function Footer() {
+
+    useTextAnimate(".animate-elem-footer", {start: "top 90%", y: 50})
+
     return (
         <footer className="bg-[#FBF6EE] px-3 overflow-hidden">
 
@@ -10,55 +14,55 @@ export default function Footer() {
 
                 {/* col 1 */}
                 <div className="col-span-12 xs:col-span-6 sm:col-span-4 lg:col-span-3">
-                    <h5 className="heading-5 font-medium">Collaborate</h5>
+                    <h5 className="animate-elem-footer heading-5 font-medium">Collaborate</h5>
                     <div className="flex flex-col items-start gap-4 mt-6">
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Partners</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Partners Program</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Affiliate Program</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Community</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">HR Partner Program</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Partners</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Partners Program</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Affiliate Program</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Community</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">HR Partner Program</span>
                     </div>
                 </div>
 
                 {/* col 2 */}
                 <div className="col-span-12 xs:col-span-6 sm:col-span-4 lg:col-span-2">
-                    <h5 className="heading-5 font-medium">My account</h5>
+                    <h5 className="animate-elem-footer heading-5 font-medium">My account</h5>
 
                     <div className="flex flex-col items-start gap-3 mt-6">
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Company</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Customer Success</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Resources</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Talk an Expert</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Company</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Customer Success</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Resources</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Talk an Expert</span>
                     </div>
                 </div>
 
                 {/* col 3 */}
                 <div className="col-span-12 xs:col-span-6 sm:col-span-4 lg:col-span-2">
-                    <h5 className="heading-5 font-medium">Service</h5>
+                    <h5 className="animate-elem-footer heading-5 font-medium">Service</h5>
 
                     <div className="flex flex-col items-start gap-3 mt-6">
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Software Development</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Cloud Services</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">AI Machine Learning</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Data Security</span>
-                        <span className="font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Software Development</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Software Development</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Cloud Services</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">AI Machine Learning</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Data Security</span>
+                        <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Software Development</span>
 
                     </div>
                 </div>
 
                 {/* col 4 form */}
                 <div className="col-span-11 xs:col-span-12 sm:col-span-10 md:col-span-8 mt-8 lg:mt-0 lg:col-span-5">
-                    <div className="logo">
+                    <div className="animate-elem-footer logo">
                         <img src="./logo-three.png" alt="logo" />
                     </div>
                     {/* input box */}
                     <div className="flex flex-col xs:flex-row gap-5 w-auto my-10">
                         <input type="text" placeholder="Email Address"
-                            className=" px-7 py-4 bg-white rounded-lg w-full"
+                            className="animate-elem-footer px-7 py-4 bg-white rounded-lg w-full"
                         />
                         <Button content={"Sign Up"} icon={"fa fa-angle-right"} className={"text-white text-nowrap"} />
                     </div>
-                    <p className="font-semibold">By subscribing, you're accept <span className="underline cursor-pointer duration-200 inline-block hover:-translate-y-1">Privacy Policy</span></p>
+                    <p className="animate-elem-footer font-semibold">By subscribing, you're accept <span className="underline cursor-pointer duration-200 inline-block hover:-translate-y-1">Privacy Policy</span></p>
                 </div>
 
             </div>
