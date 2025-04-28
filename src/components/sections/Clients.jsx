@@ -44,8 +44,8 @@ export default function Clients() {
 
     return (
         <div className="clients-section overflow-clip flex gap-10 justify-center py-10 my-15">
-            <div className="relative clients custom-container mx-auto">
-                <h5 className="text-center mb-16 font-semibold line-clamp-2 heading-4">Loved by next-gen B2B <span className='text-gradient-teal'>SaaS</span> companies.....</h5>
+            <div className="relative clients custom-container w-full mx-auto">
+                <h5 className="text-center mb-16 font-semibold line-clamp-2 heading-4 text-wrap">Loved by next-gen B2B <span className='text-gradient-teal'>SaaS</span> companies.....</h5>
 
                 <Swiper
                     className="swiper"
@@ -71,7 +71,7 @@ export default function Clients() {
 
                     {(clientsData || []).map((client, index) => (
 
-                        <SwiperSlide ref={slideRef} key={index} className="!flex swiper-slide !justify-center" >
+                        <SwiperSlide ref={slideRef} key={index} className="!flex swiper-slide !justify-center md:!justify-start" >
                         <img src={client.img} alt={client.img} />
                     </SwiperSlide>
                     ))}

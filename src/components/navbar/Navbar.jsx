@@ -3,6 +3,7 @@ import NavItem from './NavItem.jsx'
 
 // gsap
 import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -12,6 +13,61 @@ export default function Navbar() {
   const navbarRef = useRef()
   const sideBarRef = useRef()
   const sideBarToggleBtn = useRef()
+
+
+
+  // navbar animation from top
+  // useEffect(() => {
+  //   if (isFixed) {
+  //     gsap.from(navbarRef.current, {
+  //       y: -100,
+  //       duration: 0.4,
+  //       delay: -0.1,
+  //       ease: "power1.out",
+  //     })
+  //   }
+  //   else {
+  //     gsap.from(navbarRef.current, {
+  //       y: 0,
+  //     })
+  //   }
+  // }, [isFixed])
+
+  // navitems animation when sidebar is open
+
+  const sidebarTimeline = useRef();
+
+  useGSAP(() => {
+    sidebarTimeline.current = gsap.timeline({ paused: true })
+      .from(".close-btn", {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      })
+      .from(".sidebar-logo", {
+        opacity: 0,
+        y: -30,
+        duration: 0.2,
+      })
+      .fromTo(".animate-navitem",
+        { y: -50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "power1.out",
+          stagger: { each: 0.1 },
+        }
+      );
+
+  }, []); // <-- empty array, run once
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      sidebarTimeline.current?.play();
+    } else {
+      sidebarTimeline.current?.reverse();
+    }
+  }, [isSidebarOpen]);
 
 
   useEffect(() => {
@@ -33,21 +89,7 @@ export default function Navbar() {
     }
   }, [])
 
-  // navbar animation from top
-  // useEffect(() => {
-  //   if (isFixed) {
-  //     gsap.from(navbarRef.current, {
-  //       y: -100,
-  //       duration: 0.4,
-  //       ease: "power1.out",
-  //     })
-  //   }
-  //   else{
-  //     gsap.from(navbarRef.current, {
-  //       y: 0,
-  //     })
-  //   }
-  // }, [isFixed])
+
 
   // disabling scroll on sidebar open
   useEffect(() => {
@@ -59,9 +101,41 @@ export default function Navbar() {
     }
   }, [isSidebarOpen])
 
+  useGSAP(() => {
+    const trackCursor = (e) => {
+      gsap.to(".cursor-dot", {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.3,
+        ease: 'power1.out',
+      })
+    }
+
+    document.addEventListener("mousemove", trackCursor)
+    return () => document.removeEventListener("mousemove", trackCursor)
+  }, [])
 
   return (
     <header className={`py-5 relative z-50 mx-auto ${isFixed ? "" : "px-3"}`}>
+
+      {/* custom cursor if sidebar is open */}
+      {!isSidebarOpen ? "" :
+        <div
+          className="cursor-dot fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+          style={{ zIndex: 301 }}
+        >
+          <div className="line w-7 h-[3px] bg-white translate-y-[2px] rotate-[45deg]"></div>
+          <div className="line w-7 h-[3px] bg-white -rotate-[45deg]"></div>
+        </div>
+
+      }
+
+      {/* dark overlay when sidebar is open */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-[rgba(0,0,40,0.5)] bg-opacity-50 z-40"
+        />
+      )}
       <nav ref={navbarRef} className={`rounded-md px-6 ${isFixed ? "fixed top-0 left-0 z-50 bg-[#0f6555] right-0 rounded-none" : "absolute left-3 right-3 bg-white/5 max-w-[1350px] mx-auto"}`}>
         <div className="custom-container mx-auto flex justify-between items-center">
 
@@ -73,23 +147,25 @@ export default function Navbar() {
           {/* nav links */}
 
           {/* nav items row */}
-          <ul ref={sideBarRef} className={`fixed z-50 top-0 left-0 h-screen sm:w-[300px] w-[250px] flex flex-col justify-start bg-white px-6
-         transform-[translateX(-100%)] duration-300 ${isSidebarOpen ? "transform-[translateX(0)]" : ""} 
-         lg:static lg:flex-row lg:h-auto lg:w-auto lg:transform-[translateX(0)] lg:px-0 lg:bg-transparent lg:gap-[30px] lg:text-white
-        `}>
+          <ul ref={sideBarRef} className={`fixed z-50 top-0 left-0 h-screen w-[250px] sm:w-[300px] flex flex-col justify-start bg-white px-6
+          transform-[translateX(-100%)] duration-300 ${isSidebarOpen ? "transform-[translateX(0)]" : ""} 
+          lg:static lg:flex-row lg:h-auto lg:w-auto lg:transform-[translateX(0)] lg:px-0 lg:bg-transparent lg:gap-[30px] lg:text-white
+          `}>
             {/* btn to close */}
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="ms-auto absolute right-2 top-2 inline-block lg:hidden w-6 h-6 rounded-full bg-neutral-200 hover:bg-neutral-900 hover:text-white">
+              className="close-btn ms-auto absolute right-2 top-2 inline-block lg:hidden w-6 h-6 rounded-full bg-neutral-200 hover:bg-neutral-900 hover:text-white">
               <i className="fa fa-xmark rounded-full"></i>
             </button>
             {/* brand logo */}
-            <div className="navbar-brand py-6 mb-[9px] lg:hidden">
+            <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
               <a href='#'>
                 <img className='' src="./logo-blue.png" alt="logo" /></a>
             </div>
             {(navbarData || []).map((item, i) => (
-              <NavItem key={i} navTitle={item.navTitle} dropdownItems={item.dropdownItems} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown} />
+              <NavItem key={i} navTitle={item.navTitle} dropdownItems={item.dropdownItems} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown}
+                className={"animate-navitem"}
+              />
             ))}
 
           </ul>
