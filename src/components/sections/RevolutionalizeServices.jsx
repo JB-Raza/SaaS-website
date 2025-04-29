@@ -27,8 +27,8 @@ export default function RevolutionalizeServices() {
 
             {/* imgs */}
             <div className="absolute right-[20px] top-[20px]">
-                <img src="./revolutionize/person.png" alt="" className="absolute -top-[65%]" />
-                <img src="./revolutionize/card.png" alt="" className="opacity-0 lg:opacity-100" />
+                <img src="/revolutionize/person.png" alt="" className="absolute -top-[65%]" />
+                <img src="/revolutionize/card.png" alt="" className="opacity-0 lg:opacity-100" />
             </div>
 
             <p className="font-medium text-white text-wrap text-center capitalize !bg-white/15 mx-auto w-fit px-10 py-2 rounded-full">

@@ -105,7 +105,7 @@ span {
 }
 
 .app-integration {
-  background-image: url("./app-integration/net-shape.png");
+  background-image: url("/app-integration/net-shape.png");
   background-repeat: no-repeat;
   background-position: center -130px;
   background-size: cover;
