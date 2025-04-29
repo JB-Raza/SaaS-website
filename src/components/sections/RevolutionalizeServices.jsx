@@ -23,7 +23,7 @@ export default function RevolutionalizeServices() {
 
     useTextAnimate(".animate-elem-revolution", { start: "top 90%", y: 50 })
     return (
-        <div className="custom-container overflow-clip bg-[url(/revolutionize/hill-shape.png)] bg-no-repeat bg-cover mx-auto pt-20 mt-30 relative w-[calc(100%-10px)] md:w-[calc(100%-20px)] rounded-xl px-2 ">
+        <div className="custom-container bg-[url(/revolutionize/hill-shape.png)] bg-no-repeat bg-cover mx-auto pt-20 mt-30 relative w-[calc(100%-10px)] md:w-[calc(100%-20px)] rounded-xl px-2 ">
 
             {/* imgs */}
             <div className="absolute right-[20px] top-[20px]">
