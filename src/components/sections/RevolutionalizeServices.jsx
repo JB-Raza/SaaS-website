@@ -40,7 +40,7 @@ export default function RevolutionalizeServices() {
                 <p className='animate-elem-revolution'>our service?</p>
             </h2>
 
-            <Button content={"Download for free"} className={"text-white mx-auto my-10"} />
+            <Button content={"Download for free"} className={"text-white mx-auto my-10 min-w-[200px]"} />
 
             {/* all floating buttons */}
             <div className="flex items-center mt-20 flex-wrap gap-5 justify-center">

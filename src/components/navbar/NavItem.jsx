@@ -15,10 +15,14 @@ export default function NavItem({ navTitle, dropdownItems, className, isOpen, in
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
+        if (windowWidth < 1024) {
 
-        if (isOpen) {
-            dropdownRef.current.style.maxHeight = `${window.innerHeight}px`
+            if (isOpen) {
+                dropdownRef.current.style.maxHeight = `${window.innerHeight}px`
+            }
+            else dropdownRef.current.style.maxHeight = `${0}px`
         }
+
 
         window.addEventListener('resize', handleResize);
 
@@ -42,14 +46,14 @@ export default function NavItem({ navTitle, dropdownItems, className, isOpen, in
             <ul
                 ref={dropdownRef}
                 className={`
-                    overflow-hidden lg:overflow-auto
+                    overflow-hidde lg:overflow-auto
                     lg:block lg:absolute min-w-[190px] top-[100%] left-0
                     bg-transparent lg:bg-white text-black lg:shadow-lg rounded-md p-2 z-50
                     transition-all duration-300 ease
                     lg:translate-y-5 lg:group-hover:-translate-y-0
                     ${dropdownItems && dropdownItems.length > 0 ? "" : "!hidden"}
                     ${windowWidth < 1024
-                        ? (isOpen ? 'opacity-100 visible' : 'max-h-0 opacity-0 invisible')
+                        ? (isOpen ? 'opacity-100 visible' : 'opacity-0 invisible')
                         : 'lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible'
                     }
                 `}

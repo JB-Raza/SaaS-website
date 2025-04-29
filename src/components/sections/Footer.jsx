@@ -58,9 +58,9 @@ export default function Footer() {
                     {/* input box */}
                     <div className="flex flex-col xs:flex-row gap-5 w-auto my-10">
                         <input type="text" placeholder="Email Address"
-                            className="animate-elem-footer px-7 py-4 bg-white rounded-lg w-full"
+                            className="px-7 py-4 bg-white rounded-lg w-full"
                         />
-                        <Button content={"Sign Up"} icon={"fa fa-angle-right"} className={"text-white text-nowrap"} />
+                        <Button content={"Sign Up"} icon={"fa fa-angle-right"} className={"text-white text-nowrap min-w-[120px]"} />
                     </div>
                     <p className="animate-elem-footer font-semibold">By subscribing, you're accept <span className="underline cursor-pointer duration-200 inline-block hover:-translate-y-1">Privacy Policy</span></p>
                 </div>

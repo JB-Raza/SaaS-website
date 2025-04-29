@@ -18,6 +18,7 @@ export const useTextAnimate = (target, { start = "top 80%", end = "top 40%", fro
                         trigger: elem,
                         scroller: "body",
                         start: start,
+                        toggleActions: "play none none none",
                     }
                 }
 

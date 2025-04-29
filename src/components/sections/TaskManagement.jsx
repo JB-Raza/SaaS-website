@@ -10,6 +10,25 @@ export default function TaskManagement() {
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdrownRef = useRef()
+  const dropdrownBtnRef = useRef()
+
+  useEffect(() => {
+    function closeDropdownOnClick(e) {
+      if (dropdrownRef.current && !dropdrownRef.current.contains(e.target) && dropdrownBtnRef.current && !dropdrownBtnRef.current.contains(e.target)) {
+        setDropdownOpen(false)
+      }
+    }
+    function closeDropdownOnScroll() {
+      setDropdownOpen(false)
+    }
+    window.addEventListener("scroll", closeDropdownOnScroll)
+    window.addEventListener("click", closeDropdownOnClick)
+
+    return () =>{
+      window.removeEventListener("scroll", closeDropdownOnScroll)
+      window.removeEventListener("click", closeDropdownOnClick)
+    }
+  }, [])
 
   useEffect(() => {
     if (dropdownOpen) {
@@ -36,19 +55,19 @@ export default function TaskManagement() {
           </h2>
           <p className="text-gray-600 max-w-[550px]">
             <span className='animated-data-elem'><span>Sassly-CRM in the past allowing you to focus more on your businesssimply</span></span>
-             <span className='animated-data-elem'>enjoy your newfound legal time to reflect leaving pen</span>
-             </p>
+            <span className='animated-data-elem'>enjoy your newfound legal time to reflect leaving pen</span>
+          </p>
         </div>
 
         {/* main content */}
         <div className="grid grid-cols-12 gap-5 mx-0 my-10">
           {/* col 1 */}
-          <div className="col-span-12 row-span-2 sm:col-span-6 lg:col-span-4 flex flex-col items-center py-20 rounded-lg bg-[#D19D3D17]">
+          <div className="col-span-12 row-span-2 sm:col-span-6 lg:col-span-4 flex flex-col items-center pt-15 pb-8 rounded-lg bg-[#D19D3D17]">
             {/* badges */}
             <div className="w-[calc(100%-10px)] sm:w-[calc(100%-30px)] md:w-[calc(100%-50px)] flex flex-col mb-15">
               {/* badge 1 */}
               <span className="rounded-full px-10 py-3 text-white font-bold
-              relative z-3 -rotate-[14deg] bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)] inline-block min-w-[250px]
+              relative z-3 -rotate-[12deg] bg-[linear-gradient(270deg,#06766E_0%,#20BA8B_100%)] inline-block min-w-[250px]
               ">
                 Project management
               </span>
@@ -60,7 +79,7 @@ export default function TaskManagement() {
               </span>
               {/* badge 3 */}
               <span className="rounded-full px-10 py-3 text-white font-bold
-              relative z-1 rotate-[14deg] bg-[linear-gradient(69.92deg,#003D3D_28.63%,#00664E_87.07%,#008C63_112.98%)] inline-block min-w-[250px]
+              relative z-1 rotate-[10deg] bg-[linear-gradient(69.92deg,#003D3D_28.63%,#00664E_87.07%,#008C63_112.98%)] inline-block min-w-[250px]
               ">
                 Seemless integration tools
               </span>
@@ -71,8 +90,8 @@ export default function TaskManagement() {
             <div className="card relative min-w-[230px] w-[calc(100%-20px)] sm:w-[calc(100%-60px)] rounded-md p-5 bg-white shadow-lg">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-sm">Labels</span>
-                <button onClick={() => setDropdownOpen((prev) => !prev)} className="font-bold text-slate-400 text-xl -mt-3 cursor-pointer">...</button>
-                <div ref={dropdrownRef} className=' absolute left-[calc(100%-30px)] top-10 overflow-hidden transition-all duration-300 bg-white font-semibold shadow-lg min-w-[160px]'>
+                <button ref={dropdrownBtnRef} onClick={() => setDropdownOpen((prev) => !prev)} className="font-bold text-slate-400 text-xl -mt-3 cursor-pointer">...</button>
+                <div ref={dropdrownRef} className=' absolute z-45 right-0 sm:right-auto sm:left-[calc(100%-30px)] top-10 overflow-hidden transition-all duration-300 bg-white font-semibold shadow-lg min-w-[160px]'>
                   <ul className={`p-3`}>
                     <li className='hover:bg-neutral-200 rounded-sm px-2 py-1'>action</li>
                     <li className='hover:bg-neutral-200 rounded-sm px-2 py-1'>action</li>
@@ -97,9 +116,9 @@ export default function TaskManagement() {
                         id={checkbox.name}
                         className="sr-only peer"
                       />
-                      <div className="w-6 h-6 rounded border-[1px] border-green-300 bg-blue-50 peer-checked:bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] peer-checked:border-transparent transition-all duration-300 flex items-center justify-center">
+                      <div className="w-6 h-6 relative rounded border-[1px] border-green-300 bg-blue-50 peer-checked:bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] peer-checked:border-transparent transition-all duration-300 flex items-center justify-center">
                         <svg
-                          className="w-3 h-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+                          className="w-3 h-3 relative z-10  text-white opacity-0 peer-checked:opacity-100 transition-opacity"
                           fill="#06766E"
                           stroke=""
                           strokeWidth="2"
@@ -107,6 +126,7 @@ export default function TaskManagement() {
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13 l4 4L19 7" />
                         </svg>
+                        <i className="fa-solid fa-check text-blue-50 absolute"></i>
                       </div>
                     </label>
                   </div>

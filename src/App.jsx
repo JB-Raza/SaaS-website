@@ -56,7 +56,6 @@ function App() {
     gsap.from(".floating-icons-right", {
       top: 15,
       duration: 2,
-      srub: 1,
       ease: "power2.out",
       repeat: -1,
       yoyo: true,
@@ -127,7 +126,7 @@ function App() {
             <img src="./app-integration/5.png" alt="" className="floating-icons-right absolute translate-y-30 sm:translate-y-35 md:translate-y-40 right-1/8 md:right-1/5 w-10 md:w-15" />
             <img src="./app-integration/6.png" alt="" className="floating-icons-right absolute translate-y-60 md:translate-y-70 right-1 md:right-1/9 w-15 h-15 " />
           </div>
-          <Button content={"start free trial"} className={"text-nowrap absolute bottom-0 left-1/2 -translate-x-1/2 text-white px-12 !py-5"} icon={"fa-solid fa-cloud-arrow-down"} />
+          <Button content={"start free trial"} className={"text-nowrap min-w-[200px]  mx-auto relative top-[calc(100%-60px)] text-white"} icon={"fa-solid fa-cloud-arrow-down"} />
         </div>
       </div>
 

@@ -9,71 +9,100 @@ export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)
   const [isFixed, setIsFixed] = useState(false)
+  const [windowWidth, setWindowWdith] = useState(0)
+
 
   const navbarRef = useRef()
   const sideBarRef = useRef()
   const sideBarToggleBtn = useRef()
+  const overlayBtnRef = useRef()
+  const overlayRef = useRef()
 
 
 
   // navbar animation from top
-  // useEffect(() => {
-  //   if (isFixed) {
-  //     gsap.from(navbarRef.current, {
-  //       y: -100,
-  //       duration: 0.4,
-  //       delay: -0.1,
-  //       ease: "power1.out",
-  //     })
-  //   }
-  //   else {
-  //     gsap.from(navbarRef.current, {
-  //       y: 0,
-  //     })
-  //   }
-  // }, [isFixed])
+  useEffect(() => {
+    if (isFixed) {
+      gsap.fromTo(navbarRef.current, { y: -200 },
+        {
+          y: 0,
+          duration: 0.4,
+          delay: -0.1,
+          ease: "power1.out",
+        })
+    }
+    // else {
+    //   gsap.to(navbarRef.current, {
+    //     y: 0,
+    //   })
+    // }
+  }, [isFixed])
 
   // navitems animation when sidebar is open
 
   const sidebarTimeline = useRef();
 
   useGSAP(() => {
-    if (window.innerWidth < 1024) {
-
-      sidebarTimeline.current = gsap.timeline({ paused: true })
-        .from(".close-btn", {
+    if (isSidebarOpen) {
+      sidebarTimeline.current = gsap.timeline()
+        .fromTo(".close-btn", { opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.3,
+            delay: 0.3,
+            ease: "power3.out"
+          }
+        )
+        .fromTo(".sidebar-logo", {
           opacity: 0,
-          duration: 0.5,
-          ease: "power3.out",
-        })
-        .from(".sidebar-logo", {
-          opacity: 0,
-          y: -30,
-          duration: 0.2,
-        })
+          y: -50,
+        }, { opacity: 1, y: 0, duration: 0.3 })
         .fromTo(".animate-navitem",
           { y: -50, opacity: 0 },
           {
             y: 0,
             opacity: 1,
             ease: "power1.out",
-            stagger: { each: 0.1 },
+            duration: 0.1,
+            stagger: 0.1,
           }
         );
     }
 
-  }, []);
-
-  useEffect(() => {
-    if (isSidebarOpen) {
-      sidebarTimeline.current?.play();
-    }
-    else{
-      sidebarTimeline.current?.reverse();
-    }
   }, [isSidebarOpen]);
 
 
+
+  // handle window width
+  useEffect(() => {
+    function handleResize() {
+      setWindowWdith(window.innerWidth)
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    return () => window.removeEventListener("resize", handleResize)
+
+
+  }, [])
+
+
+  useEffect(() => {
+    if (windowWidth >= 1024) {
+
+      if (sidebarTimeline.current) {
+        sidebarTimeline.current?.kill();
+        sidebarTimeline.current = null;
+      }
+      return;
+    }
+
+    if (isSidebarOpen) sidebarTimeline.current?.play()
+    else sidebarTimeline.current?.reverse()
+
+  }, [isSidebarOpen, windowWidth])
+
+  // toggling isFixed state
   useEffect(() => {
 
     function handleScroll() {
@@ -82,7 +111,10 @@ export default function Navbar() {
     }
     function closeSideBar(e) {
       if (sideBarRef.current && !sideBarRef.current.contains(e.target) && sideBarToggleBtn.current && !sideBarToggleBtn.current.contains(e.target)) {
-        setIsSidebarOpen(false)
+        setTimeout(() => {
+          setIsSidebarOpen(false)
+        }, 1300)
+        sidebarTimeline.current?.reverse()
       }
     }
     window.addEventListener("click", closeSideBar)
@@ -92,7 +124,6 @@ export default function Navbar() {
       window.removeEventListener('click', closeSideBar)
     }
   }, [])
-
 
 
   // disabling scroll on sidebar open
@@ -105,6 +136,7 @@ export default function Navbar() {
     }
   }, [isSidebarOpen])
 
+  // track cursor on sidebarOpen
   useGSAP(() => {
     const trackCursor = (e) => {
       gsap.to(".cursor-dot", {
@@ -119,6 +151,61 @@ export default function Navbar() {
     return () => document.removeEventListener("mousemove", trackCursor)
   }, [])
 
+
+  // hover btn animation
+  useEffect(() => {
+    const button = overlayBtnRef.current;
+
+    function moveOverlay(e) {
+      if (button && overlayRef.current) {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        gsap.to(overlayRef.current, {
+          x: x,
+          y: y,
+          height: 100,
+          width: 100,
+          scale: 10,
+          duration: 2,
+          ease: "power3.out"
+        });
+      }
+    }
+    function leaveBtn(e) {
+      let button = overlayBtnRef.current
+      if (button && overlayRef.current) {
+        let rect = button.getBoundingClientRect()
+        let x = e.clientX - rect.left
+        let y = e.clientY - rect.top
+        gsap.to(overlayRef.current, {
+          x: x,
+          y: y,
+          height: 0,
+          width: 0,
+          scale: 0,
+          duration: 2,
+          ease: "power3.out"
+        });
+      }
+    }
+
+    if (button) {
+      button.addEventListener("mousemove", moveOverlay);
+      button.addEventListener("mouseleave", leaveBtn)
+    }
+
+    return () => {
+      if (button) {
+        button.removeEventListener("mousemove", moveOverlay);
+        button.removeEventListener("mouseleave", leaveBtn)
+      }
+    }
+  }, []);
+
+
+
   return (
     <header className={`py-5 relative z-50 mx-auto ${isFixed ? "" : "px-3"}`}>
 
@@ -131,7 +218,6 @@ export default function Navbar() {
           <div className="line w-7 h-[3px] bg-white translate-y-[2px] rotate-[45deg]"></div>
           <div className="line w-7 h-[3px] bg-white -rotate-[45deg]"></div>
         </div>
-
       }
 
       {/* dark overlay when sidebar is open */}
@@ -140,6 +226,8 @@ export default function Navbar() {
           className="fixed inset-0 bg-[rgba(0,0,40,0.5)] bg-opacity-50 z-40"
         />
       )}
+
+
       <nav ref={navbarRef} className={`rounded-md px-6 ${isFixed ? "fixed top-0 left-0 z-50 bg-[#0f6555] right-0 rounded-none" : "absolute left-3 right-3 bg-white/5 max-w-[1350px] mx-auto"}`}>
         <div className="custom-container mx-auto flex justify-between items-center">
 
@@ -150,14 +238,17 @@ export default function Navbar() {
           </div>
           {/* nav links */}
 
-          {/* nav items row */}
-          <ul ref={sideBarRef} className={`fixed z-50 top-0 left-0 h-screen w-[250px] sm:w-[300px] flex flex-col justify-start bg-white px-6
-          transform-[translateX(-100%)] duration-300 ${isSidebarOpen ? "transform-[translateX(0)]" : ""} 
-          lg:static lg:flex-row lg:h-auto lg:w-auto lg:transform-[translateX(0)] lg:px-0 lg:bg-transparent lg:gap-[30px] lg:text-white
+          {/* nav items row over lg breakpoint */}
+          <ul className={`hidden lg:flex flex-row h-auto w-auto px-0 bg-transparent gap-[30px] text-white
           `}>
             {/* btn to close */}
             <button
-              onClick={() => setIsSidebarOpen(false)}
+              onClick={() => {
+                setTimeout(() => {
+                  setIsSidebarOpen(false)
+                }, 1300)
+                sidebarTimeline.current?.reverse()
+              }}
               className="close-btn ms-auto absolute right-2 top-2 inline-block lg:hidden w-6 h-6 rounded-full bg-neutral-200 hover:bg-neutral-900 hover:text-white">
               <i className="fa fa-xmark rounded-full"></i>
             </button>
@@ -174,18 +265,21 @@ export default function Navbar() {
 
           </ul>
 
-
           <div className="actions m-0 flex gap-6 items-center">
             <button className='cursor-pointer font-semibold text-sm hidden xl:flex items-center gap-2 text-white'>
               <i className="fa-regular fa-user text-[rgb(50,244,133)] text-xs"></i>
               Sign in
             </button>
-            <button className="hidden rounded-md font-semibold bg-green-400 px-6 py-[14px] lg:flex gap-2 items-center text-nowrap text-[16px]">
-              Start Free Trial
-              <i className='fa-solid fa-cloud-arrow-down'></i>
+            <button ref={overlayBtnRef} className="hidden hover:text-white overflow-clip rounded-md relative font-semibold !bg-[var(--greenBg)] px-6 py-[14px] lg:inline text-[16px]">
+              <div ref={overlayRef} className="overlay-btn rounded-full absolute bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] z-10"></div>
+              <div className="content flex gap-2 z-20 items-center relative text-nowrap">
+                Start Free Trial
+                <i className='fa-solid fa-cloud-arrow-down'></i>
+              </div>
             </button>
           </div>
 
+          {/* sidebar toggle btn */}
           <button ref={sideBarToggleBtn}
             onClick={() => setIsSidebarOpen(prev => !prev)}
             className='flex lg:hidden flex-col gap-[7px]'>
@@ -196,6 +290,33 @@ export default function Navbar() {
         </div>
 
       </nav>
+
+      {/* navitems row under lg breakpoint */}
+      <ul ref={sideBarRef} className={`fixed z-50 top-0 left-0 h-screen w-[250px] sm:w-[300px] flex flex-col lg:hidden justify-start bg-white px-6 transform-[translateX(-100%)] duration-300 ${isSidebarOpen ? "transform-[translateX(0)]" : ""}`}>
+        {/* btn to close */}
+        <button
+          onClick={() => {
+            setTimeout(() => {
+              setIsSidebarOpen(false)
+            }, 1300)
+            sidebarTimeline.current?.reverse()
+          }}
+          className="close-btn ms-auto absolute right-2 top-2 inline-block lg:hidden w-6 h-6 rounded-full bg-neutral-200 hover:bg-neutral-900 hover:text-white">
+          <i className="fa fa-xmark rounded-full"></i>
+        </button>
+        {/* brand logo */}
+        <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
+          <a href='#'>
+            <img className='' src="./logo-blue.png" alt="logo" /></a>
+        </div>
+        {(navbarData || []).map((item, i) => (
+          <NavItem key={i} navTitle={item.navTitle} dropdownItems={item.dropdownItems} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown}
+            className={"animate-navitem"}
+          />
+        ))}
+
+      </ul>
+
     </header>
   )
 }
