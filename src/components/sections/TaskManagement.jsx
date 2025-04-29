@@ -149,7 +149,7 @@ export default function TaskManagement() {
                 onClick={handleFileSelect}
                 className="ms-auto rounded-full bg-white border-dashed border-[2px] h-7 w-7 
              text-[19px] font-bold flex items-center justify-center text-gray-300 
-             text-center leading-1 pb-[6px]"
+             text-center leading-[12px] pb-[6px]"
               >
                 +
               </button>
