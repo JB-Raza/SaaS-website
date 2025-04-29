@@ -91,8 +91,13 @@ export default function Navbar() {
     if (windowWidth >= 1024) {
 
       if (sidebarTimeline.current) {
-        sidebarTimeline.current?.kill();
-        sidebarTimeline.current = null;
+        sidebarTimeline.current = gsap.set(".animate-navitem", {
+          y: 0,
+          opacity: 1,
+          ease: "power1.out",
+          duration: 0.1,
+          stagger: 0.1,
+        })
       }
       return;
     }
