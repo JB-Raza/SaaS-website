@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useTextAnimate } from '../hooks/textAnimation'
+import { useTextAnimate } from '../../hooks/textAnimation.js'
 
 export default function Workspace() {
     let [activeDepart, setActiveDepart] = useState("all teams")

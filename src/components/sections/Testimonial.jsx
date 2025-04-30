@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 // swiper css
 import 'swiper/css';
-import { useTextAnimate } from '../hooks/textAnimation';
+import { useTextAnimate } from '../../hooks/textAnimation.js'
 
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { useTextAnimate } from '../hooks/textAnimation'
+import { useTextAnimate } from '../../hooks/textAnimation.js'
 
 
 export default function TaskManagement() {

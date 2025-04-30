@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from "../universalComponents/Button.jsx";
-import { useTextAnimate } from '../hooks/textAnimation.js'
+import { useTextAnimate } from '../../hooks/textAnimation.js'
 
 export default function AutomateTasks() {
 

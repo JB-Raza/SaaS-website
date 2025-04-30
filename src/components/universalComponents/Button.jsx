@@ -29,7 +29,6 @@ export default function Button({ className, content, icon }) {
             }
         }
         function leaveBtn (e){
-            let button = btnRef.current
             if(button && overlayRef.current){
                 let rect = button.getBoundingClientRect()
                 let x = e.clientX - rect.left

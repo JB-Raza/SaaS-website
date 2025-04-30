@@ -5,7 +5,7 @@ import Button from '../universalComponents/Button.jsx'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useTextAnimate } from '../hooks/textAnimation.js'
+import { useTextAnimate } from '../../hooks/textAnimation.js'
 
 gsap.registerPlugin(ScrollTrigger)
 

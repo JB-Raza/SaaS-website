@@ -1,10 +1,10 @@
 import React from 'react'
 import Button from "../universalComponents/Button.jsx";
-import { useTextAnimate } from '../hooks/textAnimation.js';
+import { useTextAnimate } from '../../hooks/textAnimation.js'
 
 export default function Footer() {
 
-    useTextAnimate(".animate-elem-footer", {start: "top 90%", y: 50})
+    useTextAnimate(".animate-elem-footer", { start: "top 90%", y: 50 })
 
     return (
         <footer className="bg-[#FBF6EE] px-3 overflow-hidden">
@@ -78,6 +78,11 @@ export default function Footer() {
 
                 </div>
             </div>
+
+
+            
+
+
 
         </footer>
     )
