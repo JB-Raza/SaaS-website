@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTextAnimate } from '../../hooks/textAnimation.js'
-import { PricingCard } from '../universalComponents/Cards.jsx';
+import { PricingCard_1 } from '../universalComponents/Cards.jsx';
 
 export default function PricingSection({ heading, descriptionPara, pricingCardData, cardClassNames }) {
 
@@ -17,7 +17,7 @@ export default function PricingSection({ heading, descriptionPara, pricingCardDa
       <div className="grid gap-5 grid-cols-12 mt-15">
         {/* plans */}
         {(pricingCardData || []).map((data, i) => (
-          <PricingCard key={i} data={data} className={cardClassNames} />
+          <PricingCard_1 key={i} data={data} className={cardClassNames} />
         ))}
 
 

@@ -3,7 +3,11 @@ import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 
-export default function Button({ className, content, icon }) {
+export default function Button({ className, content, icon,
+     bgColor='bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)]',
+     hoverBg=" bg-[var(--greenBg)]"
+
+ }) {
 
     let btnRef = useRef()
     let overlayRef = useRef()
@@ -23,7 +27,7 @@ export default function Button({ className, content, icon }) {
                     height: 100,
                     width: 100,
                     scale:10,
-                    duration: 2,
+                    duration: 1.5,
                     ease: "power3.out"
                 });
 
@@ -40,7 +44,7 @@ export default function Button({ className, content, icon }) {
                     height: 0,
                     width: 0,
                     scale:0,
-                    duration: 2,
+                    duration: 1.5,
                     ease: "power3.out"
                 });
             }
@@ -61,8 +65,8 @@ export default function Button({ className, content, icon }) {
     
  
     return (
-        <button ref={btnRef} className={`flex relative cursor-pointer rounded-md h-15 py-6 px-10 overflow-clip font-bold active:scale-95 hover:-translate-y-1 duration-200 text-base text-white bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] ${className}`}>
-            <div ref={overlayRef} className="btn-overlay rounded-full absolute bg-[var(--greenBg)]"></div>
+        <button ref={btnRef} className={`flex relative cursor-pointer rounded-md h-15 py-6 px-10 overflow-clip font-bold active:scale-95 hover:-translate-y-1 duration-200 text-base text-white ${bgColor} ${className}`}>
+            <div ref={overlayRef} className={`btn-overlay rounded-full absolute ${hoverBg}`}></div>
             <div className="absolute top-0 left-0 bottom-0 h-full w-full  flex gap-2 items-center justify-center">
                 {content}
                 {/* px-6 py-5 */}

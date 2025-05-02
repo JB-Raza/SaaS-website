@@ -16,10 +16,10 @@ export default function AutomateTasks() {
                     <span className="text-yellow-500">70%</span>
                     <span className="text-gradient-teal"> off managed cloud hosting</span>
                 </p>
-                <h2 className="heading-2 font-semibold mt-4 leading-10 md:leading-15 capitalize lg:w-[50%] xxl:w-auto">
+                <h3 className="heading-3 font-semibold mt-4 leading-10 md:leading-15 capitalize lg:w-[50%] xxl:w-auto">
                     <p className='animate-automateTask-elem'>Supercharge  <span className="italic text-gradient-teal font-normal">daily work</span>. with built-in </p>
                     <p className='animate-automateTask-elem'>automation </p>
-                </h2>
+                </h3>
 
                 <div className="grid grid-cols-12">
                     {/* col 1 */}
@@ -68,7 +68,7 @@ export default function AutomateTasks() {
                             <span className="text-yellow-500">70%</span>
                             <span className="text-gradient-teal"> off managed cloud hosting</span>
                         </p>
-                        <h2 className="animate-automateTask-elem heading-2 font-semibold mt-4 leading-10 md:leading-15 capitalize">Powerful & life-saving <span className="italic text-gradient-teal font-normal"> task manager</span></h2>
+                        <h3 className="animate-automateTask-elem heading-3 font-semibold mt-4 leading-10 md:leading-15 capitalize">Powerful & life-saving <span className="italic text-gradient-teal font-normal"> task manager</span></h3>
 
                         <p className="animate-automateTask-elem text-neutral-500 font-medium text-[18px] mt-8 leading-loose">Sassly-CRM in the past allowing you to focus more on your business <br /> simply enjoy your newfound legal time to reflect leaving</p>
 

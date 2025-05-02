@@ -49,10 +49,10 @@ export default function TaskManagement() {
       <div className="task-management-section custom-container mx-auto px-2 sm:px-5 my-20">
         {/* header data */}
         <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-          <h2 className="capitalize font-semibold max-w-[550px] heading-2">
+          <h3 className="capitalize font-semibold max-w-[550px] heading-3">
             <p className='animated-data-elem'>Task management <span className="text-gradient-teal capitalize font-normal italic">Features</span> &</p>
             <p className='animated-data-elem'>capabilities</p>
-          </h2>
+          </h3>
           <p className="text-gray-600 max-w-[550px]">
             <span className='animated-data-elem'><span>Sassly-CRM in the past allowing you to focus more on your businesssimply</span></span>
             <span className='animated-data-elem'>enjoy your newfound legal time to reflect leaving pen</span>
