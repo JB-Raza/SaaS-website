@@ -1,36 +1,37 @@
 import React from 'react'
-import { Button } from '../universalComponents/index.js'
-import { RevolutionizeServices } from '../sections/index.js'
-import { useTextAnimate } from '../../hooks/textAnimation.js'
+import Button from '../../universalComponents/Button.jsx'
+import { RevolutionizeServices } from '../../sections/index.js'
+import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
-export default function Contact() {
+export default function Pricing() {
 
     useTextAnimate(".animate-contact-heading")
 
     return (
-        <div className='max-w-screen bg-[#F3F8F8]'>
-            <div className="contact-hero custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
+        <div className='max-w-screen'>
+            <div className="contact-hero  bg-[#F3F8F8] custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
                 <img src="./simple-logo.png" alt="logo..." />
-                <h1 className="animate-contact-heading heading-1 capitalize font-bold text-center">Get in Touch</h1>
+                <h1 className="animate-contact-heading heading-1 capitalize font-bold text-center">Pricing Package</h1>
             </div>
 
-            {/* contact cards */}
-            <div className="px-3 relative after:absolute z-10 after:left-0 after:right-0 after:bottom-0 after:mx-auto after:h-[200px] after:w-full after:bg-white">
-                <div className="custom-container relative z-20 mx-auto grid grid-cols-12 py-10 px-10 bg-white gap-6">
-                    {(addressDetails || []).map((item, index) => (
-                        <div key={index} className="col-span-12 sm:col-span-6 lg:col-span-4 group shadow-lg rounded-lg hover:bg-[#1c3ff5] py-[60px] px-5 flex flex-col items-center gap-6">
-                            <img src={item.image} alt="address"
-                                className="group-hover:brightness-[100000%] 
-                            group-hover:animate-[var(--icon-bubble-animation)]"
-                            />
-                            <h5 className="heading-5 font-semibold text-center group-hover:text-white">{item.label}</h5>
-                            <p className=" text-center max-w-[250px] leading-8 text-neutral-600 group-hover:text-white font-medium text-[18px]">{item.description}</p>
-                        </div>
-                    ))}
+            {/* pricing section 2 */}
+            <section className='py-20'>
+                <div className="custom-container">
+                    <div className="flex flex-col gap-5">
+                        
+                    <h3 className="heading-3 font-bold leading-12 text-center capitalize">
+                        Seamless Integration for enhancing <br /> experience
+                    </h3>
+
+                    <p className="text-center text-neutral-500 max-w-[570px] mx-auto leading-8">
+                        Create tasks with various custom statuses to focus more on your keep track of theprogress of each why in
+                    </p>
+
+                    </div>
 
                 </div>
+            </section>
 
-            </div>
 
             {/* contact and form section */}
             <section className="py-[120px] bg-white m-0">

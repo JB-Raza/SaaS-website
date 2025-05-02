@@ -5,13 +5,13 @@ import Navbar from './components/navbar/Navbar.jsx'
 import Footer from './components/sections/Footer.jsx'
 
 // components
-import {Home, Contact, Page404} from './components/pages/index.js'
+
+import {Home, Contact, Pricing, Page404} from './components/pages/index.js'
 import { ScrollHeightTracker, CustomCursor } from "./components/universalComponents/index.js";
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function App() {
-
 
   return (
     <>
@@ -21,6 +21,8 @@ function App() {
     <Routes>
       <Route index path={"/"} element={<Home />} />
       <Route path={"/contact"} element={<Contact />} />
+      <Route path={"/pricing"} element={<Pricing />} />
+
       <Route path={"*"} element={<Page404 />} />
 
 
@@ -28,8 +30,6 @@ function App() {
 
     <Footer />
     </BrowserRouter>
-
-
 
 
       {/* custom cursor */}

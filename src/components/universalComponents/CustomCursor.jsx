@@ -37,7 +37,7 @@ export default function CustomCursor() {
             ></div>
 
             <div
-                className="cursor-dot fixed top-0 left-0 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-400 mix-blend-color-dodge pointer-events-none"
+                className="cursor-dot fixed top-0 left-0 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-400 pointer-events-none"
                 style={{ zIndex: 301 }}
             ></div>
 

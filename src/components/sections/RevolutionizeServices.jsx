@@ -3,11 +3,25 @@ import Button from "../universalComponents/Button.jsx";
 import { useTextAnimate } from '../../hooks/textAnimation.js'
 import gsap from 'gsap'
 import {useGSAP} from '@gsap/react'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
 
-export default function RevolutionalizeServices() {
+gsap.registerPlugin(ScrollTrigger)
+
+export default function RevolutionizeServices() {
 
 
-    useGSAP(() => [
+    useGSAP(() => {
+        gsap.from(".floating-btn", {
+            scale:0,
+            duration: 0.1,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".floating-btn",
+                scroller: "body",
+                start: "top 80%"
+            }
+        })
+
         gsap.fromTo(".floating-btn ", {
             rotate: 5,
         },
@@ -19,7 +33,7 @@ export default function RevolutionalizeServices() {
             repeat: -1,
         }
     )
-    ])
+})
 
     useTextAnimate(".animate-elem-revolution", { start: "top 90%", y: 50 })
     return (

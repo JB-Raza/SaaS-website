@@ -6,10 +6,10 @@ import AutomateTasks from './AutomateTasks'
 import TrackProjects from './TrackProjects'
 import Testimonial from './Testimonial'
 import Pricing from './Pricing'
-import RevolutionalizeServices from './RevolutionalizeServices'
+import RevolutionizeServices from './RevolutionizeServices'
 import Footer from './Footer'
 
 
 export {
-    Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, Pricing, RevolutionalizeServices, Footer
+    Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, Pricing, RevolutionizeServices, Footer
 }

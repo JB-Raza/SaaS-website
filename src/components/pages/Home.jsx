@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Navbar from '../navbar/Navbar.jsx'
-import { Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, Pricing, RevolutionalizeServices } from '../sections/index.js'
+import { Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, Pricing, RevolutionizeServices } from '../sections/index.js'
 import { Button } from '../universalComponents/index.js'
 
 export default function Home() {
@@ -56,7 +56,7 @@ export default function Home() {
 
 
             {/* revolutionize our services */}
-            <RevolutionalizeServices />
+            <RevolutionizeServices />
 
 
         </>

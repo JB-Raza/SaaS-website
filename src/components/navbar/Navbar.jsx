@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import NavItem from './NavItem.jsx'
+import { NavLink, useLocation } from 'react-router-dom'
 
 // gsap
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
 export default function Navbar() {
+
+
+  const location = useLocation()
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)
@@ -112,7 +116,7 @@ export default function Navbar() {
   useEffect(() => {
 
     function handleScroll() {
-      if (window.scrollY > 20) setIsFixed(true)
+      if (window.scrollY > 70) setIsFixed(true)
       else setIsFixed(false)
     }
     function closeSideBar(e) {
@@ -213,129 +217,165 @@ export default function Navbar() {
 
 
   return (
-      <header className={`relative z-50 mx-auto`}>
+    <header className={`relative z-50 mx-aut`}>
 
-        {/* custom cursor if sidebar is open */}
-        {!isSidebarOpen ? "" :
-          <div
-            className="cursor-dot fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
-            style={{ zIndex: 302 }}
-          >
-            <div className="line w-7 h-[3px] bg-white translate-y-[2px] rotate-[45deg]"></div>
-            <div className="line w-7 h-[3px] bg-white -rotate-[45deg]"></div>
+      {/* custom cursor if sidebar is open */}
+      {!isSidebarOpen ? "" :
+        <div
+          className="cursor-dot fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+          style={{ zIndex: 302 }}
+        >
+          <div className="line w-7 h-[3px] bg-white translate-y-[2px] rotate-[45deg]"></div>
+          <div className="line w-7 h-[3px] bg-white -rotate-[45deg]"></div>
+        </div>
+      }
+
+      {/* dark overlay when sidebar is open */}
+      {isSidebarOpen &&
+        <div
+          className="fixed inset-0 bg-[rgba(0,0,40,0.5)] bg-opacity-50 z-40"
+        >
+        </div>
+      }
+
+
+      <nav ref={navbarRef} className={`rounded-md px-6 ${isFixed ? "fixed shadow-lg top-0 left-0 z-50 right-0 rounded-none" : "fixed left-3 top-5 right-3 max-w-[1350px] mx-auto"} ${!isFixed && location.pathname == "/" ? "bg-white/5" : ""} ${location.pathname == "/" && isFixed ? "bg-[#0f6555]" : "bg-white"}`}>
+        <div className="custom-container mx-auto flex justify-between items-center">
+
+          {/* logo */}
+          <div className="navbar-brand py-6">
+            <NavLink to={"/"}>
+              {location.pathname == "/" ?
+                <img className='hover:-translate-y-1 duration-300' src="./logo-white-two.png" alt="logo" />
+                : <img className='' src="./logo-four.png" alt="logo" />}
+
+            </NavLink>
           </div>
-        }
+          {/* nav links */}
 
-        {/* dark overlay when sidebar is open */}
-        {isSidebarOpen &&
-          <div
-            className="fixed inset-0 bg-[rgba(0,0,40,0.5)] bg-opacity-50 z-40"
-            >
-          </div>
-        }
-
-
-        <nav ref={navbarRef} className={`rounded-md px-6 ${isFixed ? "fixed shadow-xl top-0 left-0 z-50 bg-[#0f6555] right-0 rounded-none" : "absolute left-3 top-4 right-3 bg-white/5 max-w-[1350px] mx-auto"}`}>
-          <div className="custom-container mx-auto flex justify-between items-center">
-
-            {/* logo */}
-            <div className="navbar-brand py-6">
-              <a href='#'>
-                <img className='hover:-translate-y-1 duration-300' src="./logo-white-two.png" alt="logo" /></a>
-            </div>
-            {/* nav links */}
-
-            {/* nav items row over lg breakpoint */}
-            <ul className={`hidden lg:flex flex-row h-auto w-auto px-0 bg-transparent gap-[30px] text-white
+          {/* nav items row over lg breakpoint */}
+          <ul className={`hidden lg:flex flex-row h-auto w-auto px-0 bg-transparent gap-[30px] text-white
     `}>
-              {/* btn to close */}
-              <button
-                onClick={() => {
-                  setTimeout(() => {
-                    setIsSidebarOpen(false)
-                  }, 1300)
-                  sidebarTimeline.current?.reverse()
-                }}
-                className="close-btn ms-auto absolute right-2 top-2 inline-block lg:hidden w-6 h-6 rounded-full bg-neutral-200 hover:bg-neutral-900 hover:text-white">
-                <i className="fa fa-xmark rounded-full"></i>
-              </button>
-              {/* brand logo */}
-              <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
-                <a href='#'>
-                  <img className='' src="./logo-blue.png" alt="logo" /></a>
-              </div>
-              {(navbarData || []).map((item, i) => (
-                <NavItem key={i} navItem={item} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown}
-                  className={"animate-navitem"}
-                />
-              ))}
-
-            </ul>
-
-            <div className="actions m-0 flex gap-6 items-center">
-              <button className='cursor-pointer font-semibold text-sm hidden xl:flex items-center gap-2 text-white'>
-                <i className="fa-regular fa-user text-[rgb(50,244,133)] text-xs"></i>
-                Sign in
-              </button>
-              <button ref={overlayBtnRef} className="hidden hover:text-white overflow-clip rounded-md relative font-semibold !bg-[var(--greenBg)] px-6 py-[14px] lg:inline text-[16px]">
-                <div ref={overlayRef} className="overlay-btn rounded-full absolute bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] z-10"></div>
-                <div className="content flex gap-2 z-20 items-center relative text-nowrap">
-                  Start Free Trial
-                  <i className='fa-solid fa-cloud-arrow-down'></i>
-                </div>
-              </button>
+            {/* btn to close */}
+            <button
+              onClick={() => {
+                setTimeout(() => {
+                  setIsSidebarOpen(false)
+                }, 1300)
+                sidebarTimeline.current?.reverse()
+              }}
+              className="close-btn ms-auto absolute right-2 top-2 inline-block lg:hidden w-6 h-6 rounded-full bg-neutral-200 hover:bg-neutral-900 hover:text-white">
+              <i className="fa fa-xmark rounded-full"></i>
+            </button>
+            {/* brand logo */}
+            <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
+              <a href='#'>
+                <img className='' src="./logo-blue.png" alt="logo" /></a>
             </div>
+            {(navbarData || []).map((item, i) => (
+              <NavItem key={i} navItem={item} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown}
+                className={`animate-navitem ${location.pathname == "/" ? "" : "text-black"}`}
+              />
+            ))}
 
-            {/* sidebar toggle btn */}
-            <button ref={sideBarToggleBtn}
-              onClick={() => setIsSidebarOpen(prev => !prev)}
-              className='flex lg:hidden flex-col gap-[7px]'>
-              <p className="w-8 rounded-2xl h-[3px] bg-white"></p>
-              <p className="w-8 rounded-2xl h-[3px] bg-white"></p>
-              <p className="w-8 rounded-2xl h-[3px] bg-white"></p>
+          </ul>
+
+          <div className="actions m-0 flex gap-6 items-center">
+            <button className={`cursor-pointer font-semibold text-sm hidden xl:flex items-center gap-2 ${location.pathname == "/" ? "text-white" : "text-black"}`}>
+              <i className={`fa-regular fa-user ${location.pathname == "/" ? "text-[rgb(50,244,133)]" : "text-sky-700"} text-xs`}></i>
+              Sign in
+            </button>
+            <button ref={overlayBtnRef} className="hidden hover:text-white overflow-clip rounded-md relative font-semibold !bg-[var(--greenBg)] px-6 py-[14px] lg:inline text-[16px]">
+              <div ref={overlayRef} className="overlay-btn rounded-full absolute bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] z-10"></div>
+              <div className="content flex gap-2 z-20 items-center relative text-nowrap">
+                Start Free Trial
+                <i className='fa-solid fa-cloud-arrow-down'></i>
+              </div>
             </button>
           </div>
 
-        </nav>
-
-        {/* navitems row under lg breakpoint */}
-        <ul ref={sideBarRef} className={`fixed z-50 top-0 left-0 h-screen w-[250px] sm:w-[300px] flex flex-col lg:hidden justify-start bg-white px-6 transform-[translateX(-100%)] duration-300 ${isSidebarOpen ? "transform-[translateX(0)]" : ""}`}>
-          {/* btn to close */}
-          <button
-            onClick={() => {
-              setTimeout(() => {
-                setIsSidebarOpen(false)
-              }, 1300)
-              sidebarTimeline.current?.reverse()
-            }}
-            className="close-btn ms-auto absolute right-2 top-2 inline-block lg:hidden w-6 h-6 rounded-full bg-neutral-200 hover:bg-neutral-900 hover:text-white">
-            <i className="fa fa-xmark rounded-full"></i>
+          {/* sidebar toggle btn */}
+          <button ref={sideBarToggleBtn}
+            onClick={() => setIsSidebarOpen(prev => !prev)}
+            className='flex lg:hidden flex-col gap-[7px]'>
+            <p className={`w-9 rounded-full h-[3px] ${location.pathname == "/" ? "bg-white" : "bg-neutral-800"}`}></p>
+            <p className={`w-9 rounded-full h-[3px] ${location.pathname == "/" ? "bg-white" : "bg-neutral-800"}`}></p>
+            <p className={`w-9 rounded-full h-[3px] ${location.pathname == "/" ? "bg-white" : "bg-neutral-800"}`}></p>
           </button>
-          {/* brand logo */}
-          <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
-            <a href='#'>
-              <img className='' src="./logo-blue.png" alt="logo" /></a>
-          </div>
-          {(navbarData).map((item, i) => (
+        </div>
 
-            <NavItem key={i} navItem={item} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown}
-              className={"animate-navitem"}
-            />
-          ))}
+      </nav>
 
-        </ul>
+      {/* navitems row under lg breakpoint */}
+      <ul ref={sideBarRef} className={`fixed z-50 top-0 left-0 h-screen w-[250px] sm:w-[300px] flex flex-col lg:hidden justify-start bg-white px-6 transform-[translateX(-100%)] duration-300 ${isSidebarOpen ? "transform-[translateX(0)]" : ""}`}>
+        {/* btn to close */}
+        <button
+          onClick={() => {
+            setTimeout(() => {
+              setIsSidebarOpen(false)
+            }, 1300)
+            sidebarTimeline.current?.reverse()
+          }}
+          className="close-btn ms-auto absolute right-2 top-2 inline-block lg:hidden w-6 h-6 rounded-full bg-neutral-200 hover:bg-neutral-900 hover:text-white">
+          <i className="fa fa-xmark rounded-full"></i>
+        </button>
+        {/* brand logo */}
+        <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
+          <a href='#'>
+            <img className='' src="./logo-blue.png" alt="logo" /></a>
+        </div>
+        {(navbarData).map((item, i) => (
 
-      </header>
+          <NavItem key={i} navItem={item} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown}
+            className={"animate-navitem"}
+          />
+        ))}
+
+      </ul>
+
+    </header>
   )
 }
 
 
 
 const navbarData = [
-  { navTitle: "Home", dropdownItems: ["IT Solution", "Web Hosting", "Task Management", "CRM Software", "App Landing"] },
-  { navTitle: "Pages", dropdownItems: ["Pricing", "About Us", "App Interation", "Integration Details", "Privacy Policy", "FAQ"] },
-  { navTitle: "Portfolio", dropdownItems: ["Portfolio"] },
-  { navTitle: "Shop", dropdownItems: ["Shop", "Shop Details", "Cart", "Checkout"] },
-  { navTitle: "Blog", dropdownItems: ["Blog", "Blog Details"] },
-  { navTitle: "Contact", path: "/contact", },
+  {
+    navTitle: "Home", dropdownItems: [
+      { label: "IT Solution", path: "/it-solution" },
+      { label: "Web Hosting", path: "/web-hosting" },
+      { label: "Task Mangement", path: "/task-management" },
+      { label: "CRM Software", path: "/crm-software" },
+      { label: "App Landing", path: "/app-landing" },
+    ]
+  },
+  {
+    navTitle: "Pages", dropdownItems: [
+      { label: "Pricing", path: "/pricing" },
+      { label: "About Us", path: "/about-us" },
+      { label: "App Integration", path: "/app-integration" },
+      { label: "Integration Details", path: "/integration-details" },
+      { label: "Privacy Policy", path: "/privacy-policy" },
+      { label: "FAQ", path: "/faq" },
+    ]
+  },
+
+  { navTitle: "Portfolio", dropdownItems: [{ label: "Portfolio", path: "/portfolio" }] },
+  {
+    navTitle: "Shop", dropdownItems: [
+      { label: "Shop", path: "/shop" },
+      { label: "Shop Details", path: "/shop-details" },
+      { label: "Cart", path: "/cart" },
+      { label: "Checkout", path: "/checkout" },
+    ]
+  },
+
+  {
+    navTitle: "Blog", dropdownItems: [
+      { label: "Blog", path: "/blog" },
+      { label: "Blog Details", path: "/blog-details" },
+    ]
+  },
+
+  { navTitle: "Contact", path: "/contact" },
 ]

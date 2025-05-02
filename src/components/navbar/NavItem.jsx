@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react'
 
-import {NavLink} from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
 
 export default function NavItem({ navItem, className, isOpen, index, setIsOpen }) {
 
     const dropdownRef = useRef()
+    const location = useLocation()
+
+    const isChildActive = navItem?.dropdownItems?.some(item => location.pathname == item.path)
 
     const toggleDropdown = (e) => {
         e.preventDefault()
@@ -37,13 +40,30 @@ export default function NavItem({ navItem, className, isOpen, index, setIsOpen }
         <li
             onClick={toggleDropdown}
             className={`relative transition-all duration-300 h-[60px] ${isOpen ? "h-auto" : ""} lg:py-6 lg:h-[100%] flex flex-col lg:flex-row items-center font-semibold cursor-pointer group text-base ${className}`}>
-            <NavLink to={`${navItem.path? navItem.path:""}`} className='group-hover:-translate-y-1 !py-3 w-full flex gap-2 items-center justify-between lg:justify-start duration-300 m-0 border-b-[1px] lg:border-0 border-slate-200' href="#">
-                <span>{navItem?.navTitle}</span>
-                {navItem?.dropdownItems?.length > 0 &&
-                    <i className={`fa fa-angle-down text-[10px] lg:group-hover:rotate-180 duration-200 lg:group-hover:text-blue-600 text-slate-300 ${isOpen ? "rotate-180 duration-300" : ""}`}></i>
-                }
-            </NavLink>
-    
+            {navItem.path ?
+                // if direct path is given in navitem like the simple one
+                <NavLink
+                    to={`${navItem.path}`}
+                    className={({ isActive }) =>
+                        `group-hover:-translate-y-1 !py-3 w-full flex gap-2 items-center justify-between lg:justify-start duration-300 m-0 border-b-[1px] lg:border-0 border-slate-200 ${isActive ? "text-blue-600" : ""
+                        }`
+                    }
+                >
+                    <span>{navItem?.navTitle}</span>
+                    {navItem?.dropdownItems?.length > 0 &&
+                        <i className={`fa fa-angle-down text-[10px] lg:group-hover:rotate-180 duration-200 lg:group-hover:text-blue-600 text-slate-300 ${isOpen ? "rotate-180 duration-300" : ""}`}></i>
+                    }
+                </NavLink>
+                :
+                // if no direct path in navitem like the one with dropdown
+                <span className={`group-hover:-translate-y-1 !py-3 w-full flex gap-2 items-center justify-between lg:justify-start duration-300 m-0 border-b-[1px] lg:border-0 border-slate-200 ${isChildActive? "text-blue-600":""}`}>
+                    <span>{navItem?.navTitle}</span>
+                    {navItem?.dropdownItems?.length > 0 &&
+                        <i className={`fa fa-angle-down text-[10px] lg:group-hover:rotate-180 duration-200 lg:group-hover:text-blue-600 text-slate-300 ${isOpen ? "rotate-180 duration-300" : ""}`}></i>
+                    }
+                </span>
+            }
+
             {/* dropdown */}
             <ul
                 ref={dropdownRef}
@@ -61,14 +81,17 @@ export default function NavItem({ navItem, className, isOpen, index, setIsOpen }
                 `}
             >
                 {(navItem?.dropdownItems || []).map((item, index) => (
-                    <li key={index} className="px-4 py-2 rounded-sm border-b-[1px] border-slate-200 lg:border-0 hover:bg-gray-200">{item}</li>
+                    <NavLink to={item.path} key={index} className={({ isActive }) => (isActive ? "text-blue-600" : "")}>
+                        <li className="px-4 py-2 rounded-sm border-b-[1px] border-slate-200 lg:border-0 hover:bg-gray-200">{item.label}</li>
+                    </NavLink>
+
                 ))}
             </ul>
 
-</li>    
+        </li>
     )
 
 
-    
+
 }
 

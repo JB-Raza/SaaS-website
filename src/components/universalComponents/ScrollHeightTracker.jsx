@@ -26,7 +26,7 @@ export default function ScrollHeightTracker() {
 
       <button
                 ref={scrollBtnRef} aria-label='go to top'
-                className={`scrollProgressBtn cursor-pointer z-[200] ${scrollPercent <= 2 ? "hidden" : ""} h-13 w-13 rounded-full fixed overflow-hidden bottom-10 right-5`}
+                className={`scrollProgressBtn cursor-pointer z-[200] ${window.scrollY <= 80 ? "hidden" : ""} h-13 w-13 rounded-full fixed overflow-hidden bottom-10 right-5`}
                 style={{
                     background: `conic-gradient(from 0deg, gold ${scrollPercent}%, transparent ${scrollPercent}%)`
                 }}
@@ -36,7 +36,8 @@ export default function ScrollHeightTracker() {
                 onClick={() => {
                     window.scrollTo({ behavior: "smooth", top: 0 })
                 }}
-                className={`fixed z-[200] bottom-10 shadow-big right-5 h-13 w-13 bg-white/5 rounded-full ${scrollPercent <= 2 ? "hidden" : "flex items-center justify-center"}`}>
+                className={`fixed z-[200] bottom-10 shadow-big right-5 h-13 w-13 bg-white/5 rounded-full ${window.scrollY <= 80 ? "hidden" : "flex items-center justify-center"}`}
+                >
                 <i className="fa-solid fa-arrow-up text-amber-400"></i>
             </span>
     </div>

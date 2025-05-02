@@ -10,15 +10,15 @@ export default function Button({ className, content, icon }) {
 
     useEffect(() => {
         const button = btnRef.current;
-    
+
+        
         function moveOverlay(e) {
             if (button && overlayRef.current) {
                 const rect = button.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-    
                 gsap.to(overlayRef.current, {
-                    x: x,
+                    x: x-100,
                     y: y,
                     height: 100,
                     width: 100,
@@ -26,6 +26,7 @@ export default function Button({ className, content, icon }) {
                     duration: 2,
                     ease: "power3.out"
                 });
+
             }
         }
         function leaveBtn (e){
