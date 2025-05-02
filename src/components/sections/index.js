@@ -5,11 +5,11 @@ import Workspace from './Workspace'
 import AutomateTasks from './AutomateTasks'
 import TrackProjects from './TrackProjects'
 import Testimonial from './Testimonial'
-import Pricing from './Pricing'
+import PricingSection from './PricingSection.jsx'
 import RevolutionizeServices from './RevolutionizeServices'
 import Footer from './Footer'
 
 
 export {
-    Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, Pricing, RevolutionizeServices, Footer
+    Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, PricingSection, RevolutionizeServices, Footer
 }

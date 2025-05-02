@@ -15,7 +15,7 @@ export default function Footer() {
                 {/* col 1 */}
                 <div className="col-span-12 xs:col-span-6 sm:col-span-4 lg:col-span-3">
                     <h5 className="animate-elem-footer heading-5 font-medium">Collaborate</h5>
-                    <div className="flex flex-col items-start gap-4 mt-6">
+                    <div className="flex flex-col items-start gap-[18px] mt-8">
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Partners</span>
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Partners Program</span>
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Affiliate Program</span>
@@ -28,7 +28,7 @@ export default function Footer() {
                 <div className="col-span-12 xs:col-span-6 sm:col-span-4 lg:col-span-2">
                     <h5 className="animate-elem-footer heading-5 font-medium">My account</h5>
 
-                    <div className="flex flex-col items-start gap-3 mt-6">
+                    <div className="flex flex-col items-start gap-[18px] mt-8">
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Company</span>
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Customer Success</span>
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Resources</span>
@@ -40,7 +40,7 @@ export default function Footer() {
                 <div className="col-span-12 xs:col-span-6 sm:col-span-4 lg:col-span-2">
                     <h5 className="animate-elem-footer heading-5 font-medium">Service</h5>
 
-                    <div className="flex flex-col items-start gap-3 mt-6">
+                    <div className="flex flex-col items-start gap-[18px] mt-8">
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Software Development</span>
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">Cloud Services</span>
                         <span className="animate-elem-footer font-semibold text-[16px] text-neutral-600 hover:underline hover:-translate-y-1 hover:text-neutral-900 duration-200 cursor-pointer">AI Machine Learning</span>

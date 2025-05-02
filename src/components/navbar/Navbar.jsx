@@ -344,7 +344,7 @@ const navbarData = [
     navTitle: "Home", dropdownItems: [
       { label: "IT Solution", path: "/it-solution" },
       { label: "Web Hosting", path: "/web-hosting" },
-      { label: "Task Mangement", path: "/task-management" },
+      { label: "Task Mangement", path: "/" },
       { label: "CRM Software", path: "/crm-software" },
       { label: "App Landing", path: "/app-landing" },
     ]

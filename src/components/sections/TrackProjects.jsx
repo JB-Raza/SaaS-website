@@ -23,11 +23,11 @@ export default function TrackProjects() {
                 <span className="text-gradient-teal"> off managed cloud hosting</span>
             </p>
 
-            <h2 className="projects-elem-animate heading-2 text-center font-semibold mt-4 leading-10 md:leading-15 capitalize">
+            <h3 className="projects-elem-animate heading-3 text-center font-semibold mt-4 leading-10 md:leading-15 capitalize">
                 <p className="projects-elem-animate"> Plan, execute and <span className="italic font-normal text-gradient-teal">track projects</span>.</p>
                 <p className="projects-elem-animate">of any size</p>
 
-                </h2>
+                </h3>
 
 
 
