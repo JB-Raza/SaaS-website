@@ -8,6 +8,7 @@ export const useTextAnimate = (target,
     { start = "top 80%", end = "top 40%", fromScale = 1, stagger = 0.3, opacity = 0, y = 100, duration = 0.5 } = {}
 ) => {
 
+    
     useEffect(() => {
         const elements = target?.current ? [target.current] : gsap.utils.toArray(target);
 
