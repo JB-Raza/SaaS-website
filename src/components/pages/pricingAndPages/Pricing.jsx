@@ -9,10 +9,13 @@ export default function Pricing() {
 
     return (
         <div className='max-w-screen'>
-            <div className="contact-hero bg-[#F3F8F8] custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                <img src="./simple-logo.png" alt="logo..." />
-                <h1 className="animate-contact-heading heading-1 capitalize font-bold text-center">Pricing Package</h1>
+            <div className="bg-[var(--bgIceBlue)]">
+                <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
+                    <img src="./simple-logo.png" alt="logo..." />
+                    <h1 className="animate-contact-heading heading-1 capitalize font-bold text-center">Pricing Package</h1>
+                </div>
             </div>
+
 
             {/* pricing section 2 */}
             <section className='py-20'>
@@ -28,7 +31,7 @@ export default function Pricing() {
             </section>
 
             {/* pricing section 3 */}
-            <section className='py-20 bg-[#F3F8F8]'>
+            <section className='py-20 bg-[var(--bgIceBlue)]'>
                 <p className="text-center max-w-[200px] text-gradient-teal mx-auto font-medium capitalize">what we offering</p>
                 <div className="py-10 custom-container mx-auto w-full px-2 sm:px-4">
 

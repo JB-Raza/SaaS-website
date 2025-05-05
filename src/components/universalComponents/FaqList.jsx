@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap'
+import { useTextAnimate } from '../../hooks/textAnimation'
 
 
 
@@ -26,6 +26,9 @@ export default function FaqList() {
 
 function FaqDropdown({ id, isOpen, setIsOpen, question, answer }) {
 
+    useTextAnimate(".animate-faq-element", {start: "top 90%"})
+    
+
     const contentRef = useRef()
 
     function toggleDropdown(id) {
@@ -34,30 +37,14 @@ function FaqDropdown({ id, isOpen, setIsOpen, question, answer }) {
 
     // animation for smooth dropdown opening and closing
     useEffect(() => {
-        if(!isOpen){
-            gsap.to(contentRef.current, {
-                height: "0px",
-                duration: 0.2,
-            })
-        }
-        else{
-            gsap.to(contentRef.current, {
-                height: `${contentRef.current.scrollHeight}px`,
-                duration: 0.2,
-                ease: "power2.out"
-            })
-            
-        }
-       
+        if (isOpen) contentRef.current.style.height = `${contentRef.current.scrollHeight}px`
+           else contentRef.current.style.height = `${0}px`
     }, [isOpen])
-     // if (isOpen) contentRef.current.style.height = `${contentRef.current.scrollHeight}px`
-        // else contentRef.current.style.height = `${0}px`
 
 
     return (
-        <details
-            open={isOpen}
-            className={`mb-8 cursor-pointer outline-none rounded-xl px-10 ${isOpen ? "shadow-xl" : "border-b-1 border-neutral-200"}`}>
+        <div
+            className={`animate-faq-element mb-8 cursor-pointer outline-none rounded-xl px-10 ${isOpen ? "shadow-xl" : "border-b-1 border-neutral-200"}`}>
 
             <summary
                 onClick={(e) => {
@@ -87,7 +74,7 @@ function FaqDropdown({ id, isOpen, setIsOpen, question, answer }) {
                 </p>
             </div>
 
-        </details>
+        </div>
     );
 }
 
@@ -97,7 +84,10 @@ function FaqDropdown({ id, isOpen, setIsOpen, question, answer }) {
 const faqData = [
     { id: 1, question: "What is Sassly?", answer: "GoDaddy offers more than just a platform to build your website, we offer everything you need to create an effective, memorable online presence. Already have a site? We offer hosting plans that will keep it fast, secure and online. Our professional" },
 
-    { id: 2, question: "Why Choose Sassly", answer: "GoDaddy offers more than just a platform to build your website, we offer everything you need to create an effective, memorable online presence. Already have a site? We offer hosting plans that will keep it fast, secure and online. Our professional" },
+    { id: 2, question: "Why Choose Sassly?", answer: "GoDaddy offers more than just a platform to build your website, we offer everything you need to create an effective, memorable online presence. Already have a site? We offer hosting plans that will keep it fast, secure and online. Our professional" },
 
-    { id: 3, question: "Can I upgrade to a different plan at a later time", answer: "GoDaddy offers more than just a platform to build your website, we offer everything you need to create an effective, memorable online presence. Already have a site? We offer hosting plans that will keep it fast, secure and online. Our professional" },
+    { id: 3, question: "Can I upgrade to a different plan at a later time?", answer: "GoDaddy offers more than just a platform to build your website, we offer everything you need to create an effective, memorable online presence. Already have a site? We offer hosting plans that will keep it fast, secure and online. Our professional" },
+    { id: 4, question: "What is the cost of Additional User?", answer: "GoDaddy offers more than just a platform to build your website, we offer everything you need to create an effective, memorable online presence. Already have a site? We offer hosting plans that will keep it fast, secure and online. Our professional" },
+    { id: 5, question: "What's the commitment?", answer: "GoDaddy offers more than just a platform to build your website, we offer everything you need to create an effective, memorable online presence. Already have a site? We offer hosting plans that will keep it fast, secure and online. Our professional" },
+    { id: 6, question: "What languages does Sassly AI support?", answer: "GoDaddy offers more than just a platform to build your website, we offer everything you need to create an effective, memorable online presence. Already have a site? We offer hosting plans that will keep it fast, secure and online. Our professional" },
 ]

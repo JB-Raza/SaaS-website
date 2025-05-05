@@ -5,7 +5,7 @@ import gsap from 'gsap'
 
 export default function Button({ className, content, icon,
      bgColor='bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)]',
-     hoverBg=" bg-[var(--greenBg)]"
+     hoverBg="bg-[var(--greenBg)]"
 
  }) {
 
@@ -63,7 +63,7 @@ export default function Button({ className, content, icon,
         }
     }, []);
     
- 
+
     return (
         <button ref={btnRef} className={`flex relative cursor-pointer rounded-md h-15 py-6 px-10 overflow-clip font-bold active:scale-95 hover:-translate-y-1 duration-200 text-base text-white ${bgColor} ${className}`}>
             <div ref={overlayRef} className={`btn-overlay rounded-full absolute ${hoverBg}`}></div>

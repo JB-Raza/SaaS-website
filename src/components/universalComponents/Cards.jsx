@@ -1,5 +1,6 @@
 import Button from './Button.jsx'
 import { useTextAnimate } from '../../hooks/textAnimation.js'
+import {Link} from 'react-router-dom'
 
 export const PricingCard_1 = ({
     data,
@@ -48,7 +49,7 @@ export const PricingCard_2 = ({ data, className }) => {
 
     return (
         <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <div className={`card max-w-[450px] mx-auto bg-white hover:bg-[#072032] hover:text-white transition-background duration-300 rounded-3xl px-10 py-13 ${className}`}>
+            <div className={`card max-w-[450px] mx-auto bg-white hover:!bg-[url(/half-moon-shape.png)] !bg-[url(/half-moon-shape.png)] bg-no-repeat bg-[center_40px] hover:bg-[#072032] hover:text-white transition-background duration-300 rounded-3xl px-10 py-13 ${className}`}>
                 <p className="card-text-animate heading-4 mb-4 font-bold">${data.annualPrice}<span className="text-xl">/month</span> </p>
                 <p className="font-medium">Smart Pricing for Good Services</p>
 
@@ -63,7 +64,7 @@ export const PricingCard_2 = ({ data, className }) => {
                 <ul className="benefits flex flex-col gap-5 mt-10 list-disc marker:text-blue-600 marker:text-lg list-inside">
                     {(data.benefits || []).map((benefit, index) => (
                         <li key={`${index}`} className="card-text-animate font-semibold ">
-                                {benefit}
+                            {benefit}
                         </li>
                     ))}
 
@@ -105,3 +106,24 @@ export const PricingCard_3 = ({ data, index }) => {
         </div>
     )
 }
+
+export const IntegrationCard = ({ data }) => {
+    return (
+        <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 border border-neutral-200 px-3">
+            {/* card */}
+            <div className="card flex h-full flex-col gap-7 items-center py-12 px-6 rounded-lg transition-shadow duration-200 hover:shadow-lg">
+                <img src={data.img} alt="icon 1"
+                    className='mx-auto'
+                />
+                <h6 className="heading-6 font-semibold max-w-[172px] text-center">{data.heading}</h6>
+                <p className="text-center text-sm text-neutral-500 max-w-[500px] px-5 mx-auto mt-4 leading-loose">{data.description}</p>
+
+                <Link to={"/"} className='group hover:underline font-bold text-blue-600'>See Integration <i className='fa fa-arrow-right ms-1 group-hover:ps-1 transition-all duration-200'></i></Link>
+
+            </div>
+        </div>
+    )
+}
+
+
+

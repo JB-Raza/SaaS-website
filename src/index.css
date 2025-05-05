@@ -12,8 +12,6 @@
 :root {
   --satoshi-font: "Satoshi", sans-serif;
   --heading-one: clamp(2.125rem, -0.0733rem + 5.5vw, 4.4375rem);
-  /* --heading-two: clamp(2rem, 0.3353rem + 2.1661vw, 3.5rem); */
-  /* --heading-three: clamp(1.875rem, 0.7133rem + 2.8846vw, 3.125rem); */
   --heading-two: clamp(1.875rem, 0.7133rem + 2.8846vw, 3.75rem);
   --heading-three: clamp(1.75rem, 0.3353rem + 2.1661vw, 3rem);
   
@@ -21,6 +19,7 @@
   --heading-five: clamp(1.125rem, 1.2rem + 0.722vw, 1.5rem);
   --heading-six: clamp(1rem, 0.769rem + 0.6813vw, 1.25rem);
   --greenBg: hsl(144, 80%, 55%);
+  --bgIceBlue: #F3F8F8;
 }
 
 * {
@@ -34,7 +33,7 @@ h4,
 h5,
 h6,
 p,
-span {
+span, button, summary {
   font-family: var(--satoshi-font) !important;
 }
 

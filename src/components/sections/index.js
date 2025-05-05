@@ -8,8 +8,8 @@ import Testimonial from './Testimonial'
 import PricingSection from './PricingSection.jsx'
 import RevolutionizeServices from './RevolutionizeServices'
 import Footer from './Footer'
-
+import AppIntegrationSection from './AppIntegrationSection.jsx'
 
 export {
-    Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, PricingSection, RevolutionizeServices, Footer
+    Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, PricingSection, AppIntegrationSection, RevolutionizeServices, Footer
 }

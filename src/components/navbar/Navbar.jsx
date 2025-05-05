@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import NavItem from './NavItem.jsx'
 import { NavLink, useLocation } from 'react-router-dom'
+import { Button } from '../universalComponents/index.js'
 
 // gsap
 import gsap from 'gsap'
@@ -20,8 +21,6 @@ export default function Navbar() {
   const navbarRef = useRef()
   const sideBarRef = useRef()
   const sideBarToggleBtn = useRef()
-  const overlayBtnRef = useRef()
-  const overlayRef = useRef()
 
 
 
@@ -161,59 +160,30 @@ export default function Navbar() {
     return () => document.removeEventListener("mousemove", trackCursor)
   }, [])
 
+  // changing button styling based on route location
+  let navBtnProps = {
+    content: "Start Free Trial",
+    bgColor: "bg-[var(--greenBg)]",
+    hoverBg: 'bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)]',
+    icon: "fa-solid fa-cloud-arrow-down"
 
-  // hover btn animation
-  useEffect(() => {
-    const button = overlayBtnRef.current;
-
-    function moveOverlay(e) {
-      if (button && overlayRef.current) {
-        const rect = button.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        gsap.to(overlayRef.current, {
-          x: x,
-          y: y,
-          height: 100,
-          width: 100,
-          scale: 10,
-          duration: 2,
-          ease: "power3.out"
-        });
-      }
+  }
+  if (location.pathname == "/") {
+    navBtnProps = {
+      content: "Start Free Trial",
+      bgColor: "bg-[var(--greenBg)]",
+      hoverBg: 'bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)]',
+      icon: "fa-solid fa-cloud-arrow-down"
     }
-    function leaveBtn(e) {
-      let button = overlayBtnRef.current
-      if (button && overlayRef.current) {
-        let rect = button.getBoundingClientRect()
-        let x = e.clientX - rect.left
-        let y = e.clientY - rect.top
-        gsap.to(overlayRef.current, {
-          x: x,
-          y: y,
-          height: 0,
-          width: 0,
-          scale: 0,
-          duration: 2,
-          ease: "power3.out"
-        });
-      }
+  }
+  else {
+    navBtnProps = {
+      content: "Get Started",
+      bgColor: "bg-indigo-950",
+      hoverBg: "bg-blue-600",
+      icon: "",
     }
-
-    if (button) {
-      button.addEventListener("mousemove", moveOverlay);
-      button.addEventListener("mouseleave", leaveBtn)
-    }
-
-    return () => {
-      if (button) {
-        button.removeEventListener("mousemove", moveOverlay);
-        button.removeEventListener("mouseleave", leaveBtn)
-      }
-    }
-  }, []);
-
+  }
 
 
   return (
@@ -239,7 +209,7 @@ export default function Navbar() {
       }
 
 
-      <nav ref={navbarRef} className={`rounded-md px-6 ${isFixed ? "fixed shadow-lg top-0 left-0 z-50 right-0 rounded-none" : "fixed left-3 top-5 right-3 max-w-[1350px] mx-auto"} ${!isFixed && location.pathname == "/" ? "bg-white/5" : ""} ${location.pathname == "/" && isFixed ? "bg-[#0f6555]" : "bg-white"}`}>
+      <nav ref={navbarRef} className={`rounded-md px-6 ${isFixed ? "fixed shadow-lg top-0 left-0 z-50 right-0 rounded-none" : "fixed left-3 top-8 right-3 max-w-[1350px] mx-auto"} ${!isFixed && location.pathname == "/" ? "bg-white/5" : ""} ${location.pathname == "/" && isFixed ? "bg-[#0f6555]" : "bg-white"}`}>
         <div className="custom-container mx-auto flex justify-between items-center">
 
           {/* logo */}
@@ -280,18 +250,19 @@ export default function Navbar() {
 
           </ul>
 
-          <div className="actions m-0 flex gap-6 items-center">
+          {/* action btns */}
+          <div className="m-0 flex gap-6 items-center">
             <button className={`cursor-pointer font-semibold text-sm hidden xl:flex items-center gap-2 ${location.pathname == "/" ? "text-white" : "text-black"}`}>
               <i className={`fa-regular fa-user ${location.pathname == "/" ? "text-[rgb(50,244,133)]" : "text-sky-700"} text-xs`}></i>
               Sign in
             </button>
-            <button ref={overlayBtnRef} className="hidden hover:text-white overflow-clip rounded-md relative font-semibold !bg-[var(--greenBg)] px-6 py-[14px] lg:inline text-[16px]">
-              <div ref={overlayRef} className="overlay-btn rounded-full absolute bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)] z-10"></div>
-              <div className="content flex gap-2 z-20 items-center relative text-nowrap">
-                Start Free Trial
-                <i className='fa-solid fa-cloud-arrow-down'></i>
-              </div>
-            </button>
+
+            <Button content={navBtnProps.content}
+              bgColor={navBtnProps.bgColor}
+              hoverBg={navBtnProps.hoverBg}
+              className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[120px] !h-13 !rounded-2xl"}`}
+              icon={navBtnProps.icon}
+            />
           </div>
 
           {/* sidebar toggle btn */}

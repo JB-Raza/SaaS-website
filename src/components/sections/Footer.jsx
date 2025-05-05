@@ -7,7 +7,7 @@ export default function Footer() {
     useTextAnimate(".animate-elem-footer", { start: "top 90%", y: 50 })
 
     return (
-        <footer className="bg-[#FBF6EE] px-3 overflow-hidden">
+        <footer className={`${location.pathname == "/"? "bg-[#FBF6EE]" : "bg-[var(--bgIceBlue)]"} px-3 overflow-hidden`}>
 
 
             <div className="custom-container mx-auto grid grid-cols-12 py-30 gap-7">
@@ -60,7 +60,11 @@ export default function Footer() {
                         <input type="text" placeholder="Email Address"
                             className="px-7 py-4 bg-white rounded-lg w-full"
                         />
-                        <Button content={"Sign Up"} icon={"fa fa-angle-right"} className={"text-white text-nowrap min-w-[120px]"} />
+                        <Button content={"Sign Up"}
+                        icon={"fa fa-angle-right text-sm"}
+                        bgColor={`${location.pathname == "/"? "bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)]":"bg-blue-600"}`}
+                        hoverBg={`${location.pathname == "/"? "bg-[var(--greenBg)]":"bg-indigo-950"}`}
+                        className={"text-white text-nowrap min-w-[130px]"} />
                     </div>
                     <p className="animate-elem-footer font-semibold">By subscribing, you're accept <span className="underline cursor-pointer duration-200 inline-block hover:-translate-y-1">Privacy Policy</span></p>
                 </div>
