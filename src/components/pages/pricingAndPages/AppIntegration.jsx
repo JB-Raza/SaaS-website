@@ -5,7 +5,9 @@ import { useGSAP } from '@gsap/react'
 import { IntegrationCard } from '../../universalComponents/index.js'
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
 import { Button, FaqList } from '../../universalComponents/index.js'
-import { RevolutionizeServices, AppIntegrationSection } from '../../sections/index.js'
+import { RevolutionizeServices } from '../../sections/index.js'
+
+import {Counter} from '../../universalComponents/Counter.jsx'
 
 
 export default function AppIntegration() {
@@ -67,25 +69,18 @@ export default function AppIntegration() {
                 </div>
             </section>
 
+
             {/* no of clients world wide */}
             <section className="bg-[var(--iceBlue)] py-[115px] my-10">
                 <div className="custom-container mx-auto">
                     <p className='animate-app-integration-elem text-center max-w-[160px] py-1 mx-auto font-medium bg-white border border-green-400 rounded-full text-gradient-teal'>What we offering</p>
                     <h3 className="animate-app-integration-elem heading-3 text-center capitalize leading-15 font-bold max-w-[640px] mt-7 mx-auto">Trusted by <span className='text-gradient-teal'>3+ million</span> website owners worldwide</h3>
 
-                    <div className="grid grid-cols-12 gap-5 border py-10 my-10 border-neutral-300">
-                        <div className="col-span-12 px-3 sm:col-span-4 mx-auto sm:mx-0">
-                            <h1 className="heading-1 px-4 text-center sm:text-start font-bold">282+</h1>
-                            <p className="heading-6 font-semibold uppercase text-center sm:text-start">worldwide clients</p>
-                        </div>
-                        <div className="col-span-12 px-3 sm:col-span-4">
-                            <h1 className="heading-1 px-4 font-bold text-center">95%</h1>
-                            <p className="heading-6 font-semibold uppercase text-center">worldwide clients</p>
-                        </div>
-                        <div className="col-span-12 px-3 sm:col-span-4 mx-auto sm:mx-0">
-                            <h1 className="heading-1 px-4 font-bold text-center sm:text-end">282+</h1>
-                            <p className="heading-6 font-semibold uppercase text-center sm:text-end">worldwide clients</p>
-                        </div>
+                    <div className="flex justify-between gap-10 flex-col sm:flex-row border py-10 my-10 border-neutral-300">
+                    <Counter target={282} symbol='+' label="worldwide clients" />
+                    <Counter target={95} symbol='%' label="Satisfied Clients" />
+                    <Counter target={282} symbol='+' label="worldwide clients" />
+
                     </div>
                 </div>
 

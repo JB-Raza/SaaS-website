@@ -33,7 +33,7 @@ export default function Hero() {
   })
 
   return (
-    <div className="grid custom-container mx-auto grid-cols-12 gap-y-10 sm:y-16 pt-60 pb-36 overflow-clip">
+    <div className="grid custom-container mx-auto grid-cols-12 gap-y-10 sm:y-16 pt-70 pb-36 overflow-clip">
       {/* content section */}
       <div className="col-span-12 sm:col-span-8 md:col-span-6 flex justify-center flex-col gap-7 !px-3">
 
@@ -68,7 +68,7 @@ export default function Hero() {
       {/* hero image section */}
       <div className="col-span-12 lg:col-span-6 flex justify-end p-0">
         <img src="./hero-main-laptop.png" alt="./hero-main-laptop.png"
-          className="hero-img lg:max-w-[55%] lg:absolute bottom-0 right-0" />
+          className="hero-img lg:max-w-[55%] w-auto lg:w-[900px] lg:absolute bottom-0 right-0" />
       </div>
 
 
