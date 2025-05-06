@@ -1,6 +1,8 @@
 import React from 'react'
 
 import { Hero, Clients, TaskManagement, Workspace, AutomateTasks, TrackProjects, Testimonial, PricingSection, AppIntegrationSection, RevolutionizeServices } from '../sections/index.js'
+import { Button } from '../universalComponents/index.js'
+
 
 export default function Home() {
     return (
@@ -30,6 +32,7 @@ export default function Home() {
             <AppIntegrationSection />
 
 
+
             {/* pricing section */}
             <div className="wrapper">
 
@@ -52,7 +55,9 @@ export default function Home() {
 
 
             {/* revolutionize our services */}
-            <RevolutionizeServices />
+            <RevolutionizeServices>
+                <Button content={"Download for free"} className={"text-white mx-auto my-10 min-w-[200px]"} />
+            </RevolutionizeServices>
 
 
         </>

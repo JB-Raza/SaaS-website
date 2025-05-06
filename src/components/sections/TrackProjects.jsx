@@ -31,7 +31,7 @@ export default function TrackProjects() {
 
 
 
-            <div className="py-10 my-15">
+            <div className="py-10 my-8">
 
                 <Swiper
                     className="mySwiper"

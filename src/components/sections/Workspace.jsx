@@ -15,10 +15,10 @@ export default function Workspace() {
                 <span className="text-gradient-teal"> off managed cloud hosting</span>
             </p>
 
-            <h2 className="relative z-2 heading-2 flex flex-col text-center text-white font-bold mt-4 leading-10 md:leading-15">
-                <p className='animated-data-workspace'>Essential for <span className="italic font-normal">workplaces</span>. Great for </p>
-                <p className='animated-data-workspace'>any team.</p>
-            </h2>
+            <h3 className="relative z-2 heading-3 flex flex-col text-center text-white font-bold mt-4 leading-10 md:leading-15">
+                <p className='animated-data-workspace'>Essential for <span className="italic font-normal">workplaces</span>. </p>
+                <p className='animated-data-workspace'>Great forany team.</p>
+            </h3>
             <p className="relative z-2 text-neutral-300 flex flex-col font-medium text-[18px] text-center mx-auto mt-8 px-3 leading-loose">
                 <span className='animated-data-workspace'>Sassly-CRM in the past allowing you to focus more on your business</span>
                 <span className='animated-data-workspace'> simply enjoy your newfound legal time to reflect leaving</span>

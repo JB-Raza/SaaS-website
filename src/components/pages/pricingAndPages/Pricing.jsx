@@ -1,5 +1,5 @@
 import React from 'react'
-import { PricingCard_2, PricingCard_3 } from '../../universalComponents/index.js'
+import { PricingCard_2, PricingCard_3, Button } from '../../universalComponents/index.js'
 import { RevolutionizeServices, PricingSection } from '../../sections/index.js'
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
@@ -9,7 +9,7 @@ export default function Pricing() {
 
     return (
         <div className='max-w-screen'>
-            <div className="bg-[var(--bgIceBlue)]">
+            <div className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
                     <img src="./simple-logo.png" alt="logo..." />
                     <h1 className="animate-contact-heading heading-1 capitalize font-bold text-center">Pricing Package</h1>
@@ -20,7 +20,7 @@ export default function Pricing() {
             {/* pricing section 2 */}
             <section className='py-20'>
                 <PricingSection pricingCardData={pricingCardData}
-                    btnBg={"bg-blue-600"} hoverBtnBg={"bg-indigo-950"}
+                    btnBg={"bg-blue-600"} hoverBtnBg={"bg-[var(--darkIndigo)]"}
                     heading={
                         <h3 className="heading-3 text-center flex max-w-[640px] mx-auto flex-col font-semibold mt-4 leading-10 md:leading-12 capitalize">
                             Seamless Integration for enhancing experience
@@ -31,7 +31,7 @@ export default function Pricing() {
             </section>
 
             {/* pricing section 3 */}
-            <section className='py-20 bg-[var(--bgIceBlue)]'>
+            <section className='py-20 bg-[var(--iceBlue)]'>
                 <p className="text-center max-w-[200px] text-gradient-teal mx-auto font-medium capitalize">what we offering</p>
                 <div className="py-10 custom-container mx-auto w-full px-2 sm:px-4">
 
@@ -86,7 +86,22 @@ export default function Pricing() {
 
 
 
-            <RevolutionizeServices />
+            <RevolutionizeServices>
+                <div className="flex gap-5 justify-center items-center">
+                    <Button
+
+                        content={"Get Started Trial"}
+                        bgColor='bg-blue-700'
+                        hoverBg='bg-[var(--darkIndigo)]'
+                        className={"text-white my-10 min-w-[175px] rounded-xl"} />
+                    <Button
+                        content={"Get Started Trial"}
+                        bgColor='bg-transparent'
+                        hoverBg='bg-blue-700'
+                        className={"text-white border-2 border-white hover:border-0 hover:text-black my-10 min-w-[175px] rounded-xl"} />
+                </div>
+
+            </RevolutionizeServices>
         </div>
     )
 }

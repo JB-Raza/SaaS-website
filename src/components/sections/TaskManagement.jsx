@@ -49,7 +49,7 @@ export default function TaskManagement() {
       <div className="task-management-section custom-container mx-auto px-2 sm:px-5 my-20">
         {/* header data */}
         <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-          <h3 className="capitalize font-semibold max-w-[550px] heading-3">
+          <h3 className="capitalize font-semibold heading-3">
             <p className='animated-data-elem'>Task management <span className="text-gradient-teal capitalize font-normal italic">Features</span> &</p>
             <p className='animated-data-elem'>capabilities</p>
           </h3>
@@ -162,7 +162,7 @@ export default function TaskManagement() {
           {/* cards */}
           {(cards || []).map((card, i) =>
             <div key={i} className="mx-3 sm:mx-0 col-span-12 sm:col-span-6 lg:col-span-4 gap-5">
-              <div className="flex flex-col justify-between h-full card group bg-neutral-50 hover:bg-[linear-gradient(270deg,#20BA8B_0%,#06766E_100%)] border-[1px] border-slate-200 rounded-lg p-7 md:p-12">
+              <div className="flex flex-col justify-between h-full card group bg-neutral-50 transition-[background] duration-200 hover:bg-[linear-gradient(270deg,#20BA8B_0%,#06766E_100%)] border-[1px] border-slate-200 rounded-lg p-7 md:p-12">
                 <div className="flex justify-between items-center mb-6">
                   <h4 className="animated-data-elem font-semibold group-hover:text-white heading-5">{card.title} <br /></h4>
                   <i className={`${card.icon} text-green-500 text-2xl group-hover:animate-[var(--icon-bubble-animation)] group-hover:text-white duration-300`}></i>

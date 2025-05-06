@@ -6,7 +6,7 @@ import Navbar from './components/navbar/Navbar.jsx'
 import Footer from './components/sections/Footer.jsx'
 
 
-import { Home, Contact, Pricing, AppIntegration, Page404 } from './components/pages/index.js'
+import { Home, Contact, Pricing, AppIntegration, IntegrationDetails, Page404 } from './components/pages/index.js'
 import { ScrollHeightTracker, CustomCursor } from "./components/universalComponents/index.js";
 
 
@@ -27,6 +27,7 @@ export default function Layout() {
           <Route path={"/contact"} element={<Contact />} />
           <Route path={"/pricing"} element={<Pricing />} />
           <Route path={"/app-integration"} element={<AppIntegration />} />
+          <Route path={"/integration-details"} element={<IntegrationDetails />} />
 
           <Route path={"*"} element={<Page404 />} />
         </Routes>

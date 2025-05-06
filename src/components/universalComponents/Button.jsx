@@ -3,10 +3,12 @@ import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 
-export default function Button({ className, content, icon,
-     bgColor='bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)]',
-     hoverBg="bg-[var(--greenBg)]"
-
+export default function Button({ 
+    className,
+    content,
+    icon,
+    bgColor='bg-[linear-gradient(270deg,_#06766E_0%,_#20BA8B_100%)]',
+    hoverBg="bg-[var(--greenBg)]"
  }) {
 
     let btnRef = useRef()
@@ -27,8 +29,9 @@ export default function Button({ className, content, icon,
                     height: 100,
                     width: 100,
                     scale:10,
-                    duration: 1.5,
-                    ease: "power3.out"
+                    duration: 0.5,
+                    ease: "none",
+
                 });
 
             }
@@ -44,8 +47,8 @@ export default function Button({ className, content, icon,
                     height: 0,
                     width: 0,
                     scale:0,
-                    duration: 1.5,
-                    ease: "power3.out"
+                    duration: 0.5,
+                    ease: "none",
                 });
             }
         }
@@ -70,7 +73,8 @@ export default function Button({ className, content, icon,
             <div className="absolute top-0 left-0 bottom-0 h-full w-full  flex gap-2 items-center justify-center">
                 {content}
                 {/* px-6 py-5 */}
-                <i className={`${icon} text-base`}></i>
+                {icon? <i className={`${icon} text-base`}></i>:null}
+                
             </div>
         </button>
 

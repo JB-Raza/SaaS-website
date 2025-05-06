@@ -21,7 +21,7 @@ export const PricingCard_1 = ({
                 <Button
                     content={"start free trial"}
                     bgColor={"bg-blue-600"}
-                    hoverBg={"bg-indigo-950"}
+                    hoverBg={"bg-[var(--darkIndigo)]"}
                     icon={"fa fa-arrow-up rotate-[45deg]"}
                     className={"capitalize card-text-animate !rounded-lg w-full mt-10 text-white !py-4"} />
                 <p className="text-center card-text-animate font-medium my-3">Renews at $9.88/month</p>
@@ -97,7 +97,7 @@ export const PricingCard_3 = ({ data, index }) => {
                             </span>
                         </p>
                     ))}
-                    <Button content={"Choose Plan"} bgColor={"bg-indigo-950"} hoverBg={"bg-blue-600"}
+                    <Button content={"Choose Plan"} bgColor={"bg-[var(--darkIndigo)]"} hoverBg={"bg-blue-600"}
                         icon={"fa fa-arrow-up rotate-[45deg]"}
                         className={"capitalize card-text-animate w-full mt-10 text-white !rounded-3xl !py-4"} />
                     <p className="text-neutral-600 font-medium text-center">No credit card required</p>

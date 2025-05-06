@@ -52,15 +52,15 @@ export default function Navbar() {
         .fromTo(".close-btn", { opacity: 0 },
           {
             opacity: 1,
-            duration: 0.3,
-            delay: 0.3,
+            duration: 0.2,
+            delay: 0.5,
             ease: "power3.out"
           }
         )
         .fromTo(".sidebar-logo", {
           opacity: 0,
           y: -50,
-        }, { opacity: 1, y: 0, duration: 0.3 })
+        }, { opacity: 1, y: 0, duration: 0.1 })
         .fromTo(".animate-navitem",
           { y: -50, opacity: 0 },
           {
@@ -70,6 +70,7 @@ export default function Navbar() {
             duration: 0.1,
             stagger: 0.1,
           }
+          ,"-=0.3"
         );
     }
 
@@ -99,7 +100,6 @@ export default function Navbar() {
           y: 0,
           opacity: 1,
           ease: "power1.out",
-          duration: 0.1,
           stagger: 0.1,
         })
       }
@@ -179,7 +179,7 @@ export default function Navbar() {
   else {
     navBtnProps = {
       content: "Get Started",
-      bgColor: "bg-indigo-950",
+      bgColor: "bg-[var(--darkIndigo)]",
       hoverBg: "bg-blue-600",
       icon: "",
     }
@@ -209,7 +209,7 @@ export default function Navbar() {
       }
 
 
-      <nav ref={navbarRef} className={`rounded-md px-6 ${isFixed ? "fixed shadow-lg top-0 left-0 z-50 right-0 rounded-none" : "fixed left-3 top-8 right-3 max-w-[1350px] mx-auto"} ${!isFixed && location.pathname == "/" ? "bg-white/5" : ""} ${location.pathname == "/" && isFixed ? "bg-[#0f6555]" : "bg-white"}`}>
+      <nav ref={navbarRef} className={`rounded-md ps-6 pe-8 ${isFixed ? "fixed shadow-lg top-0 left-0 z-50 right-0 rounded-none" : "fixed left-3 top-9 right-3 max-w-[1350px] mx-auto"} ${!isFixed && location.pathname == "/" ? "bg-white/5" : ""} ${location.pathname == "/" && isFixed ? "bg-[#0f6555]" : "bg-white"}`}>
         <div className="custom-container mx-auto flex justify-between items-center">
 
           {/* logo */}
@@ -240,7 +240,7 @@ export default function Navbar() {
             {/* brand logo */}
             <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
               <a href='#'>
-                <img className='' src="./logo-blue.png" alt="logo" /></a>
+                <img src="./logo-blue.png" alt="logo" /></a>
             </div>
             {(navbarData || []).map((item, i) => (
               <NavItem key={i} navItem={item} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown}
@@ -260,7 +260,7 @@ export default function Navbar() {
             <Button content={navBtnProps.content}
               bgColor={navBtnProps.bgColor}
               hoverBg={navBtnProps.hoverBg}
-              className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[120px] !h-13 !rounded-2xl"}`}
+              className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[130px] !h-13 !rounded-xl"}`}
               icon={navBtnProps.icon}
             />
           </div>

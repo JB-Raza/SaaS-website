@@ -17,8 +17,8 @@ export default function AutomateTasks() {
                     <span className="text-gradient-teal"> off managed cloud hosting</span>
                 </p>
                 <h3 className="heading-3 font-semibold mt-4 leading-10 md:leading-15 capitalize lg:w-[50%] xxl:w-auto">
-                    <p className='animate-automateTask-elem'>Supercharge  <span className="italic text-gradient-teal font-normal">daily work</span>. with built-in </p>
-                    <p className='animate-automateTask-elem'>automation </p>
+                    <p className='animate-automateTask-elem'>Supercharge  <span className="italic text-gradient-teal font-normal">daily work</span> with </p>
+                    <p className='animate-automateTask-elem'>built-in automation</p>
                 </h3>
 
                 <div className="grid grid-cols-12">
@@ -77,7 +77,7 @@ export default function AutomateTasks() {
                             <i className="fa-solid fa-bars-progress group-hover:animate-[var(--animate-left-right)] text-green-500 text-3xl mt-2"></i>
                             <div>
                                 <h5 className="heading-5 font-semibold">Automate Task Creation</h5>
-                                <p className="text-neutral-600 mt-4 leading-loose wrap-break-word sm:me-10 text-wrap">In today's competitive business, the demand for efficient cost-effective IT solutions has never been more critic.</p>
+                                <p className="text-neutral-600 mt-4 max-w-[432px] leading-loose wrap-break-word sm:me-10 text-wrap">In today's competitive business, the demand for efficient cost-effective IT solutions has never been more critic.</p>
                             </div>
                         </div>
                         {/* card 2 */}
@@ -85,7 +85,7 @@ export default function AutomateTasks() {
                             <i className="fa-solid fa-bars-progress group-hover:animate-[var(--animate-left-right)] text-green-500 text-3xl mt-2"></i>
                             <div>
                                 <h5 className="heading-5 font-semibold">Automate Task Creation</h5>
-                                <p className="text-neutral-600 mt-4 leading-loose wrap-break-word sm:me-10 text-wrap">In today's competitive business, the demand for efficient cost-effective IT solutions has never been more critic.</p>
+                                <p className="text-neutral-600 mt-4 max-w-[432px] leading-loose wrap-break-word sm:me-10 text-wrap">In today's competitive business, the demand for efficient cost-effective IT solutions has never been more critic.</p>
                             </div>
                         </div>
 

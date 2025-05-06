@@ -16,7 +16,7 @@ export default function PricingSection({ heading, descriptionPara, pricingCardDa
 
       <div className="grid gap-5 grid-cols-12 mt-15">
         {/* plans */}
-        {(pricingCardData || []).map((data, i) => (
+        {(pricingData || []).map((data, i) => (
           <PricingCard_1 key={i} data={data} className={cardClassNames} />
         ))}
 
