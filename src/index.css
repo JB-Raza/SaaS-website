@@ -2,6 +2,8 @@
 
 @theme {
   --breakpoint-xs: 350px;
+  --breakpoint-breakpoint-500: 500px;
+  --breakpoint-breakpoint-1000: 1000px;
   --animate-bounce-high: bounce-high 0.6s 0.2s;
   --animate-left-right: moveLeftRight 0.6s 0.2s;
   --icon-bubble-animation: icon-bubble-animation 0.7s ease;
@@ -212,5 +214,5 @@ span, button, summary, label {
   mask-image: radial-gradient(circle, transparent 62%, black 38%);
 }
 .shadow-big{
-  box-shadow: 1px 2px 30px 1px rgba(0, 0, 0, 0.712);
+  box-shadow: 1px 1px 25px 1px rgba(0, 0, 0, 0.612);
 }

@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { RevolutionizeServices } from '../../sections/index.js'
 import { Button, InputBox } from '../../universalComponents/index.js'
 import { Link } from 'react-router-dom'
+import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
 
 export default function Login() {
     const [formData, setFormData] = useState({name: "", password: ""})
+
+    useTextAnimate(".animate-text")
 
     const handleInputChange = (e) => {
         setFormData({
@@ -20,7 +23,7 @@ export default function Login() {
             <section className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
                     <img src="./simple-logo.png" alt="logo..." />
-                    <h1 className="animate-contact-heading heading-1 capitalize font-bold text-center">Sign In</h1>
+                    <h1 className="animate-text heading-1 capitalize font-bold text-center">Sign In</h1>
                 </div>
             </section>
 
