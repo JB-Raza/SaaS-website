@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 
 export default function InputBox({
     type = "text", name, id, value, onChange, label,
+    required=false
 }) {
 
     const [showPassword, setShowPassword] = useState(null)
-    console.log(showPassword)
 
 
     return (
@@ -13,7 +13,7 @@ export default function InputBox({
             <label htmlFor="name" className="font-semibold">{label}</label>
             <input
                 type={showPassword == true ? "text" : type}
-
+                required = {required}
                 name={name} id={id}
                 value={value}
                 onChange={onChange}

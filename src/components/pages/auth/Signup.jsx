@@ -5,6 +5,15 @@ import { Link } from 'react-router-dom'
 
 
 export default function Signup() {
+    const [formData, setFormData] = useState({name: "", password: "", confirmPassword: ""})
+
+    const handleInputChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.id]: e.target.value
+        })
+    }
+
     return (
         <div>
             {/* hero */}
@@ -17,18 +26,26 @@ export default function Signup() {
 
             {/* login form */}
             <div className="custom-container mx-auto py-35 px-3">
-                <form className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
+                <form
+                onSubmit={(e) => e.preventDefault()}
+                className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
                     <h3 className="heading-4 text-center font-[700] max-w-[250px] mx-auto capitalize italic">Start Your Journey with us</h3>
 
                     {/* name */}
                     <InputBox type='text' name={"name"} id={"name"}
-                    label={"Enter your name"} 
+                    onChange={handleInputChange}
+                    label={"Enter your name"}
+                    required={true}
                     />
                     <InputBox type='password' name={"password"} id={"password"}
+                    onChange={handleInputChange}
                     label={"Create Password"}
+                    required={true}
                     />
                     <InputBox type='password' name={"confirmPassword"} id={"confirmPassword"}
+                    onChange={handleInputChange}
                     label={"Confirm Password"}
+                    required={true}
                     />
 
                     <div className="input-group flex gap-2 items-center">
