@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import NavItem from './NavItem.jsx'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, Link } from 'react-router-dom'
 import { Button } from '../universalComponents/index.js'
 
 // gsap
@@ -70,12 +70,11 @@ export default function Navbar() {
             duration: 0.1,
             stagger: 0.1,
           }
-          ,"-=0.3"
+          , "-=0.3"
         );
     }
 
   }, [isSidebarOpen]);
-
 
 
   // handle window width
@@ -252,17 +251,22 @@ export default function Navbar() {
 
           {/* action btns */}
           <div className="m-0 flex gap-6 items-center">
-            <button className={`cursor-pointer font-semibold text-sm hidden xl:flex items-center gap-2 ${location.pathname == "/" ? "text-white" : "text-black"}`}>
-              <i className={`fa-regular fa-user ${location.pathname == "/" ? "text-[rgb(50,244,133)]" : "text-sky-700"} text-xs`}></i>
-              Sign in
-            </button>
+            <Link to="/login">
+              <button className={`cursor-pointer font-semibold text-sm hidden xl:flex items-center gap-2 ${location.pathname == "/" ? "text-white" : "text-black"}`}>
+                <i className={`fa-regular fa-user ${location.pathname == "/" ? "text-[rgb(50,244,133)]" : "text-sky-700"} text-xs`}></i>
+                Sign in
+              </button>
+            </Link>
 
-            <Button content={navBtnProps.content}
-              bgColor={navBtnProps.bgColor}
-              hoverBg={navBtnProps.hoverBg}
-              className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[130px] !h-13 !rounded-xl"}`}
-              icon={navBtnProps.icon}
-            />
+            <Link to={'/signup'}>
+              <Button content={navBtnProps.content}
+                bgColor={navBtnProps.bgColor}
+                hoverBg={navBtnProps.hoverBg}
+                className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[130px] !h-13 !rounded-xl"}`}
+                icon={navBtnProps.icon}
+              />
+            </Link>
+
           </div>
 
           {/* sidebar toggle btn */}

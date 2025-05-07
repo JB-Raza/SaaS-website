@@ -44,7 +44,7 @@ function FaqDropdown({ id, isOpen, setIsOpen, question, answer }) {
 
     return (
         <div
-            className={`animate-faq-element mb-8 cursor-pointer outline-none rounded-xl px-10 ${isOpen ? "shadow-xl" : "border-b-1 border-neutral-200"}`}>
+            className={`animate-faq-element mb-8 cursor-pointer outline-none px-10 ${isOpen ? "shadow-xl rounded-xl" : "border-b-1 border-neutral-200"}`}>
 
             <summary
                 onClick={(e) => {

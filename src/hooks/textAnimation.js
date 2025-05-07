@@ -4,8 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export const useTextAnimate = (target, 
-    { start = "top 80%", end = "top 40%", fromScale = 1, stagger = 0.3, opacity = 0, y = 100, duration = 0.5 } = {}
+export const useTextAnimate = (target,
+    { start = "top 80%", end = "top 40%", fromScale = 1, stagger = 0.3, opacity = 0, y = 100, duration = 0.5, currLocation } = {}
 ) => {
 
     
@@ -29,5 +29,5 @@ export const useTextAnimate = (target,
 
             );
         });
-    }, [target, start, end, stagger, y, duration, opacity]);
+    }, [target, start, end, stagger, y, duration, opacity, currLocation]);
 };
