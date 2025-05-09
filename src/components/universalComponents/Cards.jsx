@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Button from './Button.jsx'
 import { useTextAnimate } from '../../hooks/textAnimation.js'
 import { Link } from 'react-router-dom'
@@ -126,7 +127,7 @@ export const IntegrationCard = ({ data }) => {
 }
 
 
-export const ShopItemCard = ({activeAlignment="list", product}) => {
+export const ShopItemCard = ({ activeAlignment = "list", product }) => {
     return (
         <div className={`group card pb-3 hover:shadow-lg rounded-2xl flex gap-4 ${activeAlignment == "list" ? "flex-col" : "flex-row"}`}>
             {/* image section */}
@@ -171,5 +172,56 @@ export const ShopItemCard = ({activeAlignment="list", product}) => {
         </div>
     )
 }
+
+
+export const CartProductCard = ({ product, removeProduct }) => {
+    const [productData, setProductData] = useState(product)
+
+    return (
+
+        <tr className='py-10 border-b border-neutral-200'>
+            <td className='text-start px-10 py-5 text-[18px] flex items-center gap-3'>
+                <div className="relative w-[70px] flex items-center justify-center">
+
+                    <button
+                        onClick={() => removeProduct(productData)}
+                        className="absolute z-10 hover:scale-125 cursor-pointer duration-200 h-4 w-4 rounded-full flex items-center justify-center top-0 right-0 bg-red-600 text-white">
+                        <i className="fa fa-xmark text-[10px]"></i>
+                    </button>
+                    <img
+                        className='hover:scale-110 duration-200'
+                        src={productData.imgUrl} alt={productData.id} />
+                </div>
+                <span className='font-semibold'>{productData.name}</span>
+            </td>
+            <td className='text-start px-10 py-5 text-[18px] font-semibold'>${productData.price}.00</td>
+            <td className='text-start px-10 py-5 text-[18px] font-semibold'>
+                {/* quantity */}
+                <div className="flex items-center">
+                    <div className="flex !items-stretch justify-between border border-neutral-200">
+                        <button
+                            onClick={() => {
+                                if (productData.quantity <= 1) return
+                                setProductData({ ...productData, quantity: --productData.quantity })
+                            }}
+                            className="px-3 py-2 text-neutral-800 text-[18px]">
+                            <div className="fa-solid fa-minus"></div>
+                        </button>
+                        <p className='font-semibold py-2 text-center text-[16px] w-[50px] bg-neutral-200'>{productData.quantity}</p>
+                        <button
+                            onClick={() => {
+                                setProductData({ ...productData, quantity: ++productData.quantity })
+                            }}
+                            className="px-3 py-2 text-neutral-800 text-[18px]">
+                            <div className="fa-solid fa-plus"></div>
+                        </button>
+                    </div>
+                </div>
+            </td>
+            <td className='text-start px-10 py-5 text-[18px] font-semibold'>$60.00</td>
+        </tr>
+    )
+}
+
 
 
