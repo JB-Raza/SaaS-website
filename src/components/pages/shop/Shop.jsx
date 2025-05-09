@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 
 // components
 import { RevolutionizeServices } from '../../sections/index.js'
-import { Button } from '../../universalComponents/index.js'
+import { Button, ShopItemCard } from '../../universalComponents/index.js'
 
 // hooks
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
@@ -178,10 +178,11 @@ export default function Shop() {
                                     <div className="relative flex gap-2 items-center text-neutral-600">
                                         <button ref={dropdrownBtnRef} onClick={() => setDropdownOpen((prev) => !prev)} className="font-bold cursor-pointer">Price</button>
                                         <i className={`fa fa-angle-down text-sm ${dropdownOpen ? "rotate-180 duration-200" : "rotate-0 duration-200"}`}></i>
-                                        <div ref={dropdrownRef} className=' absolute z-45 -left-1/2 top-10 overflow-hidden transition-all duration-300 bg-white font-semibold shadow-lg min-w-[160px]'>
+                                        <div ref={dropdrownRef} className='absolute z-45 -left-1/2 top-10 overflow-hidden transition-all duration-300 bg-white font-semibold shadow-lg rounded-md min-w-[160px]'>
                                             <ul className={`p-3`}>
-                                                <li className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1'>action</li>
-                                                <li className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1'>action</li>
+                                                <li className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1'>Price</li>
+                                                <li className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1'>Sales</li>
+                                                <li className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1'>Published</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -201,50 +202,8 @@ export default function Shop() {
                         {/* all cards */}
                         <div className="grid grid-cols-12 gap-6 mt-6">
                             {productsData.map((product) => (
-                                <div key={product.id} className="col-span-12 breakpoint-500:col-span-6 md:col-span-4">
-
-
-                                    <div className="group card pb-3 hover:shadow-lg rounded-2xl flex flex-col gap-4">
-                                        {/* image section */}
-                                        <div className="relative flex flex-col justify-between border border-neutral-200 min-h-[290px] rounded-2xl p-6 overflow-hidden">
-                                            <img
-                                                className='group-hover:scale-115 duration-200 m-auto'
-                                                src={product.image} alt={`img_${product.id}`} />
-                                            <Button
-                                                content={"Add to Cart"}
-                                                bgColor='bg-blue-700'
-                                                hoverBg='bg-[var(--darkIndigo)]'
-                                                className={"w-full scale-0 group-hover:scale-100 duration-500 !h-10 !py-2 !rounded-full"}
-                                            />
-                                            {/* options */}
-                                            <div className="flex flex-col gap-2 absolute top-3 right-3 group-hover:translate-x-[0%] duration-500 translate-x-[200%]">
-                                                {/* icon 1 view */}
-                                                <span className="icon bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 hover:text-white rounded-md">
-                                                    <i className="fa-regular fa-eye"></i>
-                                                </span>
-                                                {/* icon 2 star */}
-                                                <span className="icon bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 hover:text-white rounded-md">
-                                                    <i className="fa-regular fa-star"></i>
-                                                </span>
-                                                {/* icon 3 */}
-                                                <span className="icon bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 hover:text-white rounded-md">
-                                                    <i className="fa-solid fa-arrows-up-down"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        {/* data */}
-                                        <div className="flex px-1 flex-col gap-3 items-center justify-center">
-                                            <div className="rating flex gap-1">
-
-                                                {[1, 2, 3, 4, 5].map((item, i) => (
-                                                    <i key={i} className={`fa fa-star text-sm ${item <= 4 ? "text-blue-600" : "text-neutral-300"}`}></i>
-                                                ))}
-                                            </div>
-                                            <h4 className="heading-6 font-semibold text-center text-wrap">Smart Wireless Headphone</h4>
-                                            <p className="price font-medium">$112.00</p>
-
-                                        </div>
-                                    </div>
+                                <div key={product.id} className={`col-span-12 ${activeAlignment == "list"? " breakpoint-500:col-span-6 md:col-span-4":"sm:col-span-12 md:col-span-6"} `}>
+                                    <ShopItemCard activeAlignment={activeAlignment} product={product} />
                                 </div>
                             ))}
                         </div>
@@ -289,12 +248,15 @@ const popularTagsData = ["Sweat Shirt", "Landing", "Banner Design", "Brochure", 
 // product card data
 const productsData = [
     { id: 0, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img1.png" },
-    { id: 1, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img2.png" },
-    { id: 2, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img3.png" },
-    { id: 3, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img4.png" },
-    { id: 4, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img5.png" },
-    { id: 5, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img6.png" },
-    { id: 6, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img7.png" },
-    { id: 7, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img8.png" },
-    { id: 8, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img9.png" },
+    { id: 1, title: "Go Pro hero action Camera", rating: 2, price: 112, image: "/shop/product-img2.png" },
+    { id: 2, title: "Colorful apple ipad", rating: 5, price: 112, image: "/shop/product-img3.png" },
+    { id: 3, title: "Humidifiler White grow", rating: 4, price: 112, image: "/shop/product-img4.png" },
+    { id: 4, title: "Apple Iphone 16 max", rating: 4, price: 112, image: "/shop/product-img5.png" },
+    { id: 5, title: "Two in One Laptop Ipad", rating: 4, price: 112, image: "/shop/product-img6.png" },
+    { id: 6, title: "Apple Smart watch", rating: 4, price: 112, image: "/shop/product-img7.png" },
+    { id: 7, title: "Insta pro max camera", rating: 4, price: 112, image: "/shop/product-img8.png" },
+    { id: 8, title: "macbook m1 cheap pro", rating: 4, price: 112, image: "/shop/product-img9.png" },
+    { id: 9, title: "VISION rad micor oven", rating: 4, price: 112, image: "/shop/product-img10.png" },
+    { id: 10, title: "Folding keyboard Display", rating: 4, price: 112, image: "/shop/product-img11.png" },
+    { id: 11, title: "Logitech Mouse Havit", rating: 4, price: 112, image: "/shop/product-img12.png" },
 ]
