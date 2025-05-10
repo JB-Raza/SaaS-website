@@ -8,11 +8,14 @@ import { Button, ShopItemCard } from '../../universalComponents/index.js'
 
 // hooks
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
+import { data } from 'react-router-dom';
 
 
 export default function Shop() {
     const [dropdownOpen, setDropdownOpen] = useState(false)
+    const [currSortStyle, setCurrSortStyle] = useState("price")
     const [activeAlignment, setActiveAlignment] = useState("list")
+    const [sortedtListings, setSortedtListings] = useState(productsData)
     const dropdrownBtnRef = useRef()
     const dropdrownRef = useRef()
 
@@ -45,6 +48,33 @@ export default function Shop() {
             window.removeEventListener("click", closeDropdownOnClick)
         }
     }, [])
+
+    // sort listings
+    useEffect(() => {
+        if (currSortStyle === "price") {
+            setSortedtListings(prevListings => {
+                return [...prevListings].sort((a, b) => {
+                    return a.price - b.price
+                });
+            });
+        }
+        else if (currSortStyle == "sales") {
+            setSortedtListings(prevListings => {
+                return [...prevListings].sort((a, b) => {
+                    return b.sales - a.sales
+                })
+            })
+        }
+        else if (currSortStyle == "published") {
+            setSortedtListings(prevListings => {
+                return [...prevListings].sort((a, b) => {
+                    return a.published - b.published
+                })
+            })
+        }
+
+    }, [currSortStyle]);
+
 
 
 
@@ -148,7 +178,7 @@ export default function Shop() {
                         </div>
                     </div>
 
-                    {/* cards */}
+                    {/* cards and headers */}
                     <div className="col-span-12 breakpoint-1000:col-span-8 px-3">
                         {/* header */}
                         <div className='flex flex-col sm:flex-row gap-3 justify-between sm:items-center border-1 border-neutral-300 rounded-md p-5'>
@@ -161,13 +191,17 @@ export default function Shop() {
                                     <i className="fa-solid fa-arrows-up-down text-neutral-500"></i>
                                     {/* dropdown */}
                                     <div className="relative flex gap-2 items-center text-neutral-600">
-                                        <button ref={dropdrownBtnRef} onClick={() => setDropdownOpen((prev) => !prev)} className="font-bold cursor-pointer">Price</button>
-                                        <i className={`fa fa-angle-down text-sm ${dropdownOpen ? "rotate-180 duration-200" : "rotate-0 duration-200"}`}></i>
+                                        <button ref={dropdrownBtnRef} onClick={() => setDropdownOpen((prev) => !prev)} className="font-bold cursor-pointer">
+                                            <span>{currSortStyle}</span>
+                                            <i className={`fa fa-angle-down text-sm ms-[6px] ${dropdownOpen ? "rotate-180 duration-200" : "rotate-0 duration-200"}`}></i>
+                                        </button>
                                         <div ref={dropdrownRef} className='absolute z-45 -left-1/2 top-10 overflow-hidden transition-all duration-300 bg-white font-semibold shadow-lg rounded-md min-w-[160px]'>
                                             <ul className={`p-3`}>
-                                                <li className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1'>Price</li>
-                                                <li className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1'>Sales</li>
-                                                <li className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1'>Published</li>
+                                                {(sortStyleData || []).map((sortMethod) => (
+                                                    <li
+                                                        onClick={() => setCurrSortStyle(sortMethod)}
+                                                        key={sortMethod} className='hover:bg-neutral-200 text-black rounded-sm px-2 py-1 capitalize'>{sortMethod}</li>
+                                                ))}
                                             </ul>
                                         </div>
                                     </div>
@@ -186,7 +220,7 @@ export default function Shop() {
                         </div>
                         {/* all cards */}
                         <div className="grid grid-cols-12 gap-6 mt-6">
-                            {productsData.map((product) => (
+                            {(sortedtListings || []).map((product) => (
                                 <div key={product.id} className={`col-span-12 ${activeAlignment == "list" ? " breakpoint-500:col-span-6 md:col-span-4" : "sm:col-span-12 md:col-span-6"} `}>
                                     <ShopItemCard activeAlignment={activeAlignment} product={product} />
                                 </div>
@@ -282,8 +316,8 @@ function PriceRangeSlider() {
 
 
 
-
-
+// sort by: (product's cards sorting)
+const sortStyleData = ["price", "sales", "published"]
 
 const categoriesData = ["Brochures & Catalogues", "Business Cards", "Calendars printing", "Design Online", "Flyers Design", "Folded Leaflets", "t-shirt printing", "Gift item printing"]
 
@@ -295,18 +329,18 @@ const popularTagsData = ["Sweat Shirt", "Landing", "Banner Design", "Brochure", 
 
 // product card data
 const productsData = [
-    { id: 0, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img1.png" },
-    { id: 1, title: "Go Pro hero action Camera", rating: 2, price: 112, image: "/shop/product-img2.png" },
-    { id: 2, title: "Colorful apple ipad", rating: 5, price: 112, image: "/shop/product-img3.png" },
-    { id: 3, title: "Humidifiler White grow", rating: 4, price: 112, image: "/shop/product-img4.png" },
-    { id: 4, title: "Apple Iphone 16 max", rating: 4, price: 112, image: "/shop/product-img5.png" },
-    { id: 5, title: "Two in One Laptop Ipad", rating: 4, price: 112, image: "/shop/product-img6.png" },
-    { id: 6, title: "Apple Smart watch", rating: 4, price: 112, image: "/shop/product-img7.png" },
-    { id: 7, title: "Insta pro max camera", rating: 4, price: 112, image: "/shop/product-img8.png" },
-    { id: 8, title: "macbook m1 cheap pro", rating: 4, price: 112, image: "/shop/product-img9.png" },
-    { id: 9, title: "VISION rad micor oven", rating: 4, price: 112, image: "/shop/product-img10.png" },
-    { id: 10, title: "Folding keyboard Display", rating: 4, price: 112, image: "/shop/product-img11.png" },
-    { id: 11, title: "Logitech Mouse Havit", rating: 4, price: 112, image: "/shop/product-img12.png" },
+    { id: 0, title: "Smart Wireless Headphone", rating: 4, price: 202, image: "/shop/product-img1.png", sales: 22, published: Date.now() },
+    { id: 1, title: "Go Pro hero action Camera", rating: 2, price: 2, image: "/shop/product-img2.png", sales: 23, published: Date.now() - 100 },
+    { id: 2, title: "Colorful apple ipad", rating: 5, price: 101, image: "/shop/product-img3.png", sales: 32, published: Date.now() - 200 },
+    { id: 3, title: "Humidifiler White grow", rating: 4, price: 322, image: "/shop/product-img4.png", sales: 222, published: Date.now() - 300 },
+    { id: 4, title: "Apple Iphone 16 max", rating: 4, price: 110, image: "/shop/product-img5.png", sales: 122, published: Date.now() - 400 },
+    { id: 5, title: "Two in One Laptop Ipad", rating: 4, price: 130, image: "/shop/product-img6.png", sales: 242, published: Date.now() - 500 },
+    { id: 6, title: "Apple Smart watch", rating: 4, price: 112, image: "/shop/product-img7.png", sales: 11, published: Date.now() - 600 },
+    { id: 7, title: "Insta pro max camera", rating: 4, price: 312, image: "/shop/product-img8.png", sales: 102, published: Date.now() - 700 },
+    { id: 8, title: "macbook m1 cheap pro", rating: 4, price: 162, image: "/shop/product-img9.png", sales: 2000, published: Date.now() - 800 },
+    { id: 9, title: "VISION rad micor oven", rating: 4, price: 512, image: "/shop/product-img10.png", sales: 302, published: Date.now() - 900 },
+    { id: 10, title: "Folding keyboard Display", rating: 4, price: 312, image: "/shop/product-img11.png", sales: 420, published: Date.now() - 1000 },
+    { id: 11, title: "Logitech Mouse Havit", rating: 4, price: 12, image: "/shop/product-img12.png", sales: 31, published: Date.now() - 1100 },
 ]
 
 

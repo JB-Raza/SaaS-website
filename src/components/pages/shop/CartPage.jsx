@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // components
 import { RevolutionizeServices } from '../../sections/index.js'
@@ -11,6 +11,17 @@ import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
 export default function CartPage() {
     const [cartData, setCartData] = useState(sampleCartData)
+    const [showAlert, setShowAlert] = useState(false)
+
+    useEffect(() => {
+    if(showAlert == true){
+        setTimeout(() => {
+            setShowAlert(false)
+        }, 3400)
+    }
+
+    }, [showAlert])
+
     useTextAnimate(".animate-text")
 
     return (
@@ -25,10 +36,24 @@ export default function CartPage() {
 
 
             <section className="py-30 px-3">
-                <div className="custom-container mx-auto grid grid-cols-12 gap-15">
+                <div className="custom-container mx-auto grid grid-cols-12 gap-10">
 
                     {/* cart col */}
-                    <div className="col-span-12 lg:col-span-8">
+                    <div className="col-span-12 lg:col-span-8 lg:pe-5 overflow-auto">
+                        {/* alert */}
+                        <div className={`min-w-[300px] z-[400] duration-300 ${showAlert ? "-translate-x-[3%]" : "translate-x-[130%]"} flex items-center gap-4 px-5 py-3 shadow-lg bg-white rounded-md border-l-3 border-red-600 fixed right-2 top-5`}>
+                            <i className="fa-solid fa-trash-can text-red-500 text-xl"></i>
+                            <div className="flex flex-col justify-between w-full">
+                                <div className="flex justify-between">
+                                    <h6 className=" font-semibold">Deleted</h6>
+                                    <i
+                                    onClick={() => setShowAlert(false)}
+                                    className="fa fa-xmark text-[20px]"></i>
+                                </div>
+                                <p className="text-neutral-600 text-[14px]">Item deleted successfully</p>
+                            </div>
+                        </div>
+
                         <table className='w-full border border-neutral-200'>
                             {/* heading rows */}
                             <thead>
@@ -40,17 +65,21 @@ export default function CartPage() {
                                     <th className='text-start px-10 py-5'>Sub Total</th>
                                 </tr>
                             </thead>
+
                             <tbody>
 
                                 {/* data rows */}
                                 {((cartData || []).map((product) => (
                                     <CartProductCard key={product.id} product={product}
                                         removeProduct={(product) => {
+
+                                            setShowAlert(true)
                                             setCartData(cartData.filter((item) => item.id !== product.id))
                                         }}
                                     />
                                 )))}
                             </tbody>
+
                             <tfoot>
                                 <tr>
                                     <td colSpan={4}>
