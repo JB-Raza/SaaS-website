@@ -25,7 +25,7 @@ export default function CartPage() {
 
 
             <section className="py-30 px-3">
-                <div className="grid grid-cols-12 gap-15">
+                <div className="custom-container mx-auto grid grid-cols-12 gap-15">
 
                     {/* cart col */}
                     <div className="col-span-12 lg:col-span-8">
@@ -86,8 +86,8 @@ export default function CartPage() {
 
                     {/* info col */}
                     <div className="col-span-12 flex flex-col md:flex-row lg:flex-col items-start gap-7 lg:col-span-4">
-                        {/* info box */}
-                        <div className='border p-5 border-neutral-200 w-full'>
+                        {/* cart items table  */}
+                        <div className='border overflow-x-aut p-5 border-neutral-200 w-full'>
 
                             <h5 className="heading-5 font-semibold text-center mb-6">Calculate Shipping</h5>
                             <div className="border flex font-semibold mb-4 justify-between border-neutral-200 rounded-sm py-3 px-4">
@@ -112,22 +112,22 @@ export default function CartPage() {
 
                         {/* total */}
                         <div className='border p-5 border-neutral-200 w-full'>
-                        <h5 className="heading-5 font-semibold text-center mb-6">Calculate Shipping</h5>
-                        <div className="border flex font-semibold mb-4 justify-between border-neutral-200 rounded-sm py-3 px-4">
+                            <h5 className="heading-5 font-semibold text-center mb-6">Calculate Shipping</h5>
+                            <div className="border flex font-semibold mb-4 justify-between border-neutral-200 rounded-sm py-3 px-4">
                                 <span className='uppercase'>subtotal</span>
                                 <span className='text-neutral-700 font-medium'>$345.00</span>
                             </div>
                             <div className="border flex font-semibold mb-4 justify-between border-neutral-200 rounded-sm py-3 px-4">
-                            <span className='uppercase'>total</span>
+                                <span className='uppercase'>total</span>
                                 <span className='text-neutral-900'>$450.00</span>
                             </div>
-                            <Button 
-                            content={"Proceed to Checkout"}
-                            bgColor='bg-[var(--darkIndigo)]'
-                            hoverBg='bg-blue-700'
-                            className={"w-full !h-[14px]"}
+                            <Button
+                                content={"Proceed to Checkout"}
+                                bgColor='bg-[var(--darkIndigo)]'
+                                hoverBg='bg-blue-700'
+                                className={"w-full !h-[14px]"}
                             />
-</div>
+                        </div>
 
                     </div>
                 </div>
@@ -138,18 +138,18 @@ export default function CartPage() {
 
 
             <RevolutionizeServices>
-                <div className="flex gap-5 justify-center items-center">
+                <div className="flex gap-5 flex-wrap my-10 justify-center items-center">
                     <Button
 
                         content={"Get Started Trial"}
                         bgColor='bg-blue-700'
                         hoverBg='bg-[var(--darkIndigo)]'
-                        className={"text-white my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white min-w-[175px] rounded-xl"} />
                     <Button
                         content={"Get Started Trial"}
                         bgColor='bg-transparent'
                         hoverBg='bg-blue-700'
-                        className={"text-white border-2 border-white hover:border-0 hover:text-black my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white border-2 border-white hover:border-0 hover:text-black min-w-[175px] rounded-xl"} />
                 </div>
 
             </RevolutionizeServices>

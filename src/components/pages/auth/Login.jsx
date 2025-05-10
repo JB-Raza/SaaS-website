@@ -6,7 +6,7 @@ import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
 
 export default function Login() {
-    const [formData, setFormData] = useState({name: "", password: ""})
+    const [formData, setFormData] = useState({ name: "", password: "" })
 
     useTextAnimate(".animate-text")
 
@@ -30,22 +30,22 @@ export default function Login() {
             {/* login form */}
             <div className="custom-container mx-auto py-35 px-3">
                 <form
-                onSubmit={(e) => e.preventDefault()}
-                className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
+                    onSubmit={(e) => e.preventDefault()}
+                    className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
                     <h3 className="heading-4 text-center font-[700] max-w-[250px] mx-auto capitalize italic">Start Your Journey with us</h3>
 
                     {/* name */}
                     <InputBox type='text' name={"name"} id={"name"}
-                    label={"Enter your name"}
-                    required={true}
-                    onChange={handleInputChange}
+                        label={"Enter your name"}
+                        required={true}
+                        onChange={handleInputChange}
                     />
                     <InputBox type='password' name={"password"} id={"password"}
-                    label={"Create Password"}
-                    required={true}
-                    onChange={handleInputChange}
+                        label={"Create Password"}
+                        required={true}
+                        onChange={handleInputChange}
                     />
-                    
+
                     <div className="flex justify-between flex-col sm:flex-row gap-3 mx-3">
                         <div className="input-group flex gap-2 items-center">
                             <input type="checkbox" className='h-4 w-4 cursor-pointer' name='rememberMe' id='rememberMe' />
@@ -73,18 +73,18 @@ export default function Login() {
             </div>
 
             <RevolutionizeServices>
-                <div className="flex gap-5 justify-center items-center">
+                <div className="flex gap-5 flex-wrap my-10 justify-center items-center">
                     <Button
 
                         content={"Get Started Trial"}
                         bgColor='bg-blue-700'
                         hoverBg='bg-[var(--darkIndigo)]'
-                        className={"text-white my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white min-w-[175px] rounded-xl"} />
                     <Button
                         content={"Get Started Trial"}
                         bgColor='bg-transparent'
                         hoverBg='bg-blue-700'
-                        className={"text-white border-2 border-white hover:border-0 hover:text-black my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white border-2 border-white hover:border-0 hover:text-black min-w-[175px] rounded-xl"} />
                 </div>
 
             </RevolutionizeServices>

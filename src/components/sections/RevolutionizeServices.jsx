@@ -58,7 +58,6 @@ export default function RevolutionizeServices({children}) {
                     <p className='animate-elem-revolution'>our service?</p>
                 </h2>
 
-                {/* <Button content={"Download for free"} className={"text-white mx-auto my-10 min-w-[200px]"} /> */}
                 {children}
 
                 {/* all floating buttons */}

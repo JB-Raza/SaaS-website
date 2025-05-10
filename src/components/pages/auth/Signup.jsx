@@ -7,10 +7,10 @@ import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
 
 export default function Signup() {
-    const [formData, setFormData] = useState({name: "", password: "", confirmPassword: ""})
+    const [formData, setFormData] = useState({ name: "", password: "", confirmPassword: "" })
 
-        useTextAnimate(".animate-text")
-    
+    useTextAnimate(".animate-text")
+
     const handleInputChange = (e) => {
         setFormData({
             ...formData,
@@ -31,25 +31,25 @@ export default function Signup() {
             {/* login form */}
             <div className="custom-container mx-auto py-35 px-3">
                 <form
-                onSubmit={(e) => e.preventDefault()}
-                className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
+                    onSubmit={(e) => e.preventDefault()}
+                    className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
                     <h3 className="heading-4 text-center font-[700] max-w-[250px] mx-auto capitalize italic">Start Your Journey with us</h3>
 
                     {/* name */}
                     <InputBox type='text' name={"name"} id={"name"}
-                    onChange={handleInputChange}
-                    label={"Enter your name"}
-                    required={true}
+                        onChange={handleInputChange}
+                        label={"Enter your name"}
+                        required={true}
                     />
                     <InputBox type='password' name={"password"} id={"password"}
-                    onChange={handleInputChange}
-                    label={"Create Password"}
-                    required={true}
+                        onChange={handleInputChange}
+                        label={"Create Password"}
+                        required={true}
                     />
                     <InputBox type='password' name={"confirmPassword"} id={"confirmPassword"}
-                    onChange={handleInputChange}
-                    label={"Confirm Password"}
-                    required={true}
+                        onChange={handleInputChange}
+                        label={"Confirm Password"}
+                        required={true}
                     />
 
                     <div className="input-group flex gap-2 items-center">
@@ -78,18 +78,18 @@ export default function Signup() {
             </div>
 
             <RevolutionizeServices>
-                <div className="flex gap-5 justify-center items-center">
+                <div className="flex gap-5 flex-wrap my-10 justify-center items-center">
                     <Button
 
                         content={"Get Started Trial"}
                         bgColor='bg-blue-700'
                         hoverBg='bg-[var(--darkIndigo)]'
-                        className={"text-white my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white min-w-[175px] rounded-xl"} />
                     <Button
                         content={"Get Started Trial"}
                         bgColor='bg-transparent'
                         hoverBg='bg-blue-700'
-                        className={"text-white border-2 border-white hover:border-0 hover:text-black my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white border-2 border-white hover:border-0 hover:text-black min-w-[175px] rounded-xl"} />
                 </div>
 
             </RevolutionizeServices>

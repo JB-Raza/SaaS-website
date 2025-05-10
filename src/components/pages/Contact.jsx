@@ -136,19 +136,21 @@ export default function Contact() {
                         </form>
                     </div>
                 </div>
-            </section><RevolutionizeServices>
-                <div className="flex gap-5 justify-center items-center">
+            </section>
+
+            <RevolutionizeServices>
+                <div className="flex gap-5 flex-wrap my-10 justify-center items-center">
                     <Button
 
                         content={"Get Started Trial"}
                         bgColor='bg-blue-700'
                         hoverBg='bg-[var(--darkIndigo)]'
-                        className={"text-white my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white min-w-[175px] rounded-xl"} />
                     <Button
                         content={"Get Started Trial"}
                         bgColor='bg-transparent'
                         hoverBg='bg-blue-700'
-                        className={"text-white border-2 border-white hover:border-0 hover:text-black my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white border-2 border-white hover:border-0 hover:text-black min-w-[175px] rounded-xl"} />
                 </div>
 
             </RevolutionizeServices>

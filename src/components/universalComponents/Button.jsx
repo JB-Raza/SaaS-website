@@ -28,7 +28,7 @@ export default function Button({
                     y: y,
                     height: 100,
                     width: 100,
-                    scale:10,
+                    scale:20,
                     duration: 0.5,
                     ease: "none",
 

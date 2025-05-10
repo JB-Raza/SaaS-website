@@ -7,7 +7,7 @@ import { useTextAnimate } from '../../../hooks/textAnimation.js'
 import { Button, FaqList } from '../../universalComponents/index.js'
 import { RevolutionizeServices } from '../../sections/index.js'
 
-import {Counter} from '../../universalComponents/Counter.jsx'
+import { Counter } from '../../universalComponents/Counter.jsx'
 
 
 export default function AppIntegration() {
@@ -42,9 +42,9 @@ export default function AppIntegration() {
 
                         <div className="relative app-integration h-[400px] md:h-[550px] flex items-center">
 
-                        <img src="./app-integration/app-integration-center.png" alt="error"
-                            className="absolute top-1/2 left-1/2 w-20 h-20 md:w-23 md:h-23 -translate-x-1/2 lg:translate-y-1/2"
-                        />
+                            <img src="./app-integration/app-integration-center.png" alt="error"
+                                className="absolute top-1/2 left-1/2 w-20 h-20 md:w-23 md:h-23 -translate-x-1/2 lg:translate-y-1/2"
+                            />
                             <img src="./app-integration/1.png" alt="" className="w-15 floating-icons-left absolute top-1/4 left-3 md:left-1/9 md:w-20 " />
                             <img src="./app-integration/5.png" alt="" className="w-15 floating-icons-left absolute top-1/4 translate-y-30 sm:translate-y-35 md:translate-y-40 left-1/8 md:left-1/5 md:w-20" />
                             <img src="./app-integration/6.png" alt="" className="w-15 floating-icons-left absolute top-1/4 translate-y-60 md:translate-y-80 left-1 md:left-1/9 md:w-20" />
@@ -77,9 +77,9 @@ export default function AppIntegration() {
                     <h3 className="animate-app-integration-elem heading-3 text-center capitalize leading-15 font-bold max-w-[640px] mt-7 mx-auto">Trusted by <span className='text-gradient-teal'>3+ million</span> website owners worldwide</h3>
 
                     <div className="flex justify-between gap-10 flex-col sm:flex-row border py-10 my-10 border-neutral-300">
-                    <Counter target={282} symbol='+' label="worldwide clients" />
-                    <Counter target={95} symbol='%' label="Satisfied Clients" />
-                    <Counter target={282} symbol='+' label="worldwide clients" />
+                        <Counter target={282} symbol='+' label="worldwide clients" />
+                        <Counter target={95} symbol='%' label="Satisfied Clients" />
+                        <Counter target={282} symbol='+' label="worldwide clients" />
 
                     </div>
                 </div>
@@ -131,18 +131,18 @@ export default function AppIntegration() {
 
 
             <RevolutionizeServices>
-                <div className="flex gap-5 justify-center items-center">
+                <div className="flex gap-5 flex-wrap my-10 justify-center items-center">
                     <Button
 
                         content={"Get Started Trial"}
                         bgColor='bg-blue-700'
                         hoverBg='bg-[var(--darkIndigo)]'
-                        className={"text-white my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white min-w-[175px] rounded-xl"} />
                     <Button
                         content={"Get Started Trial"}
                         bgColor='bg-transparent'
                         hoverBg='bg-blue-700'
-                        className={"text-white border-2 border-white hover:border-0 hover:text-black my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white border-2 border-white hover:border-0 hover:text-black min-w-[175px] rounded-xl"} />
                 </div>
 
             </RevolutionizeServices>

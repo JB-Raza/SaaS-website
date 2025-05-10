@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
+import { Range } from "react-range";
+
 
 // components
 import { RevolutionizeServices } from '../../sections/index.js'
@@ -91,26 +93,9 @@ export default function Shop() {
 
                         {/* range */}
                         <div className='rounded-xl p-8 shadow-lg'>
+                            {/* <PriceRangeSlider /> */}
                             <h5 className="heading-5 text-[var(--darkIndigo)] font-semibold border-l-2 border-blue-600 py-0 px-2">Filter By Price</h5>
-                            <form
-                                onSubmit={(e) => e.preventDefault()}
-                                className='my-5 relative'>
-                                <input type="range" step={1}
-                                    className='w-full'
-                                />
-                                <div className="flex justify-between mt-5 items center">
-                                    <p className='text-neutral-600'>
-                                        <span>700</span> -
-                                        <span> 1200</span>
-                                    </p>
-                                    <Button content={"Filter"}
-                                        bgColor='bg-blue-700'
-                                        hoverBg='bg-[var(--darkIndigo)]'
-                                        className={"!max-h-10 !px-11 "}
-                                    />
-                                </div>
-
-                            </form>
+                            <PriceRangeSlider />
                         </div>
 
                         {/* select by size */}
@@ -202,7 +187,7 @@ export default function Shop() {
                         {/* all cards */}
                         <div className="grid grid-cols-12 gap-6 mt-6">
                             {productsData.map((product) => (
-                                <div key={product.id} className={`col-span-12 ${activeAlignment == "list"? " breakpoint-500:col-span-6 md:col-span-4":"sm:col-span-12 md:col-span-6"} `}>
+                                <div key={product.id} className={`col-span-12 ${activeAlignment == "list" ? " breakpoint-500:col-span-6 md:col-span-4" : "sm:col-span-12 md:col-span-6"} `}>
                                     <ShopItemCard activeAlignment={activeAlignment} product={product} />
                                 </div>
                             ))}
@@ -217,24 +202,87 @@ export default function Shop() {
 
 
             <RevolutionizeServices>
-                <div className="flex gap-5 justify-center items-center">
+                <div className="flex gap-5 flex-wrap my-10 justify-center items-center">
                     <Button
 
                         content={"Get Started Trial"}
                         bgColor='bg-blue-700'
                         hoverBg='bg-[var(--darkIndigo)]'
-                        className={"text-white my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white min-w-[175px] rounded-xl"} />
                     <Button
                         content={"Get Started Trial"}
                         bgColor='bg-transparent'
                         hoverBg='bg-blue-700'
-                        className={"text-white border-2 border-white hover:border-0 hover:text-black my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white border-2 border-white hover:border-0 hover:text-black min-w-[175px] rounded-xl"} />
                 </div>
 
             </RevolutionizeServices>
         </div>
     )
 }
+
+
+
+function PriceRangeSlider() {
+    const MIN = 0;
+    const MAX = 10000;
+
+    const [values, setValues] = useState([2500, 7500]);
+
+    return (
+        <div className="px-4 py-10">
+            <Range
+                step={10}
+                min={MIN}
+                max={MAX}
+                values={values}
+                onChange={setValues}
+                renderTrack={({ props, children }) => (
+                    <div
+                        {...props}
+                        className="h-[6px] bg-neutral-300 rounded-full relative"
+                        style={{
+                            ...props.style,
+                            background: `linear-gradient(to right, #e5e7eb ${((values[0] - MIN) / (MAX - MIN)) * 100}%,
+                            #17a2b8 ${((values[0] - MIN) / (MAX - MIN)) * 100}%,
+                            #17a2b8 ${((values[1] - MIN) / (MAX - MIN)) * 100}%,
+                            #e5e7eb ${((values[1] - MIN) / (MAX - MIN)) * 100}%)`,
+                        }}
+                    >
+                        {children}
+                    </div>
+                )}
+                renderThumb={({ props }) => (
+                    <div
+                        {...props}
+                        className="h-4 w-4 rounded-full bg-[#17a2b8] top-[8px] -translate-y-1/2"
+                        style={{
+                            ...props.style,
+                        }}
+                    />
+                )}
+            />
+
+            <div className="flex justify-between mt-8 items-center">
+
+                <p className="mt-4 text-neutral-600">
+                    {values[0]} - {values[1]}
+                </p>
+                <Button content={"Filter"}
+                    bgColor='bg-blue-700'
+                    hoverBg='bg-[var(--darkIndigo)]'
+                    className={"!max-h-10 !px-11 "}
+                />
+            </div>
+        </div>
+    );
+}
+
+
+
+
+
+
 
 
 const categoriesData = ["Brochures & Catalogues", "Business Cards", "Calendars printing", "Design Online", "Flyers Design", "Folded Leaflets", "t-shirt printing", "Gift item printing"]
@@ -260,3 +308,11 @@ const productsData = [
     { id: 10, title: "Folding keyboard Display", rating: 4, price: 112, image: "/shop/product-img11.png" },
     { id: 11, title: "Logitech Mouse Havit", rating: 4, price: 112, image: "/shop/product-img12.png" },
 ]
+
+
+
+
+
+
+
+

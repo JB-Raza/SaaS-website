@@ -79,7 +79,7 @@ export default function ShopDetails() {
                                         setActiveSlideIndex(index)
                                         swiperRef?.current.slideTo(index)
                                     }}
-                                    className={`swiper-bullet p-2 border rounded-xl  flex items-center justify-center ${activeSlideIndex == index? "border-blue-700":"border-neutral-300"}`}>
+                                    className={`swiper-bullet p-2 border rounded-xl  flex items-center justify-center ${activeSlideIndex == index ? "border-blue-700" : "border-neutral-300"}`}>
                                     <img
                                         className="w-20 h-16 sm:w-24 sm:h-20 md:w-28 md:h-24 lg:w-32 lg:h-28 object-contain"
                                         src={img.imgUrl} alt={index} />
@@ -260,18 +260,18 @@ export default function ShopDetails() {
             </section>
 
             <RevolutionizeServices>
-                <div className="flex gap-5 justify-center items-center">
+                <div className="flex gap-5 flex-wrap my-10 justify-center items-center">
                     <Button
 
                         content={"Get Started Trial"}
                         bgColor='bg-blue-700'
                         hoverBg='bg-[var(--darkIndigo)]'
-                        className={"text-white my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white min-w-[175px] rounded-xl"} />
                     <Button
                         content={"Get Started Trial"}
                         bgColor='bg-transparent'
                         hoverBg='bg-blue-700'
-                        className={"text-white border-2 border-white hover:border-0 hover:text-black my-10 min-w-[175px] rounded-xl"} />
+                        className={"text-white border-2 border-white hover:border-0 hover:text-black min-w-[175px] rounded-xl"} />
                 </div>
 
             </RevolutionizeServices>
