@@ -13,12 +13,12 @@ export default function CartPage() {
     const [cartData, setCartData] = useState(sampleCartData)
     const [showAlert, setShowAlert] = useState(false)
 
+    const [deletedProduct, setDeletedProduct] = useState("")
     useEffect(() => {
-    if(showAlert == true){
         setTimeout(() => {
             setShowAlert(false)
-        }, 3400)
-    }
+            setDeletedProduct("")
+        }, 3500)
 
     }, [showAlert])
 
@@ -47,10 +47,10 @@ export default function CartPage() {
                                 <div className="flex justify-between">
                                     <h6 className=" font-semibold">Deleted</h6>
                                     <i
-                                    onClick={() => setShowAlert(false)}
-                                    className="fa fa-xmark text-[20px]"></i>
+                                        onClick={() => setShowAlert(false)}
+                                        className="fa fa-xmark text-[20px]"></i>
                                 </div>
-                                <p className="text-neutral-600 text-[14px]">Item deleted successfully</p>
+                                <p className="text-neutral-600 text-[14px]">"{deletedProduct}" deleted successfully</p>
                             </div>
                         </div>
 
@@ -74,7 +74,12 @@ export default function CartPage() {
                                         removeProduct={(product) => {
 
                                             setShowAlert(true)
-                                            setCartData(cartData.filter((item) => item.id !== product.id))
+                                            setCartData(cartData.filter((item) => {
+                                                if (item.id == product.id) {
+                                                    setDeletedProduct(product.name)
+                                                }
+                                                return item.id !== product.id
+                                            }))
                                         }}
                                     />
                                 )))}

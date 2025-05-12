@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Range } from "react-range";
 
 
@@ -8,7 +8,6 @@ import { Button, ShopItemCard } from '../../universalComponents/index.js'
 
 // hooks
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
-import { data } from 'react-router-dom';
 
 
 export default function Shop() {
