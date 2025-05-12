@@ -1,7 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
+
+// fetching sample data
+import { productsData } from '../../../sampleData.js'
+import { useParams } from 'react-router-dom'
 // swiper css
 import "swiper/css"
 
@@ -14,21 +18,63 @@ import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
 
 export default function ShopDetails() {
+
+    const { productId } = useParams()
+
     useTextAnimate(".animate-text")
     const swiperRef = useRef(null)
 
+    const [product, setProduct] = useState({
+        id: 0,
+        title: "Smart Wireless Headphone",
+        rating: 4,
+        price: 202,
+        image: "/shop/product-img1.png",
+        images: [
+            "/shop/product-img1.png",
+            "/shop/show-details/shop-details-thumb2.png",
+            "/shop/show-details/shop-details-thumb3.png",
+            "/shop/show-details/shop-details-thumb4.png"
+        ],
+        sales: 22,
+        published: Date.now(),
+        description: "High-quality wireless headphones with noise cancellation and long battery life.",
+        category: "Electronics",
+        brand: "AudioMax",
+        stock: 50,
+        reviews: [
+            { author: "Alice", rating: 5, comment: "Amazing sound quality!" },
+            { author: "Bob", rating: 4, comment: "Very comfortable to wear." }
+        ],
+        size: ['s', 'm', 'l', 'xl'],
+        discountPercent: 5,
+        tags: ["smart watch", "digital", 'modern'],
+        colors: ["red", "green", "blue", "orange"],
+
+    })
     const [activeBtn, setActiveBtn] = useState("product details")
     const [activeColor, setActiveColor] = useState("gray")
     const [activeSize, setActiveSize] = useState("s")
     const [quantity, setQuantity] = useState(1)
     const [activeSlideIndex, setActiveSlideIndex] = useState(0)
 
+
+    useEffect(() => {
+
+        if (productId) {
+            setProduct(productsData.find(product => {
+                return product.id == productId
+            }))
+        }
+    }, [productId])
+
+
     return (
         <div>
             {/* hero */}
             <section className="bg-[var(--iceBlue)] px-3">
                 <div className="custom-container overflow-cip mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                    <img src="./simple-logo.png" alt="logo..." />
+                    <img src="/simple-logo.png" alt="logo..." />
                     <h1 className="animate-text heading-1 capitalize font-bold text-center">Shop Details</h1>
                 </div>
             </section>
@@ -49,30 +95,26 @@ export default function ShopDetails() {
                                     bulletClass: "swiper-bullet",
                                     bulletActiveClass: "active-swiper-bullet"
                                 }}
+                                onSlideChange={(swiper) => {
+                                    setActiveSlideIndex(swiper.activeIndex)
+
+                                }}
                             >
-                                <SwiperSlide className='!flex !items-center !justify-center'>
-                                    <img src="/shop/show-details/shop-details-thumb1.png" alt="img" />
-                                </SwiperSlide>
+                                {product.images?.map((imageUrl) => (
 
-                                <SwiperSlide className='!flex !items-center !justify-center'>
-                                    <img src="/shop/show-details/shop-details-thumb2.png" alt="img" />
-                                </SwiperSlide>
-
-                                <SwiperSlide className='!flex !items-center !justify-center'>
-                                    <img src="/shop/show-details/shop-details-thumb3.png" alt="img" />
-                                </SwiperSlide>
-
-                                <SwiperSlide className='!flex !items-center !justify-center'>
-                                    <img src="/shop/show-details/shop-details-thumb4.png" alt="img" />
-                                </SwiperSlide>
-
+                                    <SwiperSlide className='!flex !items-center my-auto !justify-center'>
+                                        <img
+                                            className='w-full max-w-[450px]'
+                                            src={imageUrl} alt="img" />
+                                    </SwiperSlide>
+                                ))}
 
                             </Swiper>
                         </div>
 
+                        {/* preview image slider */}
                         <div className="flex justify-center breakpoint-1000:me-[50px] gap-2 mt-5">
-                            {(productSwiper || []).map((img, index) => (
-
+                            {product.images?.map((img, index) => (
                                 <button
                                     key={index}
                                     onClick={() => {
@@ -82,38 +124,39 @@ export default function ShopDetails() {
                                     className={`swiper-bullet p-2 border rounded-xl  flex items-center justify-center ${activeSlideIndex == index ? "border-blue-700" : "border-neutral-300"}`}>
                                     <img
                                         className="w-20 h-16 sm:w-24 sm:h-20 md:w-28 md:h-24 lg:w-32 lg:h-28 object-contain"
-                                        src={img.imgUrl} alt={index} />
+                                        src={img} alt={index} />
 
                                 </button>
                             ))}
                         </div>
                     </div>
+
                     {/* data col */}
                     <div className="col-span-12 breakpoint-1000:col-span-6">
                         {/* stats */}
                         <div className="wrapper flex gap-5 items-center">
-                            <span className="discount bg-red-600 text-white font-semibold rounded-md py-[3px] px-[8px]">-5%</span>
+                            <span className="discount bg-red-600 text-white font-semibold rounded-md py-[3px] px-[8px]">-{product.discountPercent}%</span>
                             <p className="rating flex items-center gap-1">
                                 {[1, 2, 3, 4, 5].map((item, i) => (
-                                    <i key={i} className={`fa fa-star text-sm ${item <= 4 ? "text-blue-600" : "text-neutral-300"}`}></i>
+                                    <i key={i} className={`fa fa-star text-sm ${item <= product.rating ? "text-blue-600" : "text-neutral-300"}`}></i>
                                 ))}
-                                <span className='text-neutral-600 ms-2 font-medium'>( 2 Reviews )</span>
+                                <span className='text-neutral-600 ms-2 font-medium'>( {product.reviews?.length} reviews )</span>
                             </p>
                         </div>
-                        <h3 className="heading-3 font-semibold">Smart Wireless Headphone</h3>
-                        <p className='text-wrap max-w-[500px] font-medium text-neutral-600 leading-loose mt-3'>There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised</p>
+                        <h3 className="heading-3 font-semibold">{product.title || "Smart Wireless Headphone"}</h3>
+                        <p className='text-wrap max-w-[500px] font-medium text-neutral-600 leading-loose mt-3'>{product.description}</p>
 
                         {/* price */}
                         <div className="mt-5 flex gap-10 items-center flex-wrap">
-                            <p className="heading-4 font-semibold">$600.00</p>
+                            <p className="heading-4 font-semibold">${product.price}.00</p>
                             <p className="heading-6 font-semibold text-blue-700">$900.00</p>
                         </div>
 
-                        {/* color    */}
+                        {/* color */}
                         <div className="mt-5 flex gap-6 items-center">
                             <span className="font-semibold">Color : </span>
                             <div className="flex gap-3 flex-wrap items-center">
-                                {availableColors.map((color) => (
+                                {product.colors?.map((color) => (
                                     <button
                                         key={color}
                                         onClick={() => setActiveColor(color)}
@@ -132,7 +175,7 @@ export default function ShopDetails() {
                         <div className="mt-5 flex gap-6 items-center">
                             <span className="font-semibold">Size : </span>
                             <div className="flex gap-3 flex-wrap items-center">
-                                {availableSizes.map((size) => (
+                                {product.size?.map((size) => (
                                     <button
                                         key={size}
                                         onClick={() => setActiveSize(size)}
@@ -249,7 +292,7 @@ export default function ShopDetails() {
                     <h3 className="heading-3 font-semibold capitalize">Featured Products</h3>
 
                     <div className="grid grid-cols-12 gap-6 mt-6">
-                        {productsData.map((product) => (
+                        {productsData.slice(0, 4).map((product) => (
                             <div key={product.id} className={`col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3`}>
                                 <ShopItemCard product={product} />
                             </div>
@@ -311,9 +354,3 @@ const featureOptions = [
 
 ]
 
-const productsData = [
-    { id: 0, title: "Smart Wireless Headphone", rating: 4, price: 112, image: "/shop/product-img1.png" },
-    { id: 1, title: "Go Pro hero action Camera", rating: 2, price: 112, image: "/shop/product-img2.png" },
-    { id: 2, title: "Colorful apple ipad", rating: 5, price: 112, image: "/shop/product-img3.png" },
-    { id: 3, title: "Humidifiler White grow", rating: 4, price: 112, image: "/shop/product-img4.png" },
-]

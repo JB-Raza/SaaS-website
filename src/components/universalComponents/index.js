@@ -5,10 +5,13 @@ import {PricingCard_1, PricingCard_2, PricingCard_3, IntegrationCard, ShopItemCa
 import FaqList from './FaqList.jsx'
 import InputBox from './InputBox.jsx'
 
+import Alert from './Alert.jsx'
+
 
 export {
     Button, InputBox, CustomCursor, ScrollHeightTracker, 
     PricingCard_1, PricingCard_2, PricingCard_3,
     IntegrationCard, FaqList,
-    ShopItemCard, CartProductCard
+    ShopItemCard, CartProductCard,
+    Alert
 }

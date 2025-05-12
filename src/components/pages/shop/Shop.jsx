@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { Range } from "react-range";
+import { productsData } from '../../../sampleData.js'
 
 
 // components
@@ -255,6 +256,7 @@ export default function Shop() {
 }
 
 
+// price range component
 
 function PriceRangeSlider() {
     const MIN = 0;
@@ -325,22 +327,6 @@ const sizeData = [`36"x80" (8)`, `36"x96" (60)`, `72"x80" (7)`, `72"x96" (21)`]
 const filterByRatingData = [5, 4, 3, 2, 1]
 const popularTagsData = ["Sweat Shirt", "Landing", "Banner Design", "Brochure", "Bussiness Card", "cap", "Bussiness Card", "Landing"]
 
-
-// product card data
-const productsData = [
-    { id: 0, title: "Smart Wireless Headphone", rating: 4, price: 202, image: "/shop/product-img1.png", sales: 22, published: Date.now() },
-    { id: 1, title: "Go Pro hero action Camera", rating: 2, price: 2, image: "/shop/product-img2.png", sales: 23, published: Date.now() - 100 },
-    { id: 2, title: "Colorful apple ipad", rating: 5, price: 101, image: "/shop/product-img3.png", sales: 32, published: Date.now() - 200 },
-    { id: 3, title: "Humidifiler White grow", rating: 4, price: 322, image: "/shop/product-img4.png", sales: 222, published: Date.now() - 300 },
-    { id: 4, title: "Apple Iphone 16 max", rating: 4, price: 110, image: "/shop/product-img5.png", sales: 122, published: Date.now() - 400 },
-    { id: 5, title: "Two in One Laptop Ipad", rating: 4, price: 130, image: "/shop/product-img6.png", sales: 242, published: Date.now() - 500 },
-    { id: 6, title: "Apple Smart watch", rating: 4, price: 112, image: "/shop/product-img7.png", sales: 11, published: Date.now() - 600 },
-    { id: 7, title: "Insta pro max camera", rating: 4, price: 312, image: "/shop/product-img8.png", sales: 102, published: Date.now() - 700 },
-    { id: 8, title: "macbook m1 cheap pro", rating: 4, price: 162, image: "/shop/product-img9.png", sales: 2000, published: Date.now() - 800 },
-    { id: 9, title: "VISION rad micor oven", rating: 4, price: 512, image: "/shop/product-img10.png", sales: 302, published: Date.now() - 900 },
-    { id: 10, title: "Folding keyboard Display", rating: 4, price: 312, image: "/shop/product-img11.png", sales: 420, published: Date.now() - 1000 },
-    { id: 11, title: "Logitech Mouse Havit", rating: 4, price: 12, image: "/shop/product-img12.png", sales: 31, published: Date.now() - 1100 },
-]
 
 
 

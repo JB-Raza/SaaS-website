@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import {Link} from 'react-router-dom'
 
 // components
 import { RevolutionizeServices } from '../../sections/index.js'
-import { Button, CartProductCard, InputBox } from '../../universalComponents/index.js'
+import { Button, CartProductCard, InputBox, Alert } from '../../universalComponents/index.js'
 
 // hooks
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
@@ -10,19 +11,24 @@ import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
 
 export default function CartPage() {
-    const [cartData, setCartData] = useState(sampleCartData)
+    const [cartItems, setCartItems] = useState(samplecartItems)
     const [showAlert, setShowAlert] = useState(false)
 
-    const [deletedProduct, setDeletedProduct] = useState("")
-    useEffect(() => {
-        setTimeout(() => {
-            setShowAlert(false)
-            setDeletedProduct("")
-        }, 3500)
 
-    }, [showAlert])
+    const [deletedProduct, setDeletedProduct] = useState("")
 
     useTextAnimate(".animate-text")
+
+    const removeProduct = (product) => {
+        setShowAlert(true)
+        setCartItems(cartItems.filter((item) => {
+            if (item.id == product.id) {
+                setDeletedProduct(product.name)
+            }
+            return item.id !== product.id
+        }))
+
+    }
 
     return (
         <div>
@@ -41,18 +47,9 @@ export default function CartPage() {
                     {/* cart col */}
                     <div className="col-span-12 lg:col-span-8 lg:pe-5 overflow-auto">
                         {/* alert */}
-                        <div className={`min-w-[300px] z-[400] duration-300 ${showAlert ? "-translate-x-[3%]" : "translate-x-[130%]"} flex items-center gap-4 px-5 py-3 shadow-lg bg-white rounded-md border-l-3 border-red-600 fixed right-2 top-5`}>
-                            <i className="fa-solid fa-trash-can text-red-500 text-xl"></i>
-                            <div className="flex flex-col justify-between w-full">
-                                <div className="flex justify-between">
-                                    <h6 className=" font-semibold">Deleted</h6>
-                                    <i
-                                        onClick={() => setShowAlert(false)}
-                                        className="fa fa-xmark text-[20px]"></i>
-                                </div>
-                                <p className="text-neutral-600 text-[14px]">"{deletedProduct}" deleted successfully</p>
-                            </div>
-                        </div>
+                        <Alert showAlert={showAlert} setShowAlert={setShowAlert} message={
+                            `"${deletedProduct}" deleted Successfully`
+                        } />
 
                         <table className='w-full border border-neutral-200'>
                             {/* heading rows */}
@@ -69,18 +66,9 @@ export default function CartPage() {
                             <tbody>
 
                                 {/* data rows */}
-                                {((cartData || []).map((product) => (
+                                {((cartItems || []).map((product) => (
                                     <CartProductCard key={product.id} product={product}
-                                        removeProduct={(product) => {
-
-                                            setShowAlert(true)
-                                            setCartData(cartData.filter((item) => {
-                                                if (item.id == product.id) {
-                                                    setDeletedProduct(product.name)
-                                                }
-                                                return item.id !== product.id
-                                            }))
-                                        }}
+                                        removeProduct={removeProduct}
                                     />
                                 )))}
                             </tbody>
@@ -89,7 +77,8 @@ export default function CartPage() {
                                 <tr>
                                     <td colSpan={4}>
                                         <div className='flex border-b border-neutral-200 justify-between items-center px-10 py-5'>
-                                            <button className="rounded-full border border-neutral-200 px-5 py-3 hover:text-white hover:bg-blue-600 font-semibold text-sm">Return To Shop</button>
+                                            <Link to={"/shop"}
+                                             className="rounded-full border border-neutral-200 px-5 py-3 hover:text-white hover:bg-blue-600 font-semibold text-sm">Return To Shop</Link>
                                             <button className="rounded-full border border-neutral-200 px-5 py-3 hover:text-white hover:bg-blue-600 font-semibold text-sm">Update Cart</button>
                                         </div>
                                     </td>
@@ -194,7 +183,7 @@ export default function CartPage() {
 
 
 
-const sampleCartData = [
+const samplecartItems = [
     { id: 0, name: "Apple Watch", imgUrl: "/shop/cart/cart-img1.png", price: 12, quantity: 1, subtotal: 60 },
     { id: 1, name: "samsung handset", imgUrl: "/shop/cart/cart-img2.png", price: 22, quantity: 1, subtotal: 60 },
     { id: 2, name: "Tata brand car", imgUrl: "/shop/cart/cart-img3.png", price: 122, quantity: 1, subtotal: 60 },

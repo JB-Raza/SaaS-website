@@ -39,6 +39,8 @@ export default function Layout() {
 
 
         <Route path='/shop' element={<Shop />} />
+          <Route path='/shop/:productId' element={<ShopDetails />} />
+
         <Route path='/shop-details' element={<ShopDetails />} />
         <Route path='/cart' element={<CartPage />} />
         <Route path='/checkout' element={<CheckoutPage />} />
