@@ -15,6 +15,14 @@ import CheckoutPage from './shop/CheckoutPage.jsx'
 import Login from './auth/Login.jsx'
 import Signup from './auth/Signup.jsx'
 
+// dashboard
+import Dashboard from './dashboard/Dashboard.jsx'
+import SummeryPage from './dashboard/SummeryPage.jsx'
+import Orders from './dashboard/Orders.jsx'
+import Wishlist from './dashboard/Wishlist.jsx'
+import AccountDetails from './dashboard/AccountDetails.jsx'
+
+
 import Page404 from './Page404.jsx'
 
 
@@ -23,6 +31,7 @@ export {
     Pricing, AppIntegration, IntegrationDetails,
     Shop, ShopDetails, CartPage, CheckoutPage,
     Login, Signup,
+    Dashboard, SummeryPage, Orders, Wishlist, AccountDetails,
     
     Page404
 }
