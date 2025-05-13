@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
+
 
 // components
 import Navbar from './components/navbar/Navbar.jsx'
@@ -12,6 +14,7 @@ import {
   Login, Signup,
   Shop, ShopDetails, CartPage, CheckoutPage,
   Dashboard, SummeryPage, Orders, Wishlist, AccountDetails,
+  PrivateRoute,
   Page404
 } from './components/pages/index.js'
 import { ScrollHeightTracker, CustomCursor } from "./components/universalComponents/index.js";
@@ -23,10 +26,16 @@ export default function Layout() {
 
   useEffect(() => {
 
-    if(location.pathname !== "dashboard/*"){
+    if (location.pathname !== "dashboard/*") {
       window.scrollTo(0, 0)
     }
   }, [location.pathname])
+
+  // clear toast waiting queue so the alerts don't start in queue (as i wanna show only 3 at a time)
+  const clearToastQueue = () => {
+    toast.clearWaitingQueue()
+  }
+  clearToastQueue()
 
 
   return (
@@ -52,16 +61,21 @@ export default function Layout() {
         <Route path='/checkout' element={<CheckoutPage />} />
 
         {/* dashboard */}
-        <Route path='/dashboard' element={<Dashboard />}>
-          <Route path='' element={<SummeryPage />}></Route>
+        <Route path='/dashboard' element={<PrivateRoute />}>
+          <Route path="" element={<Dashboard />}>
+          <Route index element={<SummeryPage />}></Route>
           <Route path='orders' element={<Orders />}></Route>
           <Route path='wishlist' element={<Wishlist />}></Route>
           <Route path='account' element={<AccountDetails />}></Route>
+          </Route>
         </Route>
 
 
         <Route path={"*"} element={<Page404 />} />
       </Routes>
+      {/* react toater */}
+      <ToastContainer limit={3} />
+
 
       <Footer />
       <CustomCursor />

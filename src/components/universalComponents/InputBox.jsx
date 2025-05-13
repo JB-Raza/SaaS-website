@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 export default function InputBox({
     type = "text", name, id, value, onChange, label, placeholder = "Enter text", className = '', icon,
-    required = false
+    readOnly=false, required = false
 }) {
 
     const [showPassword, setShowPassword] = useState(null)
@@ -19,6 +19,7 @@ export default function InputBox({
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
+                readOnly={readOnly}
                 className={`bg-neutral-100 focus:outline-blue-600 focus:outline-1 py-4 px-7 rounded-md w-full font-semibold ${className}`}
             />
             {type != "password" ?

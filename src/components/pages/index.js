@@ -22,6 +22,8 @@ import Orders from './dashboard/Orders.jsx'
 import Wishlist from './dashboard/Wishlist.jsx'
 import AccountDetails from './dashboard/AccountDetails.jsx'
 
+// private route
+import PrivateRoute from './PrivateRoute.jsx'
 
 import Page404 from './Page404.jsx'
 
@@ -32,6 +34,6 @@ export {
     Shop, ShopDetails, CartPage, CheckoutPage,
     Login, Signup,
     Dashboard, SummeryPage, Orders, Wishlist, AccountDetails,
-    
+    PrivateRoute,
     Page404
 }

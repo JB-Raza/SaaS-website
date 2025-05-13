@@ -1,15 +1,19 @@
 
 import { useState } from 'react'
-import { RevolutionizeServices } from '../../sections/index.js'
-import { Button } from '../../universalComponents/index.js'
 import { NavLink } from 'react-router-dom'
 import { Outlet } from 'react-router'
+
+// components
+import { Button } from '../../universalComponents/index.js'
+import { RevolutionizeServices } from '../../sections/index.js'
 
 
 export default function Dashboard() {
 
     const [activeDashLink, setActiveDashLink] = useState("dashboard")
 
+    // let token = localStorage.getItem("accessToken")
+    // if(!token) return "this path is private"
     return (
         <div>
 
@@ -28,8 +32,10 @@ export default function Dashboard() {
                 {/* dash links */}
                 <div className="col-span-12 md:col-span-3 md:sticky top-[110px] z-40 bg-white h-max px-2 sm:px-5 flex md:justify-end items-start">
                     <div className="overflow-clip border border-neutral-200 rounded-lg w-full md:min-w-3/4 font-semibold text-[18px] flex flex-col">
+
+
                         {dashLinks?.map((link) => (
-                            <NavLink to={link == "dashboard"? "/dashboard":String(link.split(" ").slice(0,1))}
+                            <NavLink to={link == "dashboard" ? "/dashboard" : String(link.split(" ").slice(0, 1))}
                                 onClick={() => setActiveDashLink(link)}
                                 key={link} className={`p-3 capitalize border-b-1 border-neutral-200 transition-[background] duration-200 hover:bg-[var(--darkIndigo)] ${activeDashLink == link ? "bg-[var(--darkIndigo)] text-white" : ""} hover:text-indigo-100 cursor-pointer`}>{link}</NavLink>
                         ))}
@@ -37,10 +43,7 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-
                 <Outlet />
-
-
 
             </div>
 
@@ -66,4 +69,4 @@ export default function Dashboard() {
     )
 }
 
-const dashLinks = ["dashboard", "orders", "wishlist", "account details", "log out"]
+const dashLinks = ["dashboard", "orders", "wishlist", "account details"]

@@ -13,6 +13,7 @@ import { useTextAnimate } from '../../../hooks/textAnimation.js'
 export default function CartPage() {
     const [cartItems, setCartItems] = useState(samplecartItems)
     const [showAlert, setShowAlert] = useState(false)
+    const [alertData, setAlertData] = useState({})
 
 
     const [deletedProduct, setDeletedProduct] = useState("")
@@ -21,6 +22,13 @@ export default function CartPage() {
 
     const removeProduct = (product) => {
         setShowAlert(true)
+        setAlertData({
+                    type: "success",
+                    icon: "fa-solid fa-trash-can text-red-500",
+                    heading: "Deleted",
+                    message: `"${deletedProduct}" deleted Successfully`
+                })
+
         setCartItems(cartItems.filter((item) => {
             if (item.id == product.id) {
                 setDeletedProduct(product.name)
@@ -47,9 +55,9 @@ export default function CartPage() {
                     {/* cart col */}
                     <div className="col-span-12 lg:col-span-8 lg:pe-5 overflow-auto">
                         {/* alert */}
-                        <Alert showAlert={showAlert} setShowAlert={setShowAlert} message={
-                            `"${deletedProduct}" deleted Successfully`
-                        } />
+                        <Alert showAlert={showAlert} setShowAlert={setShowAlert}
+                        alertData={alertData}
+                         />
 
                         <table className='w-full border border-neutral-200'>
                             {/* heading rows */}

@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
+import {useNavigate} from 'react-router'
+import { useDispatch } from 'react-redux'
+import {setUser} from '../../../redux/userSlice.js'
+
+// react toast
+import { toast } from 'react-toastify'
 import { RevolutionizeServices } from '../../sections/index.js'
-import { Button, InputBox } from '../../universalComponents/index.js'
+import { Button, Alert, InputBox } from '../../universalComponents/index.js'
 import { Link } from 'react-router-dom'
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
 
 export default function Login() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [formData, setFormData] = useState({ name: "", password: "" })
 
     useTextAnimate(".animate-text")
@@ -16,6 +24,47 @@ export default function Login() {
             [e.target.id]: e.target.value
         })
     }
+
+    // login logic
+    async function login(e) {
+        e.preventDefault()
+        let res = await fetch("http://localhost:3000/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json",
+            },
+            body: JSON.stringify(formData)
+        })
+        const result = await res.json()
+
+        if (result.success) {
+            localStorage.setItem("accessToken", result.token)
+            localStorage.setItem("user", JSON.stringify(result.profile))
+            dispatch(setUser(result.profile))
+            navigate("/")
+            toast(
+                <Alert
+                    type='success'
+                    icon="fa-solid fa-check text-green-600"
+                    heading={"Success"}
+                    message={result.message}
+                />,
+                { autoClose: 3500 }
+            )
+        }
+        else {
+            toast.error(
+                <Alert
+                    type='error'
+                    icon="fa-solid fa-xmark text-green-600"
+                    heading={"Failure"}
+                    message={result.message}
+                />,
+                { autoClose: 3500 }
+            )
+        }
+    }
+
 
     return (
         <div>
@@ -30,7 +79,7 @@ export default function Login() {
             {/* login form */}
             <div className="custom-container mx-auto py-35 px-3">
                 <form
-                    onSubmit={(e) => e.preventDefault()}
+                    onSubmit={login}
                     className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
                     <h3 className="heading-4 text-center font-[700] max-w-[250px] mx-auto capitalize italic">Start Your Journey with us</h3>
 
@@ -41,7 +90,7 @@ export default function Login() {
                         onChange={handleInputChange}
                     />
                     <InputBox type='password' name={"password"} id={"password"}
-                        label={"Create Password"}
+                        label={"Password"}
                         required={true}
                         onChange={handleInputChange}
                     />
@@ -61,6 +110,8 @@ export default function Login() {
                         hoverBg='bg-[var(--darkIndigo)]'
                         className={"!rounded-full w-full mt-7"}
                     />
+                    {/* <ToastContainer /> */}
+
 
                     <p className="text-center font-semibold mt-4 mb-2 text-neutral-600">
                         <span>Are you new here? </span>

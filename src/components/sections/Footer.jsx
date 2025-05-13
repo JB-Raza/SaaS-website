@@ -58,7 +58,7 @@ export default function Footer() {
                 {/* col 4 form */}
                 <div className="col-span-11 xs:col-span-12 sm:col-span-10 md:col-span-8 mt-8 lg:mt-0 lg:col-span-5">
                     <div className="animate-elem-footer logo">
-                        <img src="./logo-three.png" alt="logo" />
+                        <img src="/logo-three.png" alt="logo" />
                     </div>
                     {/* input box */}
                     <div className="flex flex-col xs:flex-row gap-5 w-auto my-10">

@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { RevolutionizeServices } from '../../sections/index.js'
-import { Button, InputBox } from '../../universalComponents/index.js'
+import { Alert, Button, InputBox } from '../../universalComponents/index.js'
 import { Link } from 'react-router-dom'
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
+
+import { toast } from 'react-toastify'
 
 
 
 export default function Signup() {
-    const [formData, setFormData] = useState({ name: "", password: "", confirmPassword: "" })
+    const [formData, setFormData] = useState({ name: "", username: "", email: "", password: "", confirmPassword: "" })
 
     useTextAnimate(".animate-text")
 
@@ -18,9 +20,56 @@ export default function Signup() {
         })
     }
 
+    async function signup() {
+        try {
+            const res = await fetch("http://localhost:3000/auth/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await res.json()
+            if (result.success == true) {
+                toast(
+                    <Alert
+                        type='success'
+                        icon="fa-solid fa-check text-green-600"
+                        heading={"Success"}
+                        message={result.message}
+                    />,
+                    { autoClose: 3500 }
+                )
+                // setAlertData({
+                //     type: "success",
+                //     icon: "fa-solid fa-check text-blue-600",
+                //     heading: "Success",
+                //     message: result.message
+                // })
+                // setShowAlert(true)
+            }
+            else {
+                setAlertData({
+                    type: "failure",
+                    icon: "fa-solid fa-xmark text-red-600",
+                    heading: "Failed",
+                    message: result.message
+                })
+                setShowAlert(true)
+            }
+        } catch (err) {
+            console.error("Signup failed:", err);
+        }
+    }
+
+
+
+
     return (
         <div>
             {/* hero */}
+            {/* <Alert showAlert={showAlert} setShowAlert={setShowAlert} alertData={alertData} /> */}
             <section className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
                     <img src="./simple-logo.png" alt="logo..." />
@@ -31,7 +80,10 @@ export default function Signup() {
             {/* login form */}
             <div className="custom-container mx-auto py-35 px-3">
                 <form
-                    onSubmit={(e) => e.preventDefault()}
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                        signup()
+                    }}
                     className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
                     <h3 className="heading-4 text-center font-[700] max-w-[250px] mx-auto capitalize italic">Start Your Journey with us</h3>
 
@@ -41,11 +93,27 @@ export default function Signup() {
                         label={"Enter your name"}
                         required={true}
                     />
+                    {/* username */}
+                    <InputBox type='text' name={"username"} id={"username"}
+                        onChange={handleInputChange}
+                        label={"Enter Username"}
+                        required={true}
+                    />
+                    {/* email */}
+                    <InputBox type='email' name={"email"} id={"email"}
+                        onChange={handleInputChange}
+                        label={"Enter your Email"}
+                        required={true}
+                    />
+
+                    {/* password */}
                     <InputBox type='password' name={"password"} id={"password"}
                         onChange={handleInputChange}
                         label={"Create Password"}
                         required={true}
                     />
+
+                    {/* confirm password */}
                     <InputBox type='password' name={"confirmPassword"} id={"confirmPassword"}
                         onChange={handleInputChange}
                         label={"Confirm Password"}
@@ -53,7 +121,7 @@ export default function Signup() {
                     />
 
                     <div className="input-group flex gap-2 items-center">
-                        <input type="checkbox" className='h-4 w-4 cursor-pointer' name='termsAndConditions' id='termsAndConditions' />
+                        <input type="checkbox" required className='h-4 w-4 cursor-pointer' name='termsAndConditions' id='termsAndConditions' />
                         <label htmlFor="termsAndConditions" className='font-semibold cursor-pointer text-neutral-600'>
                             <span>I agree to Sassly</span>
                             <span className='inline-block ms-1 underline hover:text-blue-600 duration-200'>Terms of Service</span>

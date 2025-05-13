@@ -9,6 +9,7 @@ import { useGSAP } from '@gsap/react'
 
 export default function Navbar() {
 
+  const token = localStorage.getItem("accessToken")
 
   const location = useLocation()
 
@@ -249,7 +250,16 @@ export default function Navbar() {
 
           </ul>
 
-          {/* action btns */}
+            {token? <div>
+              <Link to={'/dashboard'}>
+              <Button content={"dashboard"}
+                bgColor={navBtnProps.bgColor}
+                hoverBg={navBtnProps.hoverBg}
+                className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[130px] !h-13 !rounded-xl"}`}
+              />
+            </Link>
+            </div>
+              :
           <div className="m-0 flex gap-6 items-center">
             <Link to="/login">
               <button className={`cursor-pointer font-semibold text-sm hidden xl:flex items-center gap-2 ${location.pathname == "/" ? "text-white" : "text-black"}`}>
@@ -268,6 +278,7 @@ export default function Navbar() {
             </Link>
 
           </div>
+          }
 
           {/* sidebar toggle btn */}
           <button ref={sideBarToggleBtn}
