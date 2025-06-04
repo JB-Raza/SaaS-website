@@ -1,24 +1,140 @@
-import React, { useState } from 'react'
+import { useRef, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { clearCart } from '../../../redux/cartSlice.js'
 
 // components
 import { RevolutionizeServices } from '../../sections/index.js'
-import { Button, InputBox } from '../../universalComponents/index.js'
+import { Button, InputBox, Alert } from '../../universalComponents/index.js'
 // hooks
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
+import { toast } from 'react-toastify'
+import { axiosInstance } from '../../../utils.js'
 
 
 export default function CheckoutPage() {
+    const dispatch = useDispatch()
+    const cartItems = useSelector(state => state.cart.cart)
+    const token = localStorage.getItem("userAccessToken")
+    const [shippingFee, setShippingFee] = useState(34)
+    const [loading, setLoading] = useState(false)
+    const formRef = useRef()
+    // formData
     const [checkoutFormData, setCheckoutFormData] = useState({
         firstName: "", lastName: "",
-        address: "", city: "", houseNoAndStreet: "", appartment: "", zipCode: "",
-        phone: "", comments: ""
+        address: "", city: "lahore", apartment: "", zipCode: "",
+        phone: "", comment: "", paymentMethod: "", voucherCode: ""
     })
+    const [voucherCodeText, setVoucherCodeText] = useState("")
+
+
+    useTextAnimate(".animate-text")
+
+    // on input change
     const onInputChange = (e) => {
+        console.log("e - ",e)
         setCheckoutFormData({
-            [e.target.id]: e.target.value
+            ...checkoutFormData,
+            [e.target.name]: e.target.value
         })
     }
-    useTextAnimate(".animate-text")
+
+    console.log(checkoutFormData)
+
+    let subTotalPrice = 0
+    cartItems.forEach((item) => {
+        if (item != null && item != undefined) {
+            subTotalPrice += item?.price * item.quantity
+        }
+    })
+
+    const handleOrdersSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            setLoading(true)
+            // payment method validation
+            if (checkoutFormData.paymentMethod == "") {
+                toast(
+                    <Alert
+                        type='Error'
+                        icon="fa-solid fa-xmark text-red-600"
+                        heading={"Error"}
+                        message={"payment method is required"}
+                    />,
+                    { autoClose: 2000 }
+                )
+                setLoading(false)
+                return
+            }
+            // formData validation
+            if (checkoutFormData.firstName == "" || checkoutFormData.lastName == "" || checkoutFormData.address == "" || checkoutFormData.phone == "" || checkoutFormData.zipCode == "") {
+                toast(
+                    <Alert
+                        type='Error'
+                        icon="fa-solid fa-xmark text-red-600"
+                        heading={"Error"}
+                        message={"all fields are required"}
+                    />,
+                    { autoClose: 2000 }
+                )
+                setLoading(false)
+                return
+            }
+
+            // cart length validation
+            if (cartItems.length == 0) {
+                toast(
+                    <Alert
+                        type='Error'
+                        icon="fa-solid fa-xmark text-red-600"
+                        heading={"Error"}
+                        message={"no items in cart"}
+                    />,
+                    { autoClose: 2000 }
+                )
+                setLoading(false)
+
+                return
+            }
+
+            const { data } = await axiosInstance.post(`/orders/new`, { ...checkoutFormData, cart: JSON.stringify(cartItems) }, {
+                headers: { "Authorization": `Bearer ${token}`, "Content-Type": "Application/json" },
+            })
+
+            if (data.success) {
+                toast(
+                    <Alert
+                        type='Success'
+                        message={data.message}
+                    />,
+                    { autoClose: 2000 }
+                )
+                setLoading(false)
+                dispatch(clearCart())
+                return
+            }
+            toast(
+                <Alert
+                    type='Error'
+                    message={data.message}
+                />,
+                { autoClose: 2000 }
+            )
+            setLoading(false)
+
+        } catch (error) {
+            toast(
+                <Alert
+                    type='Error'
+                    message={error.message}
+                />,
+                { autoClose: 2000 }
+            )
+            setLoading(false)
+            console.log(error)
+        }
+    }
+
+
 
     return (
         <div>
@@ -36,14 +152,18 @@ export default function CheckoutPage() {
                     <div className="col-span-12 overflow-clip breakpoint-1000:col-span-7">
                         <h5 className="heading-5 font-semibold">Delivery Information</h5>
 
-                        <form className='mt-7 px-2'>
+                        <form
+                            ref={formRef}
+                            onSubmit={handleOrdersSubmit}
+                            className='mt-7 px-2'>
                             {/* name (first and last) */}
                             <div className="input-group flex flex-col breakpoint-500:flex-row breakpoint-500:gap-5">
                                 <div className="breakpoint-500:w-1/2">
                                     <InputBox
                                         name={"firstName"}
                                         id={"firstName"}
-                                        placeholder='First Name'
+                                        placeholder='First Name*'
+                                        required={true}
                                         value={checkoutFormData.firstName}
                                         onChange={onInputChange}
                                         icon={"fa-solid fa-user"}
@@ -55,6 +175,7 @@ export default function CheckoutPage() {
                                         id={"lastName"}
                                         placeholder='Last Name'
                                         value={checkoutFormData.lastName}
+                                        required={true}
                                         onChange={onInputChange}
                                         icon={"fa-solid fa-user"}
                                     />
@@ -69,18 +190,25 @@ export default function CheckoutPage() {
                                         placeholder='Address Here'
                                         value={checkoutFormData.address}
                                         onChange={onInputChange}
+                                        required={true}
                                         icon={"fa-solid fa-location-dot"}
                                     />
                                 </div>
                                 <div className="breakpoint-500:w-1/2">
-                                    <InputBox
-                                        name={"city"}
-                                        id={"city"}
-                                        placeholder='City'
+
+                                    <select name="city" id="city"
+                                        className='w-full bg-neutral-100 py-4 rounded-md px-5 font-semibold text-neutral-600'
+                                        required={true}
                                         value={checkoutFormData.city}
                                         onChange={onInputChange}
-                                        icon={"fa-solid fa-angle-down"}
-                                    />
+                                        defaultChecked={"lahore"}>
+                                        <option value="lahore">Lahore</option>
+                                        <option value="islamabad">Islamabad</option>
+                                        <option value="karachi">Karachi</option>
+                                        <option value="faisalabad">Faisalabad</option>
+                                        <option value="gujrat">Gujrat</option>
+                                        <option value="kasoor">Kasoor</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -90,6 +218,7 @@ export default function CheckoutPage() {
                                 id={"appartment"}
                                 placeholder='Appartment, Suit, Unit etc'
                                 value={checkoutFormData.appartment}
+                                required={true}
                                 onChange={onInputChange}
                                 icon={"fa-solid fa-location-dot"}
                             />
@@ -102,6 +231,7 @@ export default function CheckoutPage() {
                                         id={"zipCode"}
                                         placeholder='Zip Code'
                                         value={checkoutFormData.zipCode}
+                                        required={true}
                                         onChange={onInputChange}
                                         icon={"fa-solid fa-map-pin"}
                                     />
@@ -111,6 +241,7 @@ export default function CheckoutPage() {
                                         type='number'
                                         name={"phone"}
                                         id={"phone"}
+                                        required={true}
                                         placeholder='Your Phone'
                                         value={checkoutFormData.phone}
                                         onChange={onInputChange}
@@ -122,13 +253,17 @@ export default function CheckoutPage() {
                             {/* comments */}
                             <div className="flex relative flex-col gap-3 items-start mb-7">
 
-                                <textarea name="comment" rows={8} id="comment" placeholder='Write something...'
+                                <textarea name="comment" rows={8} id="comment"
+                                    value={checkoutFormData.comment}
+                                    onChange={onInputChange}
+                                    placeholder='Any Comments related to your order...'
                                     className='bg-neutral-100 focus:outline-blue-600 focus:outline-1 py-4 px-7 rounded-md w-full font-semibold'
                                 ></textarea>
                                 <i className="fa fa-user text-blue-600 absolute top-4 right-5"></i>
                             </div>
 
                             <Button
+                                type="button"
                                 content={"Save All Informantion"}
                                 bgColor='bg-blue-700'
                                 hoverBg='bg-[var(--darkIndigo)]'
@@ -146,21 +281,39 @@ export default function CheckoutPage() {
                             {/* sub total */}
                             <div className="bg-white text-neutral-600 font-semibold flex mb-7 justify-between rounded-md py-3 px-4">
                                 <span>Subtotal</span>
-                                <span>$345.00</span>
+                                <span>${subTotalPrice}</span>
                             </div>
                             {/* shipping fee */}
                             <div className="bg-white text-neutral-600 font-semibold flex mb-7 justify-between rounded-md py-3 px-4">
                                 <span>Shipping Fee</span>
-                                <span>$34.00</span>
+                                <span>${subTotalPrice > 0 ? shippingFee : subTotalPrice}</span>
                             </div>
 
                             {/* voucher code */}
                             <div className="input-group flex relative mb-7">
                                 <input type="text"
+                                    value={voucherCodeText}
+                                    onChange={(e) => setVoucherCodeText(e.target.value)}
                                     placeholder='Enter Voucher Code'
                                     className='bg-white focus:outline-blue-600 text-neutral-700 focus:outline-1 py-[14px] px-7 rounded-md w-full font-semibold'
                                 />
                                 <Button
+                                    type='button'
+                                    onClickFn={() => {
+                                        if (voucherCodeText == "") return
+                                        setCheckoutFormData({
+                                            ...checkoutFormData,
+                                            voucherCode: voucherCodeText
+                                        })
+                                        toast(
+                                            <Alert
+                                                type="success"
+                                                message={"Voucher code applied"}
+                                            />,
+                                            { autoClose: 2000 }
+                                        )
+                                        setVoucherCodeText("")
+                                    }}
                                     content={"Apply Code"}
                                     bgColor='bg-blue-700'
                                     hoverBg='bg-[var(--darkIndigo)]'
@@ -171,50 +324,57 @@ export default function CheckoutPage() {
                             {/* total */}
                             <div className="flex justify-between items-center mb-7">
                                 <span className='font-bold text-xl'>Total</span>
-                                <span className="font-semibold">$765.00</span>
+                                <span className="font-semibold">${subTotalPrice > 0 ? subTotalPrice + shippingFee : subTotalPrice}</span>
                             </div>
 
                             {/* payment method */}
                             <div className="wrapper p-7 mb-7 bg-white rounded-lg flex flex-col items-start gap-4">
 
-                                {/* bank transfer */}
+                                {/* Paypal */}
                                 <div className="input-group flex items-center gap-3">
-                                    <label htmlFor="bankTransfer" className="relative flex items-center cursor-pointer gap-3">
+                                    <label htmlFor="paypal" className="relative flex items-center cursor-pointer gap-3">
                                         <input
                                             type="radio"
+                                            value={"paypal"}
+                                            onChange={onInputChange}
                                             name="paymentMethod"
-                                            id="bankTransfer"
+                                            id="paypal"
                                             className="hidden peer"
                                         />
                                         <span className="w-5 h-5 rounded-full bg-neutral-200 flex items-center justify-center peer-checked:border-1 peer-checked:bg-white peer-checked:border-blue-600">
                                         </span>
                                         <span className="absolute translate-x-1/2 w-2.5 h-2.5 bg-blue-600 rounded-full transition-transform scale-0 peer-checked:scale-100"></span>
-                                        <span className='font-medium'>Direct Bank Transfer</span>
+                                        <span className='font-medium'>Paypal</span>
                                     </label>
 
                                 </div>
 
-                                {/* check payment */}
+                                {/* Stripe */}
                                 <div className="input-group flex items-center gap-3">
-                                    <label htmlFor="checkPayment" className="relative flex items-center cursor-pointer gap-3">
+                                    <label htmlFor="stripe" className="relative flex items-center cursor-pointer gap-3">
                                         <input
                                             type="radio"
+                                            value={"stripe"}
+                                            onChange={onInputChange}
                                             name="paymentMethod"
-                                            id="checkPayment"
+                                            id="stripe"
                                             className="hidden peer"
                                         />
                                         <span className="w-5 h-5 rounded-full bg-neutral-200 flex items-center justify-center peer-checked:border-1 peer-checked:bg-white peer-checked:border-blue-600">
                                         </span>
                                         <span className="absolute translate-x-1/2 w-2.5 h-2.5 bg-blue-600 rounded-full transition-transform scale-0 peer-checked:scale-100"></span>
-                                        <span className='font-medium'>Check Payment</span>
+                                        <span className='font-medium'>Stripe</span>
                                     </label>
 
                                 </div>
+                             
                                 {/* cash on delivery */}
                                 <div className="input-group flex items-center gap-3">
                                     <label htmlFor="cashOnDelivery" className="relative flex items-center cursor-pointer gap-3">
                                         <input
                                             type="radio"
+                                            value={"cashOnDelivery"}
+                                            onChange={onInputChange}
                                             name="paymentMethod"
                                             id="cashOnDelivery"
                                             className="hidden peer"
@@ -230,10 +390,12 @@ export default function CheckoutPage() {
                             </div>
 
                             <Button
-                                content={"Proceed to Pay"}
+                                onClickFn={() => formRef.current.requestSubmit()}
+                                content={loading ? "Proceeding" : "Proceed to Pay"}
                                 bgColor='bg-[#072032]'
                                 hoverBg='bg-blue-700'
-                                className={"w-full !h-[20px]"}
+                                disabled={loading}
+                                className={"w-full !h-[20px] disabled:opacity-70"}
                             />
 
                         </div>

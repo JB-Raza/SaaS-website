@@ -1,7 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from './Button.jsx'
 import { useTextAnimate } from '../../hooks/textAnimation.js'
 import { Link } from 'react-router-dom'
+import { axiosInstance } from '../../utils.js'
+
+// alert
+import Alert from './Alert.jsx'
+import { toast } from 'react-toastify'
+
+
+// redux
+import { addItemToCart, removeItemFromCart, updateItemQuanity } from '../../redux/cartSlice.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItemToWishlist, removeItemFromWishlist } from '../../redux/userSlice.js'
 
 export const PricingCard_1 = ({
     data,
@@ -128,29 +139,132 @@ export const IntegrationCard = ({ data }) => {
 
 
 export const ShopItemCard = ({ activeAlignment = "list", product }) => {
+
+    const token = localStorage.getItem("userAccessToken")
+    const wishlist = useSelector(state => state.user.user.wishlist)
+
+    const dispatch = useDispatch()
+
+    const [allReviews, setAllReviews] = useState([])
+    const [avgRating, setAvgRating] = useState(0)
+
+    // get all reviews
+    const getAllReviews = async (productId) => {
+        const { data } = await axiosInstance.get(`/${productId}/reviews/`)
+        if (data.success) {
+            setAllReviews(data.allReviews)
+        }
+    }
+    useEffect(() => {
+        getAllReviews(product._id)
+    }, [product._id])
+    // calculating average of reviews
+    useEffect(() => {
+        if (allReviews && allReviews.length > 0) {
+            let sum = 0
+            allReviews.forEach((review) => {
+                sum += review.rating
+            })
+            setAvgRating(sum / allReviews.length)
+        }
+
+
+    }, [allReviews])
+
+
+    // add item to cart
+    const handleAddToCartBtn = () => {
+        const item = {
+            _id: product._id,
+            title: product.title,
+            quantity: 1,
+            price: product.price,
+            discount: product.discount,
+            variant: { image: product.variants[0].images[0], color: product.variants[0].color, availableQuantity: product.variants[0].quantity, size: product.variants[0].sizes[0] || "" }
+        }
+        dispatch(addItemToCart(item))
+        // alert
+        toast(
+            <Alert
+                type='success'
+                icon="fa-solid fa-check text-green-600"
+                heading={"Success"}
+                message={"Item added to cart"}
+            />,
+            { autoClose: 2000 }
+        )
+    }
+
+    // add/remove item to wishlist
+    const addRemoveItemToWishlist = async (productId) => {
+        try {
+            const { data } = await axiosInstance.post(`/wishlist/${productId}/addRemoveWishlistItem`, {}, {
+                headers: { "Authorization": `Bearer ${token}` }
+            })
+            if (data.success && data.itemExists == false) {
+                toast(
+                    <Alert
+                        type='success'
+                        icon="fa-solid fa-check text-green-600"
+                        heading={"Success"}
+                        message={data.message}
+                    />,
+                    { autoClose: 2000 }
+                )
+                dispatch(addItemToWishlist(productId))
+            }
+            else {
+                dispatch(removeItemFromWishlist(productId))
+                toast(
+                    <Alert
+                        type="success"
+                        icon="fa-solid fa-check text-green-600"
+                        heading={"Success"}
+                        message={data.message}
+                    />,
+                    { autoClose: 2000 }
+                )
+            }
+        } catch (error) {
+            toast(
+                <Alert
+                    type="false"
+                    icon="fa-solid fa-xmark text-green-600"
+                    heading={"Error"}
+                    message={error.message}
+                />
+            )
+        }
+    }
+
+
     return (
         <div className={`group card pb-3 hover:shadow-lg rounded-2xl flex gap-4 ${activeAlignment == "list" ? "flex-col" : "flex-row"}`}>
             {/* image section */}
-            <div className={`relative flex flex-col justify-between border border-neutral-200 rounded-2xl p-6 overflow-hidden ${activeAlignment == "list" ? "h-[290px]" : "h-[230px]  min-w-[150px] w-[200px] max-w-[200px]"}`}>
-                <img
+            <div className={`relative flex flex-col justify-between border border-neutral-200 rounded-2xl p-6 overflow-clip ${activeAlignment == "list" ? "h-[290px]" : "h-[230px] min-w-[170px] !w-[170px]"}`}>
+                <Link to={`/shop/${product._id}`} className='m-auto'><img
                     className='group-hover:scale-115 duration-200 m-auto'
-                    src={product.image} alt={`img_${product.id}`} />
+                    src={product.variants[0].images[0]} alt={`img_${product._id}`} /></Link>
+                {product.isFeatured && <span className='absolute top-[10px] left-[10px] bg-red-700 text-white font-medium px-3 rounded-full'>featured</span>}
                 <Button
                     content={"Add to Cart"}
                     bgColor='bg-blue-700'
                     hoverBg='bg-[var(--darkIndigo)]'
+                    onClickFn={handleAddToCartBtn}
                     className={"text-nowrap w-[calc(100%-40px)] text-[14px] lg:text[16px] scale-0 group-hover:scale-100 !absolute bottom-2 duration-500 !h-10 !py-4 !rounded-full"}
                 />
                 {/* options */}
                 <div className="flex flex-col gap-2 absolute top-3 right-3 group-hover:translate-x-[0%] duration-500 translate-x-[200%]">
                     {/* icon 1 view */}
-                    <Link to={`/shop/${product.id}`} className="icon bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 hover:text-white rounded-md">
+                    <Link to={`/shop/${product._id}`} className="icon bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 hover:text-white rounded-md">
                         <i className="fa-regular fa-eye"></i>
                     </Link>
-                    {/* icon 2 star */}
-                    <span className="icon bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 hover:text-white rounded-md">
-                        <i className="fa-regular fa-star"></i>
-                    </span>
+                    {/* icon 2 wishlist */}
+                    <button
+                        onClick={() => addRemoveItemToWishlist(product._id)}
+                        className={`bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 ${wishlist.includes(product._id) ? "text-blue-600 hover:text-white" : "hover:text-white"} rounded-md`}>
+                        <i className={`${wishlist.includes(product._id) ? "fa-solid" : "fa-regular"} fa-star`}></i>
+                    </button>
                     {/* icon 3 */}
                     <span className="icon bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 hover:text-white rounded-md">
                         <i className="fa-solid fa-arrows-up-down"></i>
@@ -158,14 +272,15 @@ export const ShopItemCard = ({ activeAlignment = "list", product }) => {
                 </div>
             </div>
             {/* data */}
-            <div className={`flex px-1 flex-col gap-3 justify-center ${activeAlignment == "list" ? " items-center" : ""}`}>
+            <div className={`flex px-1 flex-col gap-3 justify-center ${activeAlignment == "list" ? " items-center" : "justify-start"}`}>
                 <div className="rating flex gap-1">
 
-                    {[1, 2, 3, 4, 5].map((item, i) => (
-                        <i key={i} className={`fa fa-star text-sm ${item <= product.rating ? "text-blue-600" : "text-neutral-300"}`}></i>
-                    ))}
+                    {[1, 2, 3, 4, 5].map((item, i) =>
+                        <i key={i} className={`fa fa-star text-sm ${item <= avgRating ? "text-blue-600" : "text-neutral-300"}`}></i>
+                    )}
+                    {/* } */}
                 </div>
-                <h4 className={`heading-6 cursor-pointer font-semibold text-wrap ${activeAlignment == "list" ? "text-center" : ""}`}>{product.title}</h4>
+                <Link to={`/shop/${product._id}`} ><h4 className={`heading-6 px-[5px] cursor-pointer font-semibold text-wrap truncate hover:text-blue-600 duration-200 line-clamp-2 ${activeAlignment == "list" ? "text-center" : ""}`}>{product.title}</h4></Link>
                 <p className="price font-medium">${product.price}.00</p>
 
             </div>
@@ -174,60 +289,94 @@ export const ShopItemCard = ({ activeAlignment = "list", product }) => {
 }
 
 
-export const CartProductCard = ({ product, removeProduct }) => {
-    const [productData, setProductData] = useState(product)
+export const CartProductCard = ({ product }) => {
+
+    if (product === null || product === undefined) return
+    const dispatch = useDispatch()
+    const [subTotal, setSubTotal] = useState(product.price)
+
+    // handle subtotal
+    useEffect(() => {
+        const productSubTotal = [product.price - (product.price * product.discount / 100)] * product.quantity
+        setSubTotal(productSubTotal)
+    }, [product.quantity])
 
 
+
+
+    // remove item from cart
+    const handleRemoveCartItem = () => {
+        dispatch(removeItemFromCart({ _id: product._id, variant: product.variant }))
+        toast(
+            <Alert
+                type='success'
+                icon="fa-solid fa-check text-green-600"
+                heading={"Success"}
+                message={"item removed from cart"}
+            />,
+            { autoClose: 2000 }
+        )
+    }
 
     return (
 
         <tr className='py-10 border-b border-neutral-200'>
-            <td className='text-start px-10 py-5 text-[18px] flex items-center gap-3'>
-                <div className="relative w-[70px] flex items-center justify-center">
+            <td className='text-start px-5 text-[16px]  max-w-[250px] flex gap-4 py-[28px] font-semibold'>
+                <div className="relative w-[50px] justify-center">
 
                     {/* button to remove cart item */}
                     <button
-                        onClick={() => {
-                            removeProduct(productData)
-                        }}
+                        onClick={handleRemoveCartItem}
                         className="absolute z-10 hover:scale-125 cursor-pointer duration-200 h-4 w-4 rounded-full flex items-center justify-center top-0 right-0 bg-red-600 text-white">
                         <i className="fa fa-xmark text-[10px]"></i>
                     </button>
                     <img
-                        className='hover:scale-110 duration-200'
-                        src={productData.imgUrl} alt={productData.id} />
+                        className='hover:scale-110 h-auto aspect-3/2 min-w-[45px] max-w-[45px] duration-200'
+                        src={product.variant.image} alt={"img"} />
                 </div>
-                <span className='font-semibold'>{productData.name}</span>
             </td>
-            <td className='text-start px-10 py-5 text-[18px] font-semibold'>${productData.price}.00</td>
-            <td className='text-start px-10 py-5 text-[18px] font-semibold'>
-                {/* quantity */}
+
+            <td className='text-start px-5 py-5 text-[16px] font-semibold truncate max-w-[250px]'>${product.title}</td>
+            <td className='text-start px-5 py-5 text-[16px] font-semibold'>${product.price}</td>
+            <td className={`text-start px-5 py-5 text-[16px] font-semibold`}>
+                <p className={`rounded-full shadow-lg w-[20px] h-[20px]`}
+                style={{ backgroundColor: product.variant.color}}
+                ></p>
+            </td>
+            <td className='text-start px-5 py-5 text-[16px] font-normal'>{product.variant.size || "Nill"}</td>
+
+            {/* quantity */}
+            <td className='text-start px-5 py-5 text-[16px] font-semibold'>
                 <div className="flex items-center">
                     <div className="flex !items-stretch justify-between border border-neutral-200">
                         <button
                             onClick={() => {
-                                if (productData.quantity <= 1) return
-                                setProductData({ ...productData, quantity: --productData.quantity })
-                                
+                                if (product.quantity <= 1) return
+                                dispatch(updateItemQuanity({ _id: product._id, variant: product.variant, actionType: "minus" }))
                             }}
-                                className="px-3 py-2 text-neutral-800 text-[18px]">
-                            
+                            className="cursor-pointer px-3 py-2 text-neutral-800 text-[16px]">
+
                             <div className="fa-solid fa-minus"></div>
-                            </button>
-                        
-                        <p className='font-semibold py-2 text-center text-[16px] w-[50px] bg-neutral-200'>{productData.quantity}</p>
+                        </button>
+
+                        <p className='font-semibold py-2 text-center text-[16px] w-[50px] bg-neutral-200'>{product.quantity}</p>
                         <button
                             onClick={() => {
-                                setProductData({ ...productData, quantity: ++productData.quantity })
+                                if (product.quantity == product.variant.availableQuantity) return
+                                dispatch(updateItemQuanity({ _id: product._id, variant: product.variant, actionType: "add" }))
                             }}
-                            className="px-3 py-2 text-neutral-800 text-[18px]">
+                            className="cursor-pointer px-3 py-2 text-neutral-800 text-[16px]">
                             <div className="fa-solid fa-plus"></div>
                         </button>
-                     
+
                     </div>
                 </div>
             </td>
-            <td className='text-start px-10 py-5 text-[18px] font-semibold'>$60.00</td>
+            <td className='text-start px-5 py-5 text-[16px] font-semibold'>{product.discount > 0 ? product.discount : "0"}%</td>
+
+            <td className='px-5 text-start py-5 text-[16px] font-semibold'>
+                {subTotal && <p className='w-[100px]'>${subTotal}</p>}
+            </td>
         </tr>
     )
 }

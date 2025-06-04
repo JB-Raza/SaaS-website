@@ -39,7 +39,7 @@ export default function NavItem({ navItem, className, isOpen, index, setIsOpen }
 
     return (
         <li
-            onClick={windowWidth < 1024? toggleDropdown : undefined}
+            onClick={windowWidth < 1024 ? toggleDropdown : undefined}
             className={`relative transition-all duration-300 h-[60px] ${isOpen ? "h-auto" : ""} lg:py-6 lg:h-[100%] flex flex-col lg:flex-row items-center font-semibold cursor-pointer group text-base ${className}`}>
             {navItem.path ?
                 // if direct path is given in navitem like the simple one
@@ -57,10 +57,10 @@ export default function NavItem({ navItem, className, isOpen, index, setIsOpen }
                 </NavLink>
                 :
                 // if no direct path in navitem like the one with dropdown
-                <span className={`group-hover:-translate-y-1 !py-3 w-full flex gap-2 items-center justify-between lg:justify-start duration-300 m-0 border-b-[1px] lg:border-0 border-slate-200 ${isChildActive? "text-blue-600":""}`}>
+                <span className={`group-hover:-translate-y-1 !py-3 w-full flex gap-2 items-center justify-between lg:justify-start duration-300 m-0 border-b-[1px] lg:border-0 border-slate-200 ${isChildActive ? "text-blue-600" : ""}`}>
                     <span>{navItem?.navTitle}</span>
                     {navItem?.dropdownItems?.length > 0 &&
-                        <i className={`fa fa-angle-down text-[10px] lg:group-hover:rotate-180 duration-200 ${isChildActive? "text-blue-600":"text-slate-400"} lg:group-hover:text-blue-600  ${isOpen ? "rotate-180 duration-300" : ""}`}></i>
+                        <i className={`fa fa-angle-down text-[10px] lg:group-hover:rotate-180 duration-200 ${isChildActive ? "text-blue-600" : "text-slate-400"} lg:group-hover:text-blue-600  ${isOpen ? "rotate-180 duration-300" : ""}`}></i>
                     }
                 </span>
             }
@@ -83,7 +83,7 @@ export default function NavItem({ navItem, className, isOpen, index, setIsOpen }
             >
                 {(navItem?.dropdownItems || []).map((item, index) => (
                     <NavLink to={item.path} key={index} className={({ isActive }) => (isActive ? "text-blue-600" : "")}>
-                        <li className="px-4 py-2 rounded-sm border-b-[1px] border-slate-200 lg:border-0 hover:bg-gray-200">{item.label}</li>
+                        <li onClick={() => setIsOpen(false)} className="px-4 py-2 rounded-sm border-b-[1px] border-slate-200 lg:border-0 hover:bg-gray-200">{item.label}</li>
                     </NavLink>
 
                 ))}

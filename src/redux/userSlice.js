@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")),
+  // user: {},
   isLoading: false,
   error: null
 };
@@ -18,6 +19,18 @@ const userSlice = createSlice({
       localStorage.removeItem("accessToken")
       state.user = null
     },
+    // wishlist reducers
+    addItemToWishlist: (state, action) => {
+      console.log("state - ",state)
+      console.log("payload - ",action.payload)
+      state.user.wishlist.push(action.payload)
+    },
+    removeItemFromWishlist: (state, action) => {
+      state.user.wishlist = state.user.wishlist.filter((item) => item !== action.payload)
+    },
+    clearWishlist: (state) => {
+      state.user.wishlist = []
+    },
     setLoading: (state, action) => {
       state.isLoading = action.payload
     },
@@ -26,5 +39,5 @@ const userSlice = createSlice({
     }
   }
 })
-export const { setUser, clearUser, setLoading, setError } = userSlice.actions
+export const { setUser, clearUser, setLoading, setError, addItemToWishlist, clearWishlist, removeItemFromWishlist } = userSlice.actions
 export default userSlice.reducer

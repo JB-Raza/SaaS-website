@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 export default function AccountDetails() {
 
   const user = useSelector((state) => state.user.user)
+  const token = localStorage.getItem("userAccessToken")
 
   const [userData, setUserData] = useState({ _id: user?._id, name: user?.name, username: user?.username, email: user?.email, oldPassword: "", newPassword: "" })
 
@@ -21,10 +22,11 @@ export default function AccountDetails() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      const res = await fetch(`http://localhost:3000/auth/${userData._id}/update`, {
+      const res = await fetch(`http://localhost:3000/api/user/auth/${userData._id}/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "Application/json",
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify(userData)
       })
@@ -39,20 +41,11 @@ export default function AccountDetails() {
   }
 
   return (
-    <div className="col-span-12 md:col-span-9 px-5">
+    <div className="col-span-12 breakpoint-900:col-span-9 mt-[40px] breakpoint-900:mt-0 px-5">
 
       <form
         onSubmit={handleSubmit}
         className='mx-auto max-w-[600px]'>
-        <InputBox
-          name={"name"}
-          id={"name"}
-          value={userData.name}
-          placeholder='Your Name'
-          label={"Your Name"}
-          onChange={handleInputChange}
-          readOnly={true}
-        />
         <InputBox
           name={"username"}
           id={"username"}

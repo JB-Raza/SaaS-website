@@ -1,25 +1,59 @@
 import { useRef, useState, useEffect } from 'react'
 import { Range } from "react-range";
-import { productsData } from '../../../sampleData.js'
 
 
 // components
 import { RevolutionizeServices } from '../../sections/index.js'
-import { Button, ShopItemCard } from '../../universalComponents/index.js'
+import { Button, ShopItemCard, LoadingCards } from '../../universalComponents/index.js'
 
-// hooks
+// utils and hooks
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
+import { axiosInstance } from '../../../utils.js'
+
+// redux
 
 
 export default function Shop() {
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    const [currSortStyle, setCurrSortStyle] = useState("price")
+    const [currSortStyle, setCurrSortStyle] = useState("sales")
     const [activeAlignment, setActiveAlignment] = useState("list")
-    const [sortedtListings, setSortedtListings] = useState(productsData)
+
+    // loading state
+    const [loading, setLoading] = useState(true)
+
+    const [allProducts, setAllProducts] = useState([])
+    const [sortedProducts, setSortedProducts] = useState([])
+
+    // filters
+    const [availableCategories, setAvailableCategories] = useState([])
+    const [activeCategory, setActiveCategory] = useState("")
+
+    const [priceRange, setPriceRange] = useState([0, 7000])
+    const [activeTagList, setActiveTagList] = useState([])
+
+    const [searchQuery, setSearchQuery] = useState("")
+
+
     const dropdrownBtnRef = useRef()
     const dropdrownRef = useRef()
 
     useTextAnimate(".animate-text")
+
+    const fetchProductsAndCategories = async () => {
+        const { data } = await axiosInstance.get("/products/")
+        setAllProducts(data.allProducts)
+        setSortedProducts(data.allProducts)
+
+        const categories = await axiosInstance.get("/products/categories")
+        setAvailableCategories(categories.data.categories)
+
+        setTimeout(() => {
+            setLoading(false)
+        }, 500)
+    }
+    useEffect(() => {
+        fetchProductsAndCategories()
+    }, [])
 
     // for sort dropdown
     // open and close dropdown
@@ -29,6 +63,7 @@ export default function Shop() {
         }
         else dropdrownRef.current.style.maxHeight = `${0}px`
     }, [dropdownOpen])
+
 
     // close dropdown methods
     useEffect(() => {
@@ -52,30 +87,75 @@ export default function Shop() {
     // sort listings
     useEffect(() => {
         if (currSortStyle === "price") {
-            setSortedtListings(prevListings => {
-                return [...prevListings].sort((a, b) => {
-                    return a.price - b.price
-                });
-            });
-        }
-        else if (currSortStyle == "sales") {
-            setSortedtListings(prevListings => {
-                return [...prevListings].sort((a, b) => {
-                    return b.sales - a.sales
-                })
-            })
+            const priceSort = allProducts.sort((a, b) => a.price - b.price)
+            setSortedProducts(priceSort)
         }
         else if (currSortStyle == "published") {
-            setSortedtListings(prevListings => {
+            setSortedProducts(prevListings => {
                 return [...prevListings].sort((a, b) => {
                     return a.published - b.published
                 })
             })
+
         }
+        setDropdownOpen(false)
+
 
     }, [currSortStyle]);
 
 
+    // search query filter
+
+    const fetchSearchQueryData = async (query) => {
+        const { data } = await axiosInstance.get(`/products/search?searchQuery=${query}`)
+        if (data.success) {
+            setSortedProducts(data?.searchQueryData)
+        }
+
+    }
+    useEffect(() => {
+        if (searchQuery !== "") {
+            fetchSearchQueryData(searchQuery)
+            return
+        }
+        else {
+            fetchProductsAndCategories()
+
+        }
+    }, [searchQuery])
+
+    // category filter
+    const handleCategorySelect = (category) => {
+        if (category == activeCategory) {
+            setSortedProducts(allProducts)
+            setActiveCategory("")
+            return
+        }
+        setActiveCategory(category)
+        const categorySort = allProducts.filter((product) => product.category == category)
+        setSortedProducts(categorySort)
+    }
+
+    // priceRange filter
+    useEffect(() => {
+        const priceRangeFilter = allProducts.filter((product) => product.price > priceRange[0] && product.price < priceRange[1])
+        setSortedProducts(priceRangeFilter)
+    }, [priceRange])
+
+
+    // tag filter
+    useEffect(() => {
+
+        if (activeTagList.length == 0) {
+            setSortedProducts(allProducts)
+            return
+        }
+        const tagListSort = allProducts.filter((product) =>
+            product.tags?.some(tag => activeTagList.includes(tag))
+        )
+        setSortedProducts(tagListSort)
+
+    }, [activeTagList])
 
 
 
@@ -100,7 +180,10 @@ export default function Shop() {
                             <form
                                 onSubmit={(e) => e.preventDefault()}
                                 className='my-5 relative'>
-                                <input type="text" placeholder='Search here...'
+                                <input type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder='Search here...'
                                     className='p-4 focus:outline-1 outline-blue-600 border-1 border-neutral-200 rounded-md w-full'
                                 />
                                 <button className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -112,8 +195,10 @@ export default function Shop() {
                         <div className='rounded-xl p-8 shadow-lg'>
                             <h5 className="heading-5 text-[var(--darkIndigo)] font-semibold border-l-2 border-blue-600 py-0 px-2">Categories</h5>
                             <div className="flex flex-col gap-6 mt-5">
-                                {(categoriesData || []).map((category, index) => (
-                                    <p key={index} className="flex gap-5 cursor-pointer text-neutral-900 hover:text-blue-600 duration-200 items-center">
+                                {(availableCategories || []).map((category, index) => (
+                                    <p key={category + index}
+                                        onClick={() => handleCategorySelect(category)}
+                                        className={`flex gap-5 cursor-pointer hover:text-blue-600 duration-200 items-center ${activeCategory == category ? "text-blue-600" : "text-neutral-900 "}`}>
                                         <i className="fa fa-angle-left"></i>
                                         <span className='font-medium'>{category}</span>
                                     </p>
@@ -125,7 +210,7 @@ export default function Shop() {
                         <div className='rounded-xl p-8 shadow-lg'>
                             {/* <PriceRangeSlider /> */}
                             <h5 className="heading-5 text-[var(--darkIndigo)] font-semibold border-l-2 border-blue-600 py-0 px-2">Filter By Price</h5>
-                            <PriceRangeSlider />
+                            <PriceRangeSlider priceRange={priceRange} setPriceRange={setPriceRange} />
                         </div>
 
                         {/* select by size */}
@@ -172,7 +257,18 @@ export default function Shop() {
                             {/* tags */}
                             <div className="tags flex flex-wrap gap-2 mt-6">
                                 {(popularTagsData || []).map((tag, i) => (
-                                    <p key={i} className='border-1 cursor-pointer hover:bg-blue-600 hover:text-white duration-200 border-neutral-300 text-sm text-neutral-600 font-medium rounded-full px-4 py-[6px]'>{tag}</p>
+                                    <p
+                                        onClick={() => {
+                                            if (!activeTagList.includes(tag)) {
+                                                setActiveTagList([...activeTagList, tag])
+                                            }
+                                            else {
+                                                setActiveTagList(() =>
+                                                    activeTagList.filter((tagItem) => tagItem !== tag)
+                                                )
+                                            }
+                                        }}
+                                        key={i} className={`border-1 cursor-pointer hover:bg-blue-600 hover:text-white duration-200 border-neutral-300 text-sm text-neutral-600 font-medium rounded-full px-4 py-[6px] ${activeTagList.includes(tag) ? "!bg-blue-600 text-white" : ""}`}>{tag}</p>
                                 ))}
                             </div>
                         </div>
@@ -219,13 +315,17 @@ export default function Shop() {
 
                         </div>
                         {/* all cards */}
-                        <div className="grid grid-cols-12 gap-6 mt-6">
-                            {(sortedtListings || []).map((product) => (
-                                <div key={product.id} className={`col-span-12 ${activeAlignment == "list" ? " breakpoint-500:col-span-6 md:col-span-4" : "sm:col-span-12 md:col-span-6"} `}>
-                                    <ShopItemCard activeAlignment={activeAlignment} product={product} />
-                                </div>
-                            ))}
-                        </div>
+                        {loading ?
+                            <LoadingCards />
+                            :
+                            <div className="grid grid-cols-12 gap-6 mt-6">
+                                {(sortedProducts || []).map((product) => (
+                                    <div key={product._id} className={`col-span-12 ${activeAlignment == "list" ? " breakpoint-500:col-span-6 md:col-span-4" : "sm:col-span-12 md:col-span-6"} `}>
+                                        <ShopItemCard activeAlignment={activeAlignment} product={product} />
+                                    </div>
+                                ))}
+                            </div>
+                        }
 
 
                     </div>
@@ -258,11 +358,12 @@ export default function Shop() {
 
 // price range component
 
-function PriceRangeSlider() {
+function PriceRangeSlider({ priceRange, setPriceRange }) {
     const MIN = 0;
     const MAX = 10000;
 
-    const [values, setValues] = useState([2500, 7500]);
+    // const [values, setValues] = useState([2500, 7500]);
+
 
     return (
         <div className="px-4 py-10">
@@ -270,18 +371,19 @@ function PriceRangeSlider() {
                 step={10}
                 min={MIN}
                 max={MAX}
-                values={values}
-                onChange={setValues}
+                values={priceRange}
+                onChange={setPriceRange}
                 renderTrack={({ props, children }) => (
                     <div
                         {...props}
                         className="h-[6px] bg-neutral-300 rounded-full relative"
                         style={{
                             ...props.style,
-                            background: `linear-gradient(to right, #e5e7eb ${((values[0] - MIN) / (MAX - MIN)) * 100}%,
-                            #17a2b8 ${((values[0] - MIN) / (MAX - MIN)) * 100}%,
-                            #17a2b8 ${((values[1] - MIN) / (MAX - MIN)) * 100}%,
-                            #e5e7eb ${((values[1] - MIN) / (MAX - MIN)) * 100}%)`,
+                            background: `linear-gradient(to right, #e5e7eb ${((priceRange[0] - MIN) / (MAX - MIN)) * 100}%,
+                            
+                            #17a2b8 ${((priceRange[0] - MIN) / (MAX - MIN)) * 100}%,
+                            #17a2b8 ${((priceRange[1] - MIN) / (MAX - MIN)) * 100}%,
+                            #e5e7eb ${((priceRange[1] - MIN) / (MAX - MIN)) * 100}%)`,
                         }}
                     >
                         {children}
@@ -301,13 +403,8 @@ function PriceRangeSlider() {
             <div className="flex justify-between mt-8 items-center">
 
                 <p className="mt-4 text-neutral-600">
-                    {values[0]} - {values[1]}
+                    {priceRange[0]} - {priceRange[1]}
                 </p>
-                <Button content={"Filter"}
-                    bgColor='bg-blue-700'
-                    hoverBg='bg-[var(--darkIndigo)]'
-                    className={"!max-h-10 !px-11 "}
-                />
             </div>
         </div>
     );
@@ -316,22 +413,14 @@ function PriceRangeSlider() {
 
 
 
-
 // sort by: (product's cards sorting)
 const sortStyleData = ["price", "sales", "published"]
 
-const categoriesData = ["Brochures & Catalogues", "Business Cards", "Calendars printing", "Design Online", "Flyers Design", "Folded Leaflets", "t-shirt printing", "Gift item printing"]
 
-const sizeData = [`36"x80" (8)`, `36"x96" (60)`, `72"x80" (7)`, `72"x96" (21)`]
+const sizeData = [`36"x80"(8)`, `36"x96"(60)`, `72"x80"(7)`, `72"x96"(21)`]
 
 const filterByRatingData = [5, 4, 3, 2, 1]
-const popularTagsData = ["Sweat Shirt", "Landing", "Banner Design", "Brochure", "Bussiness Card", "cap", "Bussiness Card", "Landing"]
-
-
-
-
-
-
+const popularTagsData = ["laptop", "mouse", "modern", "economical", "camera", "logitec", "headset", "headphone"]
 
 
 

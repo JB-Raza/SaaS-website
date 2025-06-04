@@ -13,7 +13,8 @@ import {
   Pricing, AppIntegration, IntegrationDetails,
   Login, Signup,
   Shop, ShopDetails, CartPage, CheckoutPage,
-  Dashboard, SummeryPage, Orders, Wishlist, AccountDetails,
+  Dashboard,
+  Blogs, BlogDetails,
   PrivateRoute,
   Page404
 } from './components/pages/index.js'
@@ -56,19 +57,17 @@ export default function Layout() {
         <Route path='/shop' element={<Shop />} />
         <Route path='/shop/:productId' element={<ShopDetails />} />
 
-        <Route path='/shop-details' element={<ShopDetails />} />
         <Route path='/cart' element={<CartPage />} />
         <Route path='/checkout' element={<CheckoutPage />} />
 
         {/* dashboard */}
         <Route path='/dashboard' element={<PrivateRoute />}>
-          <Route path="" element={<Dashboard />}>
-          <Route index element={<SummeryPage />}></Route>
-          <Route path='orders' element={<Orders />}></Route>
-          <Route path='wishlist' element={<Wishlist />}></Route>
-          <Route path='account' element={<AccountDetails />}></Route>
-          </Route>
+          <Route index element={<Dashboard />} />
         </Route>
+
+        {/* blogs */}
+        <Route path='/blogs' element={<Blogs />} />
+        <Route path='/blogs/:blogId' element={<BlogDetails />} />
 
 
         <Route path={"*"} element={<Page404 />} />

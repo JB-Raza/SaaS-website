@@ -44,7 +44,7 @@ export default function Hero() {
           <span className='hero-title-span'>prioritize work</span>
         </h1>
 
-        <p className="text-white text-[18px] font-normal px-3 flex flex-col leading-loose">
+        <p className="text-white text-[18px] font-normal px-3 leading-loose">
           <span className="hero-animated-data">Sassly-<span className='text-amber-400'>CRM</span> in the past allowing you to focus more on your business or simply</span>
           <span className="hero-animated-data"> enjoy your newfound legal time to reflect leaving</span>
         </p>

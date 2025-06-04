@@ -1,42 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // components
 import { RevolutionizeServices } from '../../sections/index.js'
-import { Button, CartProductCard, InputBox, Alert } from '../../universalComponents/index.js'
+import { Button, CartProductCard, Alert } from '../../universalComponents/index.js'
 
 // hooks
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
+// redux
+import { useSelector, useDispatch } from 'react-redux'
+import { clearCart } from '../../../redux/cartSlice.js'
+
 
 
 export default function CartPage() {
-    const [cartItems, setCartItems] = useState(samplecartItems)
-    const [showAlert, setShowAlert] = useState(false)
-    const [alertData, setAlertData] = useState({})
+    const dispatch = useDispatch()
+    let cartItems = useSelector(state => state.cart.cart)
 
-
-    const [deletedProduct, setDeletedProduct] = useState("")
-
+    let subTotalPrice = 0
+    cartItems.forEach((item) => {
+        if (item != null || item != undefined) {
+            subTotalPrice += item?.price * item.quantity
+        }
+    })
+    cartItems = cartItems.filter((item) => item !== null)
     useTextAnimate(".animate-text")
-
-    const removeProduct = (product) => {
-        setShowAlert(true)
-        setAlertData({
-                    type: "success",
-                    icon: "fa-solid fa-trash-can text-red-500",
-                    heading: "Deleted",
-                    message: `"${deletedProduct}" deleted Successfully`
-                })
-
-        setCartItems(cartItems.filter((item) => {
-            if (item.id == product.id) {
-                setDeletedProduct(product.name)
-            }
-            return item.id !== product.id
-        }))
-
-    }
 
     return (
         <div>
@@ -53,46 +42,54 @@ export default function CartPage() {
                 <div className="custom-container mx-auto grid grid-cols-12 gap-10">
 
                     {/* cart col */}
-                    <div className="col-span-12 lg:col-span-8 lg:pe-5 overflow-auto">
-                        {/* alert */}
-                        <Alert showAlert={showAlert} setShowAlert={setShowAlert}
-                        alertData={alertData}
-                         />
+                    <div className="col-span-12 lg:pe-5 overflow-auto">
 
                         <table className='w-full border border-neutral-200'>
                             {/* heading rows */}
                             <thead>
 
                                 <tr className='py-10 border-b border-neutral-200'>
-                                    <th className='text-start px-10 py-5'>Product</th>
-                                    <th className='text-start px-10 py-5'>Price</th>
-                                    <th className='text-start px-10 py-5'>Quantity</th>
-                                    <th className='text-start px-10 py-5'>Sub Total</th>
+                                    <th className='text-start px-5 py-5'></th>
+                                    <th className='text-start px-5 py-5'>Title</th>
+                                    <th className='text-start px-5 py-5'>Price</th>
+                                    <th className='text-start px-5 py-5'>Color </th>
+                                    <th className='text-start px-5 py-5'>Size</th>
+                                    <th className='text-start px-5 py-5'>Quantity</th>
+                                    <th className='text-start px-5 py-5'>Discount</th>
+                                    <th className='text-start px-5 py-5'>Sub Total</th>
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            {cartItems.length == 0 ?
+                                <tbody>
+                                    <tr className='py-4'>
+                                        <td colSpan={8} className='py-7 text-center border-b border-neutral-200 text-neutral-700'> No Items in cart</td>
+                                    </tr>
+                                </tbody> :
+                                <tbody>
 
-                                {/* data rows */}
-                                {((cartItems || []).map((product) => (
-                                    <CartProductCard key={product.id} product={product}
-                                        removeProduct={removeProduct}
-                                    />
-                                )))}
-                            </tbody>
+                                    {/* data rows */}
+                                    {(cartItems?.length > 0 && cartItems.map((product, index) => (
+                                        <CartProductCard key={product._id + index} product={product}
+                                        />
+                                    )))}
+                                </tbody>
+                            }
 
                             <tfoot>
                                 <tr>
-                                    <td colSpan={4}>
+                                    <td colSpan={8}>
                                         <div className='flex border-b border-neutral-200 justify-between items-center px-10 py-5'>
                                             <Link to={"/shop"}
-                                             className="rounded-full border border-neutral-200 px-5 py-3 hover:text-white hover:bg-blue-600 font-semibold text-sm">Return To Shop</Link>
-                                            <button className="rounded-full border border-neutral-200 px-5 py-3 hover:text-white hover:bg-blue-600 font-semibold text-sm">Update Cart</button>
+                                                className="rounded-full border border-neutral-200 px-5 py-3 hover:text-white hover:bg-blue-600 font-semibold text-sm">Return To Shop</Link>
+                                            <button
+                                                onClick={() => dispatch(clearCart())}
+                                                className="rounded-full border border-neutral-200 px-5 py-3 hover:text-white hover:bg-blue-600 font-semibold text-sm">Clear Cart</button>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={4}>
+                                    <td colSpan={8}>
                                         <div className='flex justify-between items-center px-10 py-5'>
                                             <p className="font-semibold text-nowrap me-10 text-[18px]">Coupon Code</p>
                                             <div className="input-box w-full relative">
@@ -116,9 +113,9 @@ export default function CartPage() {
                     </div>
 
                     {/* info col */}
-                    <div className="col-span-12 flex flex-col md:flex-row lg:flex-col items-start gap-7 lg:col-span-4">
+                    <div className="col-span-12 flex flex-col md:flex-row items-start gap-7">
                         {/* cart items table  */}
-                        <div className='border overflow-x-aut p-5 border-neutral-200 w-full'>
+                        <div className='border overflow-x-auto p-5 border-neutral-200 w-full'>
 
                             <h5 className="heading-5 font-semibold text-center mb-6">Calculate Shipping</h5>
                             <div className="border flex font-semibold mb-4 justify-between border-neutral-200 rounded-sm py-3 px-4">
@@ -143,21 +140,27 @@ export default function CartPage() {
 
                         {/* total */}
                         <div className='border p-5 border-neutral-200 w-full'>
-                            <h5 className="heading-5 font-semibold text-center mb-6">Calculate Shipping</h5>
+                            <h5 className="heading-5 font-semibold text-center mb-6">Checkout</h5>
                             <div className="border flex font-semibold mb-4 justify-between border-neutral-200 rounded-sm py-3 px-4">
                                 <span className='uppercase'>subtotal</span>
-                                <span className='text-neutral-700 font-medium'>$345.00</span>
+                                <span className='text-neutral-700 font-medium'>${subTotalPrice}</span>
+                            </div>
+                            <div className="border flex font-semibold mb-4 justify-between border-neutral-200 rounded-sm py-3 px-4">
+                                <span className='uppercase'>Shipping Fee</span>
+                                <span className='text-neutral-700 font-medium'>$34</span>
                             </div>
                             <div className="border flex font-semibold mb-4 justify-between border-neutral-200 rounded-sm py-3 px-4">
                                 <span className='uppercase'>total</span>
-                                <span className='text-neutral-900'>$450.00</span>
+                                <span className='text-neutral-900'>${subTotalPrice + 34}</span>
                             </div>
-                            <Button
-                                content={"Proceed to Checkout"}
-                                bgColor='bg-[var(--darkIndigo)]'
-                                hoverBg='bg-blue-700'
-                                className={"w-full !h-[14px]"}
-                            />
+                            <Link to={'/checkout'}>
+                                <Button
+                                    content={"Proceed to Checkout"}
+                                    bgColor='bg-[var(--darkIndigo)]'
+                                    hoverBg='bg-blue-700'
+                                    className={"w-full !h-[14px]"}
+                                />
+                            </Link>
                         </div>
 
                     </div>
@@ -187,13 +190,3 @@ export default function CartPage() {
         </div>
     )
 }
-
-
-
-
-const samplecartItems = [
-    { id: 0, name: "Apple Watch", imgUrl: "/shop/cart/cart-img1.png", price: 12, quantity: 1, subtotal: 60 },
-    { id: 1, name: "samsung handset", imgUrl: "/shop/cart/cart-img2.png", price: 22, quantity: 1, subtotal: 60 },
-    { id: 2, name: "Tata brand car", imgUrl: "/shop/cart/cart-img3.png", price: 122, quantity: 1, subtotal: 60 },
-    { id: 3, name: "new Iphone pro max", imgUrl: "/shop/cart/cart-img4.png", price: 30, quantity: 1, subtotal: 60 },
-]

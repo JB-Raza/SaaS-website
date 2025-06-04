@@ -2,8 +2,9 @@
 import "./App.css"
 import React from 'react'
 // import { ToastContainer } from 'react-toastify'
-import {store} from './redux/store.js'
+import {store, persistor} from './redux/store.js'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import Layout from './Layout.jsx'
 
@@ -13,6 +14,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 function App() {
 
+  
 
   return (
     <>
@@ -20,9 +22,12 @@ function App() {
 <Provider store={store}>
 
       <BrowserRouter>
+      <PersistGate persistor={persistor}>
+
 
         <Layout />
 
+      </PersistGate>
       </BrowserRouter>
 </Provider>
 

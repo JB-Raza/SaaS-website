@@ -12,9 +12,10 @@ import { useTextAnimate } from '../../../hooks/textAnimation.js'
 
 
 export default function Login() {
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [formData, setFormData] = useState({ name: "", password: "" })
+    const [formData, setFormData] = useState({ email: "", password: "" })
 
     useTextAnimate(".animate-text")
 
@@ -28,7 +29,7 @@ export default function Login() {
     // login logic
     async function login(e) {
         e.preventDefault()
-        let res = await fetch("http://localhost:3000/auth/login", {
+        let res = await fetch("http://localhost:3000/api/user/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "Application/json",
@@ -38,7 +39,7 @@ export default function Login() {
         const result = await res.json()
 
         if (result.success) {
-            localStorage.setItem("accessToken", result.token)
+            localStorage.setItem("userAccessToken", result.token)
             localStorage.setItem("user", JSON.stringify(result.profile))
             dispatch(setUser(result.profile))
             navigate("/")
@@ -84,8 +85,8 @@ export default function Login() {
                     <h3 className="heading-4 text-center font-[700] max-w-[250px] mx-auto capitalize italic">Start Your Journey with us</h3>
 
                     {/* name */}
-                    <InputBox type='text' name={"name"} id={"name"}
-                        label={"Enter your name"}
+                    <InputBox type='text' name={"email"} id={"email"}
+                        label={"Enter your Email"}
                         required={true}
                         onChange={handleInputChange}
                     />

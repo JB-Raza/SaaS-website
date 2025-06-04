@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { RevolutionizeServices } from '../../sections/index.js'
 import { Alert, Button, InputBox } from '../../universalComponents/index.js'
 import { Link } from 'react-router-dom'
 import { useTextAnimate } from '../../../hooks/textAnimation.js'
+
+import { useNavigate } from 'react-router'
 
 import { toast } from 'react-toastify'
 
 
 
 export default function Signup() {
-    const [formData, setFormData] = useState({ name: "", username: "", email: "", password: "", confirmPassword: "" })
+    const [formData, setFormData] = useState({ username: "", email: "", password: "", confirmPassword: "" })
+    const navigate = useNavigate()
 
     useTextAnimate(".animate-text")
 
@@ -22,7 +25,7 @@ export default function Signup() {
 
     async function signup() {
         try {
-            const res = await fetch("http://localhost:3000/auth/signup", {
+            const res = await fetch("http://localhost:3000/api/user/auth/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,25 +44,31 @@ export default function Signup() {
                     />,
                     { autoClose: 3500 }
                 )
-                // setAlertData({
-                //     type: "success",
-                //     icon: "fa-solid fa-check text-blue-600",
-                //     heading: "Success",
-                //     message: result.message
-                // })
-                // setShowAlert(true)
+                navigate("/login")
             }
             else {
-                setAlertData({
-                    type: "failure",
-                    icon: "fa-solid fa-xmark text-red-600",
-                    heading: "Failed",
-                    message: result.message
-                })
-                setShowAlert(true)
+                toast(
+                    <Alert
+                        type='failure'
+                        icon="fa-solid fa-check text-red-600"
+                        heading={"Failure"}
+                        message={result.message}
+                    />,
+                    { autoClose: 3500 }
+                )
             }
         } catch (err) {
-            console.error("Signup failed:", err);
+            toast(
+                <Alert
+                    type='failure'
+                    icon="fa-solid fa-xmark text-red-600"
+                    heading={"Failure"}
+                    message={err?.message}
+                />,
+                { autoClose: 3500 }
+            )
+                console.log("err = ",err)
+
         }
     }
 
@@ -69,7 +78,6 @@ export default function Signup() {
     return (
         <div>
             {/* hero */}
-            {/* <Alert showAlert={showAlert} setShowAlert={setShowAlert} alertData={alertData} /> */}
             <section className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
                     <img src="./simple-logo.png" alt="logo..." />
@@ -87,12 +95,6 @@ export default function Signup() {
                     className="rounded-xl shadow-2xl py-6 px-2 sm:px-6 max-w-[514px] mx-auto bg-white">
                     <h3 className="heading-4 text-center font-[700] max-w-[250px] mx-auto capitalize italic">Start Your Journey with us</h3>
 
-                    {/* name */}
-                    <InputBox type='text' name={"name"} id={"name"}
-                        onChange={handleInputChange}
-                        label={"Enter your name"}
-                        required={true}
-                    />
                     {/* username */}
                     <InputBox type='text' name={"username"} id={"username"}
                         onChange={handleInputChange}

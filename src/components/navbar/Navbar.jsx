@@ -9,7 +9,7 @@ import { useGSAP } from '@gsap/react'
 
 export default function Navbar() {
 
-  const token = localStorage.getItem("accessToken")
+  const token = localStorage.getItem("userAccessToken")
 
   const location = useLocation()
 
@@ -36,11 +36,6 @@ export default function Navbar() {
           ease: "power1.out",
         })
     }
-    // else {
-    //   gsap.to(navbarRef.current, {
-    //     y: 0,
-    //   })
-    // }
   }, [isFixed])
 
   // navitems animation when sidebar is open
@@ -187,7 +182,7 @@ export default function Navbar() {
 
 
   return (
-    <header className={`relative z-50 mx-aut`}>
+    <header className={`relative`} style={{ zIndex: '100' }}>
 
       {/* custom cursor if sidebar is open */}
       {!isSidebarOpen ? "" :
@@ -250,34 +245,34 @@ export default function Navbar() {
 
           </ul>
 
-            {token? <div>
-              <Link to={'/dashboard'}>
-              <Button content={"dashboard"}
+          {token ? <div>
+            <Link to={'/dashboard'}>
+              <Button content={"Dashboard"}
                 bgColor={navBtnProps.bgColor}
                 hoverBg={navBtnProps.hoverBg}
                 className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[130px] !h-13 !rounded-xl"}`}
               />
             </Link>
-            </div>
-              :
-          <div className="m-0 flex gap-6 items-center">
-            <Link to="/login">
-              <button className={`cursor-pointer font-semibold text-sm hidden xl:flex items-center gap-2 ${location.pathname == "/" ? "text-white" : "text-black"}`}>
-                <i className={`fa-regular fa-user ${location.pathname == "/" ? "text-[rgb(50,244,133)]" : "text-sky-700"} text-xs`}></i>
-                Sign in
-              </button>
-            </Link>
-
-            <Link to={'/signup'}>
-              <Button content={navBtnProps.content}
-                bgColor={navBtnProps.bgColor}
-                hoverBg={navBtnProps.hoverBg}
-                className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[130px] !h-13 !rounded-xl"}`}
-                icon={navBtnProps.icon}
-              />
-            </Link>
-
           </div>
+            :
+            <div className="m-0 flex gap-6 items-center">
+              <Link to="/login">
+                <button className={`cursor-pointer font-semibold text-sm hidden lg:flex items-center gap-2 ${location.pathname == "/" ? "text-white" : "text-black"}`}>
+                  <i className={`fa-regular fa-user ${location.pathname == "/" ? "text-[rgb(50,244,133)]" : "text-sky-700"} text-xs`}></i>
+                  Sign in
+                </button>
+              </Link>
+
+              <Link to={'/signup'}>
+                <Button content={navBtnProps.content}
+                  bgColor={navBtnProps.bgColor}
+                  hoverBg={navBtnProps.hoverBg}
+                  className={`hidden lg:flex font-medium ${location.pathname == "/" ? "min-w-[150px] !text-black px-22 hover:!text-white" : "!text-white min-w-[130px] !h-13 !rounded-xl"}`}
+                  icon={navBtnProps.icon}
+                />
+              </Link>
+
+            </div>
           }
 
           {/* sidebar toggle btn */}
@@ -308,7 +303,7 @@ export default function Navbar() {
         {/* brand logo */}
         <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
           <a href='#'>
-            <img className='' src="./logo-blue.png" alt="logo" /></a>
+            <img className='' src="/logo-blue.png" alt="logo" /></a>
         </div>
         {(navbarData).map((item, i) => (
 
@@ -350,7 +345,6 @@ const navbarData = [
   {
     navTitle: "Shop", dropdownItems: [
       { label: "Shop", path: "/shop" },
-      { label: "Shop Details", path: "/shop-details" },
       { label: "Cart", path: "/cart" },
       { label: "Checkout", path: "/checkout" },
     ]
@@ -358,8 +352,7 @@ const navbarData = [
 
   {
     navTitle: "Blog", dropdownItems: [
-      { label: "Blog", path: "/blog" },
-      { label: "Blog Details", path: "/blog-details" },
+      { label: "Blog", path: "/blogs" },
     ]
   },
 

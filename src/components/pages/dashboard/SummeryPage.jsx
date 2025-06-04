@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import { clearUser } from '../../../redux/userSlice.js'
+import { axiosInstance } from '../../../utils.js'
 
 
 export default function SummeryPage() {
@@ -13,6 +14,7 @@ export default function SummeryPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector((state) => state.user?.user)
+
 
 
     // countdown
@@ -23,6 +25,7 @@ export default function SummeryPage() {
 
     function logout() {
         dispatch(clearUser())
+        localStorage.removeItem("userAccessToken")
         navigate("/login")
     }
 
@@ -52,10 +55,10 @@ export default function SummeryPage() {
     }, [seconds, minutes])
 
     return (
-        <div className="col-span-12 md:col-span-9 px-5">
+        <div className="col-span-12 breakpoint-900:col-span-9 px-5">
 
             <div className="flex flex-wrap items-end gap-3">
-                <h3 className="heading-3 font-medium">Hello {user?.name}!</h3> <p className='pb-2'>( not {user?.name}? <button onClick={logout} className="underline cursor-pointer hover:text-blue-600 font-medium">Logout</button> )</p>
+                <h3 className="heading-3 font-medium">Hello {user?.username}!</h3> <p className='pb-2'>( not {user?.username}? <button onClick={logout} className="underline cursor-pointer hover:text-blue-600 font-medium">Logout</button> )</p>
             </div>
             <p className='mt-4 text-neutral-700'>Today is a great day to check your account page. You can check your last orders or have a look to your wishlist . Or maybe you can start to shop our latest offers ?</p>
 
@@ -64,7 +67,7 @@ export default function SummeryPage() {
                 {/* orders */}
                 <div className="col-span-12 breakpoint-500:col-span-6">
                     {/* card */}
-                    <div className="cursor-pointer group flex flex-col gap-2 items-center px-5 py-10 sm:px-10 border border-neutral-200 rounded-lg">
+                    <div className="group flex flex-col gap-2 items-center px-5 py-10 sm:px-10 border border-neutral-200 rounded-lg">
                         {/* icon */}
                         <div className="relative mb-3">
                             <i className="fa-solid fa-bag-shopping group-hover:text-blue-700 group-hover:animate-[var(--animate-left-right)] text-[60px] text-neutral-700"></i>
@@ -79,12 +82,12 @@ export default function SummeryPage() {
                 {/* wishlist */}
                 <div className="col-span-12 breakpoint-500:col-span-6">
                     {/* card */}
-                    <div className="cursor-pointer group flex flex-col gap-2 items-center py-10 px-5 sm:p-10 border border-neutral-200 rounded-lg">
+                    <div className="group flex flex-col gap-2 items-center py-10 px-5 sm:p-10 border border-neutral-200 rounded-lg">
                         {/* icon */}
                         <div className="relative mb-3">
                             <i className="fa-solid fa-heart group-hover:text-red-800 group-hover:animate-[var(--icon-bubble-animation)] text-[60px] text-neutral-700"></i>
                             {/* label */}
-                            <span className="absolute -top-[10px] -right-[25px] h-7 w-7 flex items-center justify-center rounded-full bg-[var(--darkIndigo)] text-white">5</span>
+                            <span className="absolute -top-[10px] -right-[25px] h-7 w-7 flex items-center justify-center rounded-full bg-[var(--darkIndigo)] text-white">{user.wishlist?.length}</span>
                         </div>
                         <h4 className="heading-5 group-hover:text-red-800 transition-colors duration-200 font-semibold">My Wishlist</h4>
                         <p className="text-center font-medium">Sale!! The Best time to fullfil your wishes</p>

@@ -38,3 +38,18 @@
         background-size: cover;
       }
 }
+
+
+
+.toolbar button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  background: #f3f3f3;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.toolbar .active {
+  background: #ddd;
+}
+

@@ -339,3 +339,56 @@ export const productsData = [
     }
 ];
 
+
+// blogs data
+
+export const blogsData = [
+    {
+        _id: 0,
+        blogTitle: "The whimsically named Egg Canvas brainch",
+        datePosted: "14 Feb",
+        auther: "Mehandi",
+        comments: [{}, {}, {}, {}],
+        readTime: "3 min Read",
+        bannerImage: "/blogs/blog-page-img1.png",
+        otherImages: [
+            "/blogs/invest-img.png",
+            "/blogs/blog-details-img1.png",
+            "/blogs/blog-details-img2.png",
+
+        ],
+        description: "There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum."
+    },
+    {
+        _id: 1,
+        blogTitle: "The Dawn of Eagle Eye",
+        datePosted: "14 Feb",
+        auther: "Mehandi",
+        comments: [{}, {}],
+        readTime: "3 min Read",
+        bannerImage: "/blogs/blog-page-img2.png",
+        otherImages: [
+            "/blogs/invest-img.png",
+            "/blogs/blog-details-img1.png",
+            "/blogs/blog-details-img2.png",
+
+        ],
+        description: "There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum."
+    },
+    {
+        _id: 2,
+        blogTitle: "The whimsically named Egg Canvas brainch",
+        datePosted: "14 Feb",
+        auther: "Mehandi",
+        comments: [{}, {}, {}, {}],
+        readTime: "3 min Read",
+        bannerImage: "/blogs/blog-page-img3.png",
+        otherImages: [
+            "/blogs/invest-img.png",
+            "/blogs/blog-details-img1.png",
+            "/blogs/blog-details-img2.png",
+
+        ],
+        description: "There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passage of Lorem Ipsum."
+    },
+]

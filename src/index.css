@@ -3,6 +3,7 @@
 @theme {
   --breakpoint-xs: 350px;
   --breakpoint-breakpoint-500: 500px;
+  --breakpoint-breakpoint-900: 900px;
   --breakpoint-breakpoint-1000: 1000px;
   --animate-bounce-high: bounce-high 0.6s 0.2s;
   --animate-left-right: moveLeftRight 0.6s 0.2s;
@@ -37,8 +38,20 @@ h4,
 h5,
 h6,
 p,
-span, button, summary, label {
+span,
+button,
+summary,
+label {
   font-family: var(--satoshi-font) !important;
+}
+
+/* shadow on body when modal is open */
+body.modal-open::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 50;
 }
 
 .satoshi-font {
@@ -103,7 +116,7 @@ span, button, summary, label {
 /* custom swiper bullets */
 .custom-bullet {
   background: linear-gradient(270deg, #06766E 0%, #20BA8B 100%);
-  @apply w-3 h-3 rounded-full cursor-pointer transition-all 
+  @apply w-3 h-3 rounded-full cursor-pointer transition-all
 }
 
 .custom-bullet-active {
@@ -137,7 +150,8 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-textarea{
+
+textarea {
   resize: none;
 }
 
@@ -181,46 +195,182 @@ textarea{
 
 /* bounce element animation */
 @keyframes bounce-high {
-  0%{
+  0% {
     transform: translateY(0);
     animation-timing-function: ease-out;
   }
-  40%{
+
+  40% {
     transform: translateY(-2.5rem);
     animation-timing-function: ease-out;
   }
-  60%{
+
+  60% {
     transform: translateY(0);
     animation-timing-function: ease-out;
   }
-  80%{
+
+  80% {
     transform: translateY(-1rem);
     animation-timing-function: ease-out;
   }
-  100%{
+
+  100% {
     transform: translateY(0);
     animation-timing-function: ease-out;
   }
 }
 
-@keyframes moveLeftRight{
-  0%{
+@keyframes moveLeftRight {
+  0% {
     transform: translateX(0);
   }
-  25%{
+
+  25% {
     transform: translateX(-20px) rotate(-6deg);
   }
-  75%{
+
+  75% {
     transform: translateX(20px) rotate(6deg);
   }
-  100%{
-    transform: translateX(0)  rotate(0deg);
+
+  100% {
+    transform: translateX(0) rotate(0deg);
   }
 }
 
-.scrollProgressBtn{
+.scrollProgressBtn {
   mask-image: radial-gradient(circle, transparent 62%, black 38%);
 }
-.shadow-big{
+
+.shadow-big {
   box-shadow: 1px 1px 25px 1px rgba(0, 0, 0, 0.612);
+}
+
+
+
+/* blog-actions elements styling */
+/* .blogs-section h1{
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 45px;
+    color: var(--darkIndigo);
+}
+.blogs-section h2{
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 40px;
+    color: var(--darkIndigo);
+}
+.blogs-section h3{
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 35px;
+    color: var(--darkIndigo);
+}
+.blogs-section h4{
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    color: var(--darkIndigo);
+}
+.blogs-section h5{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 25px;
+    color: var(--darkIndigo);
+}
+.blogs-section h6{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--darkIndigo);
+} */
+/* when focused gave no outline in editor */
+/* .ProseMirror:focus {
+  outline: none;
+
+} */
+
+
+/* list styles */
+/* .blogs-section ul {
+  margin: 0px 20px;
+  list-style: circle;
+}
+.blogs-section blockquote{
+  position: relative;
+  margin: 0px 40px;
+  padding-left: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.blogs-section blockquote::before{
+  content: '\201C';
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  font-size: 50px;
+  font-weight: 600;
+  color: blue;
+}
+
+.blogs-section img{
+  display: inline;
+} */
+
+
+
+.blog-details-section h1 {
+  font-size: var(--heading-one);
+  font-weight: 600;
+}
+
+.blog-details-section h2 {
+  font-size: var(--heading-two);
+  font-weight: 600;
+}
+
+.blog-details-section h3 {
+  font-size: var(--heading-three);
+  font-weight: 600;
+}
+
+.blog-details-section h4 {
+  font-size: var(--heading-four);
+  font-weight: 600;
+}
+
+.blog-details-section h5 {
+  font-size: var(--heading-five);
+  font-weight: 600;
+}
+
+.blog-details-section h6 {
+  font-size: var(--heading-six);
+  font-weight: 600;
+}
+
+.blog-details-section p {
+  font-size: 17px;
+  color: #444444;
+}
+
+.blog-details-section ul li {
+  padding: 10px 0px;
+}
+
+.blog-details-section blockquote {
+  position: relative !important;
+  margin: 50px 20px !important;
+  padding: 20px !important;
+  border-radius: 10px;
+  background-color: rgba(211, 211, 211, 0.445) !important;
+  border-left: 5px solid var(--greenBg) !important;
+  font-size: 20px !important;
+}
+
+.blog-details-section ul {
+  margin: 20px 0px 0px 20px;
+  list-style-type: disc;
 }
