@@ -40,7 +40,7 @@ export default function ShopDetails() {
     useTextAnimate(".animate-text")
     const swiperRef = useRef(null)
 
-    const wishlist = useSelector(state => state.user.user.wishlist)
+    const wishlist = useSelector(state => state.user.user?.wishlist)
 
     const [activeBtn, setActiveBtn] = useState("product details")
     const [loading, setLoading] = useState(true)

@@ -1,6 +1,10 @@
 import { useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { clearCart } from '../../../redux/cartSlice.js'
+import { useNavigate } from 'react-router'
+
+// stripe
+import { loadStripe } from '@stripe/stripe-js'
 
 // components
 import { RevolutionizeServices } from '../../sections/index.js'
@@ -13,6 +17,7 @@ import { axiosInstance } from '../../../utils.js'
 
 export default function CheckoutPage() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const cartItems = useSelector(state => state.cart.cart)
     const token = localStorage.getItem("userAccessToken")
     const [shippingFee, setShippingFee] = useState(34)
@@ -31,14 +36,12 @@ export default function CheckoutPage() {
 
     // on input change
     const onInputChange = (e) => {
-        console.log("e - ",e)
         setCheckoutFormData({
             ...checkoutFormData,
             [e.target.name]: e.target.value
         })
     }
 
-    console.log(checkoutFormData)
 
     let subTotalPrice = 0
     cartItems.forEach((item) => {
@@ -47,10 +50,12 @@ export default function CheckoutPage() {
         }
     })
 
+    // submit order function
     const handleOrdersSubmit = async (e) => {
         e.preventDefault()
         try {
             setLoading(true)
+
             // payment method validation
             if (checkoutFormData.paymentMethod == "") {
                 toast(
@@ -96,11 +101,16 @@ export default function CheckoutPage() {
                 return
             }
 
+            // stripe
+            const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+
             const { data } = await axiosInstance.post(`/orders/new`, { ...checkoutFormData, cart: JSON.stringify(cartItems) }, {
                 headers: { "Authorization": `Bearer ${token}`, "Content-Type": "Application/json" },
             })
 
             if (data.success) {
+
+                // stripe
                 toast(
                     <Alert
                         type='Success'
@@ -109,6 +119,14 @@ export default function CheckoutPage() {
                     { autoClose: 2000 }
                 )
                 setLoading(false)
+
+                const result = stripe.redirectToCheckout({
+                    sessionId: data.sessionId
+                })
+                if (result.error) {
+                    console.log(result.error)
+                    return
+                }
                 dispatch(clearCart())
                 return
             }
@@ -214,10 +232,10 @@ export default function CheckoutPage() {
 
                             {/* house and street */}
                             <InputBox
-                                name={"appartment"}
-                                id={"appartment"}
+                                name={"apartment"}
+                                id={"apartment"}
                                 placeholder='Appartment, Suit, Unit etc'
-                                value={checkoutFormData.appartment}
+                                value={checkoutFormData.apartment}
                                 required={true}
                                 onChange={onInputChange}
                                 icon={"fa-solid fa-location-dot"}
@@ -367,7 +385,7 @@ export default function CheckoutPage() {
                                     </label>
 
                                 </div>
-                             
+
                                 {/* cash on delivery */}
                                 <div className="input-group flex items-center gap-3">
                                     <label htmlFor="cashOnDelivery" className="relative flex items-center cursor-pointer gap-3">

@@ -88,25 +88,6 @@ export default function CartPage() {
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colSpan={8}>
-                                        <div className='flex justify-between items-center px-10 py-5'>
-                                            <p className="font-semibold text-nowrap me-10 text-[18px]">Coupon Code</p>
-                                            <div className="input-box w-full relative">
-                                                <i className="fa-solid fa-envelope absolute top-1/2 left-4 -translate-y-1/2 text-neutral-700"></i>
-                                                <input type="text" placeholder='Email Address'
-                                                    className='ps-10 py-4 rounded-lg w-full outline-neutral-200 outline-1 focus:outline-blue-600'
-                                                />
-                                            </div>
-                                            <Button
-                                                content={"Apply Coupon"}
-                                                bgColor='bg-blue-700'
-                                                hoverBg='bg-[var(--darkIndigo)]'
-                                                className={"w-[250px] ms-3"}
-                                            />
-                                        </div>
-                                    </td>
-                                </tr>
                             </tfoot>
 
                         </table>

@@ -5,8 +5,15 @@ export default function Modal({ isModalOpen, setIsModalOpen, orderData }) {
 
     useEffect(() => {
 
-        if (isModalOpen) document.body.classList.add("modal-open")
-        else document.body.classList.remove("modal-open")
+        if (isModalOpen) {
+            document.body.classList.add("modal-open")
+            document.body.style.overflow = "hidden"
+        }
+        else {
+            document.body.classList.remove("modal-open")
+            document.body.style.overflow = "auto"
+        }
+
 
     }, [isModalOpen])
 
@@ -23,8 +30,10 @@ export default function Modal({ isModalOpen, setIsModalOpen, orderData }) {
         }
     }, [isModalOpen])
 
+    console.log(orderData)
+
     return (
-        <div ref={modalRef} className={`absolute left-1/2 overflow-hidden -translate-x-1/2 w-[calc(100%-50px)] max-w-[1100px] max-h-[500px] z-50 bg-white shadow-lg rounded-lg transform-[translate] duration-300 ${isModalOpen ? "opacity-100 visible translate-y-[-30px]" : "opacity-0 invisible translate-y-0"}`}>
+        <div ref={modalRef} className={`fixed top-1/4 left-1/2 overflow-hidden -translate-x-1/2 w-[calc(100%-50px)] max-w-[1100px] max-h-[500px] z-50 bg-white shadow-lg rounded-lg transform-[translate] duration-300 ${isModalOpen ? "opacity-100 visible translate-y-[-30px]" : "opacity-0 invisible translate-y-0"}`}>
             {/* wrapper */}
             <div className={`w-full max-h-[470px] my-auto py-10 px-4 md:px-10 overflow-auto `}>
                 <h3 className="heading-3 font-bold text-center">Order Details</h3>
@@ -44,10 +53,11 @@ export default function Modal({ isModalOpen, setIsModalOpen, orderData }) {
                         <thead>
 
                             <tr className='py-10 border-b border-neutral-200'>
-                                <th className='text-start px-5 py-5'></th>
+                                <th className='text-start px-5 py-5'>#</th>
 
                                 <th className='text-start py-5'>Title</th>
                                 <th className='text-start py-5'>size/color</th>
+                                <th className='text-start py-5'>Voucher Code</th>
                                 <th className='text-start py-5'>Discount</th>
                                 <th className='text-start py-5'>SubTotal</th>
                             </tr>
@@ -66,10 +76,19 @@ export default function Modal({ isModalOpen, setIsModalOpen, orderData }) {
                                         {item.variant.size || "Nill"} /
                                         <span className={`border border-neutral-200 shadow-sm mx-1 px-[10px] rounded-full`} style={{ height: "10px", width: "10px", backgroundColor: item.variant.color }}></span>
                                     </td>
+                                    <td className="font-medium text-start text-neutral-800 py-4">{orderData.voucher?.code || "-"}</td>
                                     <td className="font-medium text-start text-neutral-800 py-4">{item.discount}%</td>
                                     <td className="font-medium text-start text-neutral-800 py-4">${item.totalPriceAfterDiscount} / {item.quantity} item(s)</td>
                                 </tr>
                             ))}
+                            <tr className="border-b border-neutral-200">
+                                <td colSpan={5} className="font-medium text-start text-neutral-800 py-4">Voucher Code Discount</td>
+                                <td className="font-medium text-start text-neutral-800 py-4">{orderData.voucher?.discountValue || 0}$</td>
+                            </tr>
+                            <tr className="border-b border-neutral-200">
+                                <td colSpan={5} className="font-medium text-start text-neutral-800 py-4">Total</td>
+                                <td className="font-medium text-start text-neutral-800 py-4">{orderData.totalPrice}$</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

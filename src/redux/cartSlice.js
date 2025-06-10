@@ -10,7 +10,7 @@ const cartSlice = createSlice({
         addItemToCart: (state, action) => {
             const newItem = action.payload
             const existing = state.cart.find(item =>
-                item._id == newItem._id && item.variant.color == newItem.variant.color
+                item._id == newItem._id && item.variant.color == newItem.variant.color && item.variant.size == newItem.variant.size
             )
             if (existing) {
                 existing.quantity += 1

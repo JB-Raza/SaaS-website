@@ -141,7 +141,7 @@ export const IntegrationCard = ({ data }) => {
 export const ShopItemCard = ({ activeAlignment = "list", product }) => {
 
     const token = localStorage.getItem("userAccessToken")
-    const wishlist = useSelector(state => state.user.user.wishlist)
+    const wishlist = useSelector(state => state.user.user?.wishlist)
 
     const dispatch = useDispatch()
 
@@ -260,11 +260,13 @@ export const ShopItemCard = ({ activeAlignment = "list", product }) => {
                         <i className="fa-regular fa-eye"></i>
                     </Link>
                     {/* icon 2 wishlist */}
-                    <button
-                        onClick={() => addRemoveItemToWishlist(product._id)}
-                        className={`bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 ${wishlist.includes(product._id) ? "text-blue-600 hover:text-white" : "hover:text-white"} rounded-md`}>
-                        <i className={`${wishlist.includes(product._id) ? "fa-solid" : "fa-regular"} fa-star`}></i>
-                    </button>
+                    {!wishlist ? null :
+                        <button
+                            onClick={() => addRemoveItemToWishlist(product._id)}
+                            className={`bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 ${wishlist.includes(product._id) ? "text-blue-600 hover:text-white" : "hover:text-white"} rounded-md`}>
+                            <i className={`${wishlist.includes(product._id) ? "fa-solid" : "fa-regular"} fa-star`}></i>
+                        </button>
+                    }
                     {/* icon 3 */}
                     <span className="icon bg-neutral-200 h-10 w-10 flex items-center justify-center hover:bg-blue-700 duration-200 hover:text-white rounded-md">
                         <i className="fa-solid fa-arrows-up-down"></i>
@@ -340,7 +342,7 @@ export const CartProductCard = ({ product }) => {
             <td className='text-start px-5 py-5 text-[16px] font-semibold'>${product.price}</td>
             <td className={`text-start px-5 py-5 text-[16px] font-semibold`}>
                 <p className={`rounded-full shadow-lg w-[20px] h-[20px]`}
-                style={{ backgroundColor: product.variant.color}}
+                    style={{ backgroundColor: product.variant.color }}
                 ></p>
             </td>
             <td className='text-start px-5 py-5 text-[16px] font-normal'>{product.variant.size || "Nill"}</td>

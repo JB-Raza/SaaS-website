@@ -27,6 +27,8 @@ export default function Shop() {
     // filters
     const [availableCategories, setAvailableCategories] = useState([])
     const [activeCategory, setActiveCategory] = useState("")
+    const [activeRating, setActiveRating] = useState("")
+
 
     const [priceRange, setPriceRange] = useState([0, 7000])
     const [activeTagList, setActiveTagList] = useState([])
@@ -105,7 +107,6 @@ export default function Shop() {
 
 
     // search query filter
-
     const fetchSearchQueryData = async (query) => {
         const { data } = await axiosInstance.get(`/products/search?searchQuery=${query}`)
         if (data.success) {
@@ -135,6 +136,8 @@ export default function Shop() {
         const categorySort = allProducts.filter((product) => product.category == category)
         setSortedProducts(categorySort)
     }
+
+
 
     // priceRange filter
     useEffect(() => {
@@ -231,7 +234,8 @@ export default function Shop() {
                             <h5 className="heading-5 text-[var(--darkIndigo)] font-semibold border-l-2 border-blue-600 py-0 px-2">Filter By Rating</h5>
                             <div className="flex flex-col gap-6 mt-5">
                                 {(filterByRatingData || []).map((filter, index) => (
-                                    <div key={index} className="input-group flex items-center gap-3">
+                                    <button key={index}
+                                        className="input-group flex items-center gap-3">
 
                                         <input type="checkbox" id={`${filter}_star`} className='w-4 h-4 opacity-50 checked:opacity-100'
                                         />
@@ -246,7 +250,7 @@ export default function Shop() {
                                             </span>
                                             <span className='text-neutral-500 font-medium'>( {filter} star )</span>
                                         </label>
-                                    </div>
+                                    </button>
                                 ))}
 
                             </div>
