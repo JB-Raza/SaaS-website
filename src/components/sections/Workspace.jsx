@@ -31,7 +31,7 @@ export default function Workspace() {
                     <div className="col-span-12 lg:col-span-3 flex justify-center items-stretch px-2 sm:px-7 lg:px-0 ms-0 sm:ms-3 mb-7">
                         <div className="left-section bg-neutral-100 w-full rounded-2xl mt-20 lg:mt-15">
                             <div className="logo mx-7 mt-4 mb-8 md:mb-20">
-                                <img src="./logo-two.png" alt="" />
+                                <img loading="lazy" src="./logo-two.png" alt="" />
                             </div>
                             {/* all department btns */}
                             <div className="flex flex-col pb-5">
@@ -63,7 +63,7 @@ export default function Workspace() {
                     </div>
                     <div className="col-span-12 lg:col-span-9 my-7 px-7 pt-7">
                         <div className="">
-                            <img src="./workplace-tab-thumb.png" alt="workspace img" className="mx-auto lg:ms-auto" />
+                            <img loading="lazy" src="./workplace-tab-thumb.png" alt="workspace img" className="mx-auto lg:ms-auto" />
                         </div>
                     </div>
                 </div>

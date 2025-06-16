@@ -49,7 +49,7 @@ export default function AutomateTasks() {
 
                     </div>
                     <div className="col-span-12 mt-10 lg:mt-0 lg:col-span-6">
-                        <img src="./automation-thumb.png" alt="" className="mx-auto" />
+                        <img loading="lazy" src="./automation-thumb.png" alt="" className="mx-auto" />
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@ export default function AutomateTasks() {
                 <div className="grid grid-cols-12">
                     {/* col 1 */}
                     <div className="col-span-12 mt-10 lg:mt-0 md:col-span-6 pe-7">
-                        <img src="./task-manager-thumb.png" alt="" className="mx-" />
+                        <img loading="lazy" src="./task-manager-thumb.png" alt="" className="mx-" />
                     </div>
                     {/* col 2 */}
                     <div className="col-span-12 md:col-span-6">

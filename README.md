@@ -1,10 +1,16 @@
-<!-- check it later -->
-bg images are not being loaded and are coming from assets folder.
+
+use cases to handle:
+
+show voucher code if applied.
+include delivery charges in formData and in orderSchema
 
 
-<!-- other important issues -->
-my animations are bit hard then the original one.
+the discount should also be shown before placing order in checkout page as total price. lets say discount is 10%, at price is $1000, then total price should be shown $900. right now it is not shown like that. (also include voucher discount to show if possible)
 
-if a non existing route is requested. show 404 page without navbar or footer.
+in wishlist, if one variant has 0 quantity left, it should add item of next variant on click. also give a link to see product details to redirect him to product details page.
 
-the bg image of card is hiding when i hover over the card and the bg color i applied maybe overriding the bg image on hover in Pricing.jsx
+add to cart through wishlist issue (we can add more items than the total quantity of products available), the size is not mentioned
+
+
+<!-- backend -->
+paypal-rest-sdk

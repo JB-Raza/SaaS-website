@@ -39,9 +39,9 @@ export default function Modal({ isModalOpen, setIsModalOpen, orderData }) {
                 <h3 className="heading-3 font-bold text-center">Order Details</h3>
                 <div className="flex justify-between gap-2 flex-wrap">
                     <h6 className="heading-6 font-semibold">Items:</h6>
-                    <span className="px-4 py-1 border-1 border-neutral-200 text-white font-medium rounded-full"
+                    <span className="px-4 pt-1 pb-2 border-1 border-neutral-200 text-white font-medium rounded-full"
                         style={{
-                            backgroundColor: orderData.orderStatus == "delivered" ? "green" : orderData.orderStatus == "processing" ? "orange" : orderData.orderStatus == "on-the-way" ? "blue" : orderData.orderStatus == "cancelled" ? "red" : "",
+                            backgroundColor: orderData.orderStatus == "delivered" ? "green" : orderData.orderStatus == "processing" ? "orange" : orderData.orderStatus == "on-the-way" ? "blue" : orderData.orderStatus == "cancelled" ? "red" : "purple",
                         }}
                     >{orderData?.orderStatus}</span>
                 </div>
@@ -65,7 +65,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, orderData }) {
                         <tbody className=''>
                             {(orderData.items || []).map((item) => (
                                 <tr key={item._id} className="border-b border-neutral-200">
-                                    <td className="w-[80px] flex items-center justify-center py-4 text-neutral-800 font-medium"> <img
+                                    <td className="w-[80px] flex items-center justify-center py-4 text-neutral-800 font-medium"> <img loading="lazy"
                                         className='w-[50px]'
                                         src={item.variant.image} alt="" /> </td>
 

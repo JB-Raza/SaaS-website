@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { clearCart } from '../../../redux/cartSlice.js'
 import { useNavigate } from 'react-router'
 
+// paypal
+import Paypal from './Paypal.jsx'
+
+
 // stripe
 import { loadStripe } from '@stripe/stripe-js'
 
@@ -46,7 +50,8 @@ export default function CheckoutPage() {
     let subTotalPrice = 0
     cartItems.forEach((item) => {
         if (item != null && item != undefined) {
-            subTotalPrice += item?.price * item.quantity
+            subTotalPrice += (item.price * item.quantity) - (item?.price * item.quantity * item.discount) / 100
+
         }
     })
 
@@ -103,14 +108,23 @@ export default function CheckoutPage() {
 
             // stripe
             const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
-
             const { data } = await axiosInstance.post(`/orders/new`, { ...checkoutFormData, cart: JSON.stringify(cartItems) }, {
                 headers: { "Authorization": `Bearer ${token}`, "Content-Type": "Application/json" },
             })
 
             if (data.success) {
-
                 // stripe
+                setLoading(false)
+
+                if (checkoutFormData.paymentMethod == "stripe") {
+                    const result = stripe.redirectToCheckout({
+                        sessionId: data.sessionId
+                    })
+                    if (result.error) {
+                        console.log(result.error)
+                        return
+                    }
+                }
                 toast(
                     <Alert
                         type='Success'
@@ -118,15 +132,6 @@ export default function CheckoutPage() {
                     />,
                     { autoClose: 2000 }
                 )
-                setLoading(false)
-
-                const result = stripe.redirectToCheckout({
-                    sessionId: data.sessionId
-                })
-                if (result.error) {
-                    console.log(result.error)
-                    return
-                }
                 dispatch(clearCart())
                 return
             }
@@ -159,14 +164,14 @@ export default function CheckoutPage() {
             {/* hero */}
             <section className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                    <img src="./simple-logo.png" alt="logo..." />
+                    <img loading="lazy" src="./simple-logo.png" alt="logo..." />
                     <h1 className="animate-text heading-1 capitalize font-bold text-center">Checkout Page</h1>
                 </div>
             </section>
 
             <section className="py-30 ">
                 <div className="custom-container px-3 mx-auto grid grid-cols-12 gap-7">
-                    {/* customer data form */}
+                    {/* form data col */}
                     <div className="col-span-12 overflow-clip breakpoint-1000:col-span-7">
                         <h5 className="heading-5 font-semibold">Delivery Information</h5>
 
@@ -289,6 +294,7 @@ export default function CheckoutPage() {
                             />
 
                         </form>
+
                     </div>
 
                     {/* data col */}
@@ -350,13 +356,13 @@ export default function CheckoutPage() {
 
                                 {/* Paypal */}
                                 <div className="input-group flex items-center gap-3">
-                                    <label htmlFor="paypal" className="relative flex items-center cursor-pointer gap-3">
+                                    <label htmlFor="paypal-option" className="relative flex items-center cursor-pointer gap-3">
                                         <input
                                             type="radio"
                                             value={"paypal"}
                                             onChange={onInputChange}
                                             name="paymentMethod"
-                                            id="paypal"
+                                            id="paypal-option"
                                             className="hidden peer"
                                         />
                                         <span className="w-5 h-5 rounded-full bg-neutral-200 flex items-center justify-center peer-checked:border-1 peer-checked:bg-white peer-checked:border-blue-600">
@@ -407,14 +413,17 @@ export default function CheckoutPage() {
 
                             </div>
 
-                            <Button
-                                onClickFn={() => formRef.current.requestSubmit()}
-                                content={loading ? "Proceeding" : "Proceed to Pay"}
-                                bgColor='bg-[#072032]'
-                                hoverBg='bg-blue-700'
-                                disabled={loading}
-                                className={"w-full !h-[20px] disabled:opacity-70"}
-                            />
+                            {checkoutFormData.paymentMethod == "paypal" ?
+                            <Paypal formData={checkoutFormData} /> :
+                                <Button
+                                    onClickFn={() => formRef.current.requestSubmit()}
+                                    content={loading ? "Proceeding" : "Proceed to Pay"}
+                                    bgColor='bg-[#072032]'
+                                    hoverBg='bg-blue-700'
+                                    disabled={loading}
+                                    className={"w-full !h-[20px] disabled:opacity-70"}
+                                />
+                            }
 
                         </div>
                     </div>

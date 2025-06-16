@@ -124,7 +124,7 @@ export const IntegrationCard = ({ data }) => {
         <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 border border-neutral-200 px-3">
             {/* card */}
             <div className="card flex h-full flex-col gap-7 items-center py-12 px-6 rounded-lg transition-shadow duration-200 hover:shadow-lg">
-                <img src={data.img} alt="icon 1"
+                <img loading="lazy" src={data.img} alt="icon 1"
                     className='mx-auto'
                 />
                 <h6 className="heading-6 font-semibold max-w-[172px] text-center">{data.heading}</h6>
@@ -242,7 +242,7 @@ export const ShopItemCard = ({ activeAlignment = "list", product }) => {
         <div className={`group card pb-3 hover:shadow-lg rounded-2xl flex gap-4 ${activeAlignment == "list" ? "flex-col" : "flex-row"}`}>
             {/* image section */}
             <div className={`relative flex flex-col justify-between border border-neutral-200 rounded-2xl p-6 overflow-clip ${activeAlignment == "list" ? "h-[290px]" : "h-[230px] min-w-[170px] !w-[170px]"}`}>
-                <Link to={`/shop/${product._id}`} className='m-auto'><img
+                <Link to={`/shop/${product._id}`} className='m-auto'><img loading="lazy"
                     className='group-hover:scale-115 duration-200 m-auto'
                     src={product.variants[0].images[0]} alt={`img_${product._id}`} /></Link>
                 {product.isFeatured && <span className='absolute top-[10px] left-[10px] bg-red-700 text-white font-medium px-3 rounded-full'>featured</span>}
@@ -274,7 +274,7 @@ export const ShopItemCard = ({ activeAlignment = "list", product }) => {
                 </div>
             </div>
             {/* data */}
-            <div className={`flex px-1 flex-col gap-3 justify-center ${activeAlignment == "list" ? " items-center" : "justify-start"}`}>
+            <div className={`flex px-1 flex-col gap-3 justify-center ${activeAlignment == "list" ? " items-center" : "justify-center"}`}>
                 <div className="rating flex gap-1">
 
                     {[1, 2, 3, 4, 5].map((item, i) =>
@@ -332,7 +332,7 @@ export const CartProductCard = ({ product }) => {
                         className="absolute z-10 hover:scale-125 cursor-pointer duration-200 h-4 w-4 rounded-full flex items-center justify-center top-0 right-0 bg-red-600 text-white">
                         <i className="fa fa-xmark text-[10px]"></i>
                     </button>
-                    <img
+                    <img loading="lazy"
                         className='hover:scale-110 h-auto aspect-3/2 min-w-[45px] max-w-[45px] duration-200'
                         src={product.variant.image} alt={"img"} />
                 </div>

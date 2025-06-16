@@ -6,7 +6,6 @@ export const truncateText = (text) => {
         return text.slice(0, 340) + "...."
     }
     return text
-
 }
 
 export const truncateOneLine = (text) => {

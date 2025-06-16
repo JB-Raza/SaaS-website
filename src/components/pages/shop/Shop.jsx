@@ -168,7 +168,7 @@ export default function Shop() {
             {/* hero */}
             <section className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                    <img src="./simple-logo.png" alt="logo..." />
+                    <img loading="lazy" src="./simple-logo.png" alt="logo..." />
                     <h1 className="animate-text heading-1 capitalize font-bold text-center">Shop Page</h1>
                 </div>
             </section>

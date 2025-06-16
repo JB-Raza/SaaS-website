@@ -105,7 +105,7 @@ export default function ShopDetails() {
             quantity,
             discount: product.discount || 0,
             price: product.price,
-            variant: { image: currFilter.images[0], color: currFilter.color, availableQuantity: currFilter.quantity, size: activeSize !==""? activeSize:currFilter?.sizes[0] }
+            variant: { image: currFilter.images[0], color: currFilter.color, availableQuantity: currFilter.quantity, size: activeSize !== "" ? activeSize : currFilter?.sizes[0] }
         }))
         // alert
         toast(
@@ -170,12 +170,14 @@ export default function ShopDetails() {
         }
     }
 
+    console.log(currFilter)
+
     return (
         <>
             {/* hero */}
             <section className="bg-[var(--iceBlue)] px-3">
                 <div className="custom-container overflow-cip mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                    <img src="/simple-logo.png" alt="logo..." />
+                    <img loading="lazy" src="/simple-logo.png" alt="logo..." />
                     <h1 className="animate-text heading-1 capitalize font-bold text-center">Shop Details</h1>
                 </div>
             </section>
@@ -202,7 +204,7 @@ export default function ShopDetails() {
                             >
                                 {currFilter.images && currFilter.images?.map((imageUrl) => (
                                     <SwiperSlide className='!flex max-h-[500px] !items-center my-auto !justify-center'>
-                                        <img
+                                        <img loading="lazy"
                                             className='aspect-auto h-full max-h-[450px] my-auto max-w-[450px]'
                                             src={imageUrl} alt="img" />
                                     </SwiperSlide>
@@ -221,7 +223,7 @@ export default function ShopDetails() {
                                         swiperRef?.current.slideTo(index)
                                     }}
                                     className={`swiper-bullet p-2 border rounded-xl flex items-center justify-center ${activeSlideIndex == index ? "border-blue-700" : "border-neutral-300"}`}>
-                                    <img
+                                    <img loading="lazy"
                                         className="w-20 h-16 sm:w-24 sm:h-20 md:w-28 md:h-24 object-contain"
                                         src={img} alt={index} />
 
@@ -336,7 +338,7 @@ export default function ShopDetails() {
                             <Button
                                 content={"Add To Cart"}
                                 bgColor='bg-blue-700'
-                                disabled={token ? false : true}
+                                disabled={currFilter.quantity > 0 && token ? false : true}
                                 onClickFn={handleAddToCartBtn}
                                 hoverBg='bg-[var(--darkIndigo)]'
                                 icon={"fa-solid group-hover:text-blue-700 transition-[background] !duration:400 fa-basket-shopping"}
@@ -348,7 +350,7 @@ export default function ShopDetails() {
                                     addRemoveItemToWishlist(productId)
                                 }}
                                 type='button'
-                                disabled={token ? false : true}
+                                disabled={currFilter.quantity > 0 && token ? false : true}
                                 className={`cursor-pointer disabled:opacity-90 disabled:hover:bg-white disabled:hover:text-neutral-800 disabled:cursor-default hover:bg-blue-600 hover:text-white duration-200 bg-white text-neutral-800 shadow-[1px_1px_20px_1px_#cfcfcf] min-w-14 h-14 flex items-center justify-center rounded-full ${wishlist?.includes(product._id) ? "!bg-blue-600 text-white" : ""}`}>
                                 <i className="fa-regular fa-star text-xl"></i>
                             </button>

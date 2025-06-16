@@ -44,15 +44,15 @@ export default function IntegrationDetails() {
               <p>Integrations</p>
             </div>
             {/* animation rotating images */}
-            <img
+            <img loading="lazy"
               className='absolute z-3 img-rotate-anti-clock'
               src="/app-integration/integration-details/round-icons-small.png" alt="small icons image" />
             {/* top-[20px] left-[50px]  */}
-            <img
+            <img loading="lazy"
               className='absolute z-2 img-rotate-clock'
               src="/app-integration/integration-details/round-icons-big.png" alt="big icons image" />
 
-            <img
+            <img loading="lazy"
               className='absolute z-1'
               src="/app-integration/integration-details/rounded-circle.png" alt="rounded circle" />
 
@@ -136,7 +136,7 @@ export default function IntegrationDetails() {
             card flex bg-white h-full flex-col gap-7 py-12 px-8 rounded-2xl transition-[background] duration-200
             hover:bg-[hsl(184,84%,30%)] hover:text-white group">
 
-                <img src={data.img} alt={data.heading}
+                <img loading="lazy" src={data.img} alt={data.heading}
                   className='me-auto'
                 />
                 <h6 className="heading-6 font-semibold">{data.heading}</h6>

@@ -63,7 +63,7 @@ export default function TrackProjects() {
                         <SwiperSlide key={i} >
                             <div className="card col-span-3 flex flex-col">
                                 <div className='flex items-stretch h-[350px]'>
-                                <img src={project.image} alt="project 1" className="w-full max-w-300px" />
+                                <img loading="lazy" src={project.image} alt="project 1" className="w-full max-w-300px" />
                                 </div>
                                 <div>
                                 <h3 className="heading-6 font-bold text-center my-4">{project.title}</h3>

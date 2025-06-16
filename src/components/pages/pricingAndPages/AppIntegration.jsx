@@ -42,15 +42,15 @@ export default function AppIntegration() {
 
                         <div className="relative app-integration h-[400px] md:h-[550px] flex items-center">
 
-                            <img src="./app-integration/app-integration-center.png" alt="error"
+                            <img loading="lazy" src="./app-integration/app-integration-center.png" alt="error"
                                 className="absolute top-1/2 left-1/2 w-20 h-20 md:w-23 md:h-23 -translate-x-1/2 lg:translate-y-1/2"
                             />
-                            <img src="./app-integration/1.png" alt="" className="w-15 floating-icons-left absolute top-1/4 left-3 md:left-1/9 md:w-20 " />
-                            <img src="./app-integration/5.png" alt="" className="w-15 floating-icons-left absolute top-1/4 translate-y-30 sm:translate-y-35 md:translate-y-40 left-1/8 md:left-1/5 md:w-20" />
-                            <img src="./app-integration/6.png" alt="" className="w-15 floating-icons-left absolute top-1/4 translate-y-60 md:translate-y-80 left-1 md:left-1/9 md:w-20" />
-                            <img src="./app-integration/2.png" alt="" className="w-15 floating-icons-right absolute top-1/5 right-3 md:right-1/15 md:w-23" />
-                            <img src="./app-integration/3.png" alt="" className="w-15 floating-icons-right absolute top-1/2 right-1/8 md:right-1/5 md:w-20" />
-                            <img src="./app-integration/4.png" alt="" className="w-15 floating-icons-right absolute bottom-1/12 right-1 md:right-1/4 md:w-20" />
+                            <img loading="lazy" src="./app-integration/1.png" alt="" className="w-15 floating-icons-left absolute top-1/4 left-3 md:left-1/9 md:w-20 " />
+                            <img loading="lazy" src="./app-integration/5.png" alt="" className="w-15 floating-icons-left absolute top-1/4 translate-y-30 sm:translate-y-35 md:translate-y-40 left-1/8 md:left-1/5 md:w-20" />
+                            <img loading="lazy" src="./app-integration/6.png" alt="" className="w-15 floating-icons-left absolute top-1/4 translate-y-60 md:translate-y-80 left-1 md:left-1/9 md:w-20" />
+                            <img loading="lazy" src="./app-integration/2.png" alt="" className="w-15 floating-icons-right absolute top-1/5 right-3 md:right-1/15 md:w-23" />
+                            <img loading="lazy" src="./app-integration/3.png" alt="" className="w-15 floating-icons-right absolute top-1/2 right-1/8 md:right-1/5 md:w-20" />
+                            <img loading="lazy" src="./app-integration/4.png" alt="" className="w-15 floating-icons-right absolute bottom-1/12 right-1 md:right-1/4 md:w-20" />
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ export default function AppIntegration() {
             </section>
 
             <div className="custom-container py-30 mx-auto">
-                <img src="/app-integration/integration-page/integration-bg.png" alt="bg image" />
+                <img loading="lazy" src="/app-integration/integration-page/integration-bg.png" alt="bg image" />
                 <h3 className="animate-app-integration-elem max-w-[690px] px-2 mx-auto heading-3 text-center font-semibold mt-10 leading-10 capitalize">Driven your business today next level by sasstech</h3>
 
                 <div className="flex gap-4 justify-center my-10">

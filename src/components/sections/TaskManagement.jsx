@@ -141,9 +141,9 @@ export default function TaskManagement() {
             {/* people */}
             <div className="people  mt-5 px-3 min-w-[230px] w-[calc(100%-20px)] sm:w-[calc(100%-60px)]">
               <div className="imgs flex relative ms-">
-                <img src="./people/1.png" alt="client-1" className="rounded-full border-2 border-white absolute z-3 hover:scale-125 duration-200" />
-                <img src="./people/2.png" alt="client-2" className="rounded-full border-2 border-white absolute left-7 z-2 hover:scale-125 duration-200" />
-                <img src="./people/3.png" alt="client-3" className="rounded-full border-2 border-white absolute left-13 z-1 hover:scale-125 duration-200" />
+                <img loading="lazy" src="./people/1.png" alt="client-1" className="rounded-full border-2 border-white absolute z-3 hover:scale-125 duration-200" />
+                <img loading="lazy" src="./people/2.png" alt="client-2" className="rounded-full border-2 border-white absolute left-7 z-2 hover:scale-125 duration-200" />
+                <img loading="lazy" src="./people/3.png" alt="client-3" className="rounded-full border-2 border-white absolute left-13 z-1 hover:scale-125 duration-200" />
               </div>
               <button
                 onClick={handleFileSelect}

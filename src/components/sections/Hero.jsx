@@ -67,7 +67,7 @@ export default function Hero() {
       </div>
       {/* hero image section */}
       <div className="col-span-12 lg:col-span-6 flex justify-end p-0">
-        <img src="./hero-main-laptop.png" alt="./hero-main-laptop.png"
+        <img loading="lazy" src="./hero-main-laptop.png" alt="./hero-main-laptop.png"
           className="hero-img lg:max-w-[55%] w-auto lg:w-[900px] lg:absolute bottom-0 right-0" />
       </div>
 

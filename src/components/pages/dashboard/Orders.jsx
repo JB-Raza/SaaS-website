@@ -53,7 +53,7 @@ export default function Orders() {
               <tr key={order._id} className="border-b border-neutral-200">
                 <td className="px-5 py-4 line-clamp-1 text-[18px] text-neutral-800 font-medium"> {order.trackingNumber} </td>
                 <td className="font-medium text-center text-neutral-800"> {new Date(order.createdAt).toLocaleDateString()}</td>
-                <td className={`text-center capitalize ${order.orderStatus == "delivered" ? "text-green-600" : order.orderStatus == "cancelled" ? "text-red-600" : order.orderStatus == "processing" ? "text-amber-500" : "text-blue-600"}`}
+                <td className={`text-center capitalize ${order.orderStatus == "delivered" ? "text-green-600" : order.orderStatus == "cancelled" ? "text-red-600" : order.orderStatus == "processing" ? "text-amber-500" : order.orderStatus == "on-the-way" ? "bg-blue-600" : "text-purple-700"}`}
                 > {order.orderStatus}</td>
                 <td className="font-medium text-center text-neutral-800">${Math.floor(order.totalPrice)} / {order.items.length} item(s)</td>
                 <td className="font-medium text-center text-neutral-800">

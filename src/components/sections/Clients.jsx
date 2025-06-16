@@ -72,7 +72,7 @@ export default function Clients() {
                     {(clientsData || []).map((client, index) => (
 
                         <SwiperSlide ref={slideRef} key={index} className="!flex swiper-slide !justify-center md:!justify-start" >
-                        <img src={client.img} alt={client.img} />
+                        <img loading="lazy" src={client.img} alt={client.img} />
                     </SwiperSlide>
                     ))}
                 </Swiper>

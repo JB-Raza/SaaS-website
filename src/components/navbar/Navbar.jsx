@@ -211,8 +211,8 @@ export default function Navbar() {
           <div className="navbar-brand py-6">
             <NavLink to={"/"}>
               {location.pathname == "/" ?
-                <img className='hover:-translate-y-1 duration-300' src="/logo-white-two.png" alt="logo" />
-                : <img className='' src="/logo-four.png" alt="logo" />}
+                <img loading="lazy" className='hover:-translate-y-1 duration-300' src="/logo-white-two.png" alt="logo" />
+                : <img loading="lazy" className='' src="/logo-four.png" alt="logo" />}
 
             </NavLink>
           </div>
@@ -235,7 +235,7 @@ export default function Navbar() {
             {/* brand logo */}
             <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
               <a href='#'>
-                <img src="./logo-blue.png" alt="logo" /></a>
+                <img loading="lazy" src="./logo-blue.png" alt="logo" /></a>
             </div>
             {(navbarData || []).map((item, i) => (
               <NavItem key={i} navItem={item} isOpen={openDropdown == i} index={i} setIsOpen={setOpenDropdown}
@@ -303,7 +303,7 @@ export default function Navbar() {
         {/* brand logo */}
         <div className="navbar-brand sidebar-logo py-6 mb-[9px] lg:hidden">
           <a href='#'>
-            <img className='' src="/logo-blue.png" alt="logo" /></a>
+            <img loading="lazy" className='' src="/logo-blue.png" alt="logo" /></a>
         </div>
         {(navbarData).map((item, i) => (
 

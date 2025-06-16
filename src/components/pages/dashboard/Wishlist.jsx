@@ -56,6 +56,7 @@ export default function Wishlist() {
 
   // add item to cart
   const handleAddToCartBtn = (product) => {
+    console.log("pr - ", product)
     const item = {
       _id: product._id,
       title: product.title,
@@ -86,8 +87,6 @@ export default function Wishlist() {
         "Authorization": `Bearer ${token}`
       }
     })
-
-    console.log(data)
 
     if (data.success && data.itemExists) {
 
@@ -140,7 +139,7 @@ export default function Wishlist() {
 
               {/* data rows */}
               {((wishlist || []).map((product) => (
-                <tr key={product.id} className=" border-b border-neutral-200">
+                <tr key={product._id} className=" border-b border-neutral-200">
                   <td className=" px-2 py-6">
                     <div className='relative w-[50px] justify-center'>
 
@@ -150,7 +149,7 @@ export default function Wishlist() {
                         className="absolute z-10 hover:scale-125 cursor-pointer duration-200 h-4 w-4 rounded-full flex items-center justify-center top-0 right-0 bg-red-600 text-white">
                         <i className="fa fa-xmark text-[10px]"></i>
                       </button>
-                      <img
+                      <img loading="lazy"
                         className='hover:scale-110 h-auto aspect-3/2 min-w-[45px] max-w-[45px] duration-200'
                         src={product.variants[0].images[0]} alt={"img"} />
                     </div>

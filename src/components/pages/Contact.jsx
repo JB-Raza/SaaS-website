@@ -10,7 +10,7 @@ export default function Contact() {
     return (
         <div className='max-w-screen bg-[#F3F8F8]'>
             <div className="contact-hero custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                <img src="./simple-logo.png" alt="logo..." />
+                <img loading="lazy" src="./simple-logo.png" alt="logo..." />
                 <h1 className="animate-contact-heading heading-1 capitalize font-bold text-center">Get in Touch</h1>
             </div>
 
@@ -19,7 +19,7 @@ export default function Contact() {
                 <div className="custom-container relative z-20 mx-auto grid grid-cols-12 py-10 px-10 bg-white gap-6">
                     {(addressDetails || []).map((item, index) => (
                         <div key={index} className="col-span-12 sm:col-span-6 lg:col-span-4 group shadow-lg rounded-lg hover:bg-[#1c3ff5] py-[60px] px-5 flex flex-col items-center gap-6">
-                            <img src={item.image} alt="address"
+                            <img loading="lazy" src={item.image} alt="address"
                                 className="group-hover:brightness-[100000%] 
                             group-hover:animate-[var(--icon-bubble-animation)]"
                             />

@@ -21,7 +21,7 @@ export default function CartPage() {
     let subTotalPrice = 0
     cartItems.forEach((item) => {
         if (item != null || item != undefined) {
-            subTotalPrice += item?.price * item.quantity
+            subTotalPrice += (item.price * item.quantity) - (item?.price * item.quantity * item.discount) / 100
         }
     })
     cartItems = cartItems.filter((item) => item !== null)
@@ -32,7 +32,7 @@ export default function CartPage() {
             {/* hero */}
             <section className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                    <img src="./simple-logo.png" alt="logo..." />
+                    <img loading="lazy" src="./simple-logo.png" alt="logo..." />
                     <h1 className="animate-text heading-1 capitalize font-bold text-center">Cart Page</h1>
                 </div>
             </section>

@@ -35,7 +35,7 @@ export default function BlogDetails() {
             {/* hero */}
             <section className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                    <img src="/simple-logo.png" alt="logo..." />
+                    <img loading="lazy" src="/simple-logo.png" alt="logo..." />
                     <h1 className="animate-text heading-1 capitalize font-bold text-center">Blog Details</h1>
                 </div>
             </section>
@@ -47,7 +47,7 @@ export default function BlogDetails() {
                     <div className="col-span-12 blog-details-section px-4 blog-details-section flex flex-col gap-5 lg:col-span-8">
                         {/* blog banner image */}
                         <div className="blog-image mx-auto relative rounded-2xl overflow-clip">
-                            <img src={blogData.bannerImage}
+                            <img loading="lazy" src={blogData.bannerImage}
                                 alt="blog header image" className='mx-auto hover:scale-105 duration-400' />
                             {/* date badge */}
                             <div className="badge text-center text-white px-3 py-2 rounded-lg md:px-6 md:py-4 md:rounded-xl md:text-xl absolute top-3 left-3 bg-blue-700 font-semibold">
@@ -96,7 +96,7 @@ export default function BlogDetails() {
                     <div className="col-span-12 lg:col-span-4 flex flex-col gap-7 px-3 breakpoint-900:px-8 breakpoint-900:pe-3">
                         {/* profile */}
                         <div className=' bg-neutral-50 px-5 py-15'>
-                            <img src="/blogs/blogger.png" alt="" className="rounded-circle mx-auto mb-4" />
+                            <img loading="lazy" src="/blogs/blogger.png" alt="" className="rounded-circle mx-auto mb-4" />
                             <h5 className="heading-6 text-[var(--darkIndigo)] font-semibold text-center py-0 px-2">Rosalina D. Willaim</h5>
                             <p className="text-center text-neutral-600 text-sm">Blogger/Photographer</p>
                             <p className="description text-center text-neutral-600 leading-loose mt-4 max-w-[270px] mx-auto">he whimsically named Egg Canvas is the design director and photographer in New York. Why the nam</p>
@@ -143,7 +143,7 @@ export default function BlogDetails() {
 
                                     <div key={recentBlog._id} className="card flex items-center gap-5">
                                         {/* image */}
-                                        <img src={recentBlog.image} alt="recent post"
+                                        <img loading="lazy" src={recentBlog.image} alt="recent post"
                                             className='cursor-pointer' />
                                         {/* data */}
                                         <div className="flex flex-col gap-3">

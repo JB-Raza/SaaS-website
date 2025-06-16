@@ -43,7 +43,7 @@ export default function Blogs() {
             {/* hero */}
             <section className="bg-[var(--iceBlue)]">
                 <div className="custom-container mx-auto pt-[270px] pb-[170px] flex flex-col items-center gap-1.5">
-                    <img src="/simple-logo.png" alt="logo..." />
+                    <img loading="lazy" src="/simple-logo.png" alt="logo..." />
                     <h1 className="animate-item heading-1 capitalize font-bold text-center">Blogs</h1>
                 </div>
             </section>
@@ -60,7 +60,7 @@ export default function Blogs() {
                                 {/* blog head image */}
                                 <div className="blog-image mx-auto relative rounded-2xl overflow-clip">
                                     <Link to={`/blogs/${blog._id}`}>
-                                        <img src={blog.bannerImage}
+                                        <img loading="lazy" src={blog.bannerImage}
                                             alt="blog header image" className='mx-auto w-full hover:scale-105 duration-400' />
                                     </Link>
 
@@ -97,7 +97,7 @@ export default function Blogs() {
 
                                 <Link to={`/blogs/${blog._id}`} className="font-bold group text-indigo-950 text-sm uppercase mt-10 hover:text-blue-700 flex gap-3 items-center cursor-pointer duration-200">
                                     <span>Read More</span>
-                                    <img src="/blogs/arrow-long.svg" alt="arrow long"
+                                    <img loading="lazy" src="/blogs/arrow-long.svg" alt="arrow long"
                                         className='group-hover:translate-x-1/2 duration-200'
                                     />
                                 </Link>
@@ -112,7 +112,7 @@ export default function Blogs() {
                     <div className="col-span-12 lg:col-span-4 flex flex-col gap-7 px-3 breakpoint-900:px-8 breakpoint-900:pe-3">
                         {/* profile */}
                         <div className=' bg-neutral-50 px-5 py-15'>
-                            <img src="/blogs/blogger.png" alt="" className="rounded-circle mx-auto mb-4" />
+                            <img loading="lazy" src="/blogs/blogger.png" alt="" className="rounded-circle mx-auto mb-4" />
                             <h5 className="heading-6 text-[var(--darkIndigo)] font-semibold text-center py-0 px-2">Rosalina D. Willaim</h5>
                             <p className="text-center text-neutral-600 text-sm">Blogger/Photographer</p>
                             <p className="description text-center text-neutral-600 leading-loose mt-4 max-w-[270px] mx-auto">he whimsically named Egg Canvas is the design director and photographer in New York. Why the nam</p>
@@ -159,7 +159,7 @@ export default function Blogs() {
 
                                     <div key={recentBlog._id} className="card flex items-center gap-5">
                                         {/* image */}
-                                        <img src={recentBlog.image} alt="recent post"
+                                        <img loading="lazy" src={recentBlog.image} alt="recent post"
                                             className='cursor-pointer' />
                                         {/* data */}
                                         <div className="flex flex-col gap-3">

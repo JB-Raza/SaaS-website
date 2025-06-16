@@ -23,7 +23,7 @@ export default function NavItem({ navItem, className, isOpen, index, setIsOpen }
             setWindowWidth(window.innerWidth);
         };
         if (windowWidth < 1024) {
-
+            console.log('ran again')
             if (isOpen) {
                 dropdownRef.current.style.maxHeight = `${window.innerHeight}px`
             }
@@ -83,7 +83,9 @@ export default function NavItem({ navItem, className, isOpen, index, setIsOpen }
             >
                 {(navItem?.dropdownItems || []).map((item, index) => (
                     <NavLink to={item.path} key={index} className={({ isActive }) => (isActive ? "text-blue-600" : "")}>
-                        <li onClick={() => setIsOpen(false)} className="px-4 py-2 rounded-sm border-b-[1px] border-slate-200 lg:border-0 hover:bg-gray-200">{item.label}</li>
+                        <li onClick={() => {
+                            setIsOpen(false)
+                        }} className="px-4 py-2 rounded-sm border-b-[1px] border-slate-200 lg:border-0 hover:bg-gray-200">{item.label}</li>
                     </NavLink>
 
                 ))}
